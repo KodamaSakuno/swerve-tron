@@ -8,6 +8,9 @@ import { PoolComponent } from './pages/pool/pool.component';
 import { NavTabsComponent } from './shared/nav-tabs/nav-tabs.component';
 import { HeaderComponent } from './shared/header/header.component';
 import { StateService } from './services/state.service';
+import { AddLiquidityComponent } from './pages/add-liquidity/add-liquidity.component';
+import { RemoveLiquidityComponent } from './pages/remove-liquidity/remove-liquidity.component';
+import { BignumberPipe } from './bignumber.pipe';
 
 @NgModule({
   declarations: [
@@ -15,7 +18,10 @@ import { StateService } from './services/state.service';
     SwapComponent,
     PoolComponent,
     NavTabsComponent,
-    HeaderComponent
+    HeaderComponent,
+    AddLiquidityComponent,
+    RemoveLiquidityComponent,
+    BignumberPipe
   ],
   imports: [
     BrowserModule,

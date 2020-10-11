@@ -1,0 +1,14 @@
+<div>
+  <a routerLink="/pool">
+    Back
+  </a>
+  <span>Add Liquidity</span>
+</div>
+<div>
+  <div *ngIf="usdt$ | async as usdt">
+    {{ usdt.balance | bignumber:usdt.decimals }}
+  </div>
+  <div *ngIf="usdj$ | async as usdj">
+    {{ usdj.balance | bignumber:usdj.decimals }}
+  </div>
+</div>
