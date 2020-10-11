@@ -4,6 +4,9 @@ declare global {
       hex: string,
       base58: string,
     };
+    trx: {
+      getBalance(): Promise<number>,
+    };
   }
 }
 

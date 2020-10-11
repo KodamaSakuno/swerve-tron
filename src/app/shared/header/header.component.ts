@@ -12,10 +12,16 @@ import { TronService } from '../../services/tron.service';
 export class HeaderComponent implements OnInit {
 
   account$: Observable<string>;
+  balance$: Observable<any>;
 
   constructor(private tronService: TronService) {
-    this.account$ = tronService.getState$().pipe(
+    const state$ = tronService.getState$();
+
+    this.account$ = state$.pipe(
       map(state => state.account)
+    );
+    this.balance$ = state$.pipe(
+      map(state => state.balance)
     );
   }
 

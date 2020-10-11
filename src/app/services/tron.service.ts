@@ -1,16 +1,18 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Subject } from 'rxjs';
-import { scan } from "rxjs/operators";
+import { scan, filter } from "rxjs/operators";
 
 export interface TronState {
   tronWeb: TronWebInstance | null;
   account: string;
+  balance: number;
 }
 
 function getDefaultState(): TronState {
   return {
     tronWeb: null,
     account: '',
+    balance: 0,
   };
 }
 
@@ -39,12 +41,29 @@ export class TronService {
 
         return state;
       });
+      this.requestAccountBalance();
+
       clearInterval(interval);
     }, 1000);
   }
 
   getState$() {
-    return this.state$;
+    return this.state$.pipe(
+      filter(state => !!state.tronWeb)
+    );
+  }
+
+  requestAccountBalance() {
+    if (!window.tronWeb)
+      throw new Error("TronWeb not initialized");
+
+    window.tronWeb.trx.getBalance().then(balance => {
+      this.update$.next(state => {
+        state.balance = balance;
+
+        return state;
+      });
+    });
   }
 }
 
