@@ -40,7 +40,8 @@ export class StateService {
 
   initialize() {
     let interval = setInterval(() => {
-      if (!window.tronWeb)
+      const ready = window.tronWeb?.ready ?? false;
+      if (!ready)
         return;
 
       this.update$.next(state => {

@@ -2,6 +2,8 @@ declare global {
   interface TronWebInstance {
     BigNumber: BigNumberConstructor;
 
+    ready?: boolean;
+
     defaultAddress: {
       hex: string,
       base58: string,
