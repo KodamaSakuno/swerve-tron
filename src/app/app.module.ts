@@ -7,7 +7,7 @@ import { SwapComponent } from './pages/swap/swap.component';
 import { PoolComponent } from './pages/pool/pool.component';
 import { NavTabsComponent } from './shared/nav-tabs/nav-tabs.component';
 import { HeaderComponent } from './shared/header/header.component';
-import { TronService } from './services/tron.service';
+import { StateService } from './services/state.service';
 
 @NgModule({
   declarations: [
@@ -24,8 +24,8 @@ import { TronService } from './services/tron.service';
   providers: [
     {
       provide: APP_INITIALIZER,
-      useFactory: (service: TronService) => () => service.initialize(),
-      deps: [TronService],
+      useFactory: (service: StateService) => () => service.initialize(),
+      deps: [StateService],
       multi: true,
     }
   ],

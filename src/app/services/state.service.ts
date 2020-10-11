@@ -19,7 +19,7 @@ function getDefaultState(): TronState {
 @Injectable({
   providedIn: 'root'
 })
-export class TronService {
+export class StateService {
 
   private state$ = new BehaviorSubject<TronState>(getDefaultState());
   private update$ = new Subject<(state: TronState) => TronState>();

@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 
-import { TronService } from '../../services/tron.service';
+import { StateService } from '../../services/state.service';
 
 @Component({
   selector: 'app-header',
@@ -14,8 +14,8 @@ export class HeaderComponent implements OnInit {
   account$: Observable<string>;
   balance$: Observable<any>;
 
-  constructor(private tronService: TronService) {
-    const state$ = tronService.getState$();
+  constructor(private StateService: StateService) {
+    const state$ = StateService.getState$();
 
     this.account$ = state$.pipe(
       map(state => state.account)
