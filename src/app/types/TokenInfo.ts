@@ -1,4 +1,9 @@
+import { Token } from '../constants/tokens';
+
 export type TokenInfo = {
+  address: Token,
+  name: string,
   decimals: number,
-  balance: BigNumber,
+  balance: string,
+  allowance: string,
 }

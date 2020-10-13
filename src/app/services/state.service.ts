@@ -10,8 +10,9 @@ export interface TronState {
   tronWeb: TronWebInstance | null;
   account: string;
   balance: number;
-  tokenDecimals: { [address: string]: number };
-  tokenBalances: { [address: string]: BigNumber };
+  tokens: {
+    [address: string]: TokenInfo,
+  };
 }
 
 function getDefaultState(): TronState {
@@ -19,8 +20,22 @@ function getDefaultState(): TronState {
     tronWeb: null,
     account: '',
     balance: 0,
-    tokenDecimals: {},
-    tokenBalances: {},
+    tokens: {
+      [Token.USDT]: {
+        address: Token.USDT,
+        name: 'USDT',
+        decimals: 6,
+        balance: '0',
+        allowance: '0',
+      },
+      [Token.USDJ]: {
+        address: Token.USDJ,
+        name: 'USDJ',
+        decimals: 18,
+        balance: '0',
+        allowance: '0',
+      },
+    }
   };
 }
 
@@ -30,11 +45,15 @@ function getDefaultState(): TronState {
 export class StateService {
 
   private state$ = new BehaviorSubject<TronState>(getDefaultState());
-  private update$ = new Subject<(state: TronState) => TronState>();
+  private update$ = new Subject<(state: TronState) => void>();
 
   constructor() {
     this.update$.pipe(
-      scan((state: TronState, func: Function) => func(state), getDefaultState())
+      scan((state: TronState, func: (state: TronState) => void) => {
+        func(state);
+
+        return state;
+      }, getDefaultState())
     ).subscribe(this.state$);
   }
 
@@ -52,8 +71,6 @@ export class StateService {
       });
 
       this.requestAccountBalance();
-      this.requestTRC20TokenDecimals(Token.USDT);
-      this.requestTRC20TokenDecimals(Token.USDJ);
 
       clearInterval(interval);
     }, 1000);
@@ -79,26 +96,10 @@ export class StateService {
     window.tronWeb.trx.getBalance().then(balance => {
       this.update$.next(state => {
         state.balance = balance;
-
-        return state;
       });
     });
   }
 
-  requestTRC20TokenDecimals(token: Token) {
-    if (!window.tronWeb)
-      throw new Error("TronWeb not initialized");
-
-    const contract = window.tronWeb.contract(TRC20ABI, token);
-
-    contract.methods.decimals().call().then(result => {
-      this.update$.next(state => {
-        state.tokenDecimals[token] = result;
-
-        return state;
-      });
-    });
-  }
   requestTRC20TokenBalance(token: Token) {
     if (!window.tronWeb)
       throw new Error("TronWeb not initialized");
@@ -106,21 +107,18 @@ export class StateService {
     const contract = window.tronWeb.contract(TRC20ABI, token);
 
     contract.methods.balanceOf(window.tronWeb.defaultAddress.base58).call().then(result => {
-      this.update$.next(state => {
-        state.tokenBalances[token] = result;
+      const balance = result;
 
-        return state;
+      this.update$.next(state => {
+        state.tokens[token].balance = balance;
       });
     });
   }
 
   getToken$(token: Token): Observable<TokenInfo> {
     return this.state$.pipe(
-      filter(state => !!state.tronWeb && !!state.tokenDecimals[token] && !!state.tokenBalances[token]),
-      map(state => ({
-        decimals: state.tokenDecimals[token],
-        balance: state.tokenBalances[token],
-      }))
+      filter(state => !!state.tronWeb),
+      map(state => state.tokens[token])
     )
   }
 }
