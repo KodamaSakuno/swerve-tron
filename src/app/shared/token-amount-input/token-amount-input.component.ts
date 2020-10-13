@@ -1,6 +1,6 @@
-import { Component, ElementRef, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
+import { Component, ElementRef, Input, OnInit, Output, ViewChild } from '@angular/core';
 import { BigNumber } from 'bignumber.js';
-import { BehaviorSubject, fromEvent, combineLatest } from 'rxjs';
+import { Subject, BehaviorSubject, fromEvent, combineLatest } from 'rxjs';
 import { debounceTime, distinctUntilChanged, map, delay } from 'rxjs/operators';
 
 import { TokenInfo } from '../../types/TokenInfo';
@@ -22,7 +22,7 @@ export class TokenAmountInputComponent implements OnInit {
   @Input()
   amount = new BigNumber(0);
   @Output()
-  amountChange = new BehaviorSubject<BigNumber>(new BigNumber(0));
+  amountChange = new Subject<BigNumber>();
 
   @Output()
   shouldApproveChange = new BehaviorSubject<boolean>(false);

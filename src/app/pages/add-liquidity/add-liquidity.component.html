@@ -4,11 +4,22 @@
   </a>
   <span>Add Liquidity</span>
 </div>
+
+<app-token-amount-input [token]="usdt" [(amount)]="inputUSDT" (amountChange)="inputUSDT$.next($event)" [disabled]="isApprovingUSDT" (shouldApproveChange)="shouldApproveUSDT = $event"
+  *ngIf="usdt$ | async as usdt">
+</app-token-amount-input>
+<app-token-amount-input [token]="usdj" [(amount)]="inputUSDJ" (amountChange)="inputUSDJ$.next($event)" [disabled]="isApprovingUSDJ" (shouldApproveChange)="shouldApproveUSDJ = $event"
+  *ngIf="usdj$ | async as usdj">
+</app-token-amount-input>
+
 <div>
-  <div *ngIf="usdt$ | async as usdt">
-    {{ usdt.balance | bignumber:usdt.decimals }}
-  </div>
-  <div *ngIf="usdj$ | async as usdj">
-    {{ usdj.balance | bignumber:usdj.decimals }}
-  </div>
+  <button [disabled]="isApprovingUSDT" (click)="approveUSDT()" *ngIf="shouldApproveUSDT">
+    {{ isApprovingUSDT ? 'Approving' : 'Approve' }} USDT
+  </button>
+  <button [disabled]="isApprovingUSDJ" (click)="approveUSDJ()" *ngIf="shouldApproveUSDJ">
+    {{ isApprovingUSDJ ? 'Approving' : 'Approve' }} USDJ
+  </button>
+</div>
+<div>
+  <button [disabled]="!(canSupply$ | async)" (click)="supply()">Supply</button>
 </div>

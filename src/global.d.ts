@@ -16,7 +16,8 @@ declare global {
   interface TronWebContract {
     methods: {
       [method: string]: (...args: any[]) => {
-        call: () => Promise<any>,
+        call(): Promise<any>,
+        send(options?: Object): Promise<any>,
       },
     };
   }

@@ -143,5 +143,14 @@ export class StateService {
       map(state => state.tokens[token])
     )
   }
+
+  async approve(token: Token, amount: BigNumber) {
+    if (!window.tronWeb)
+      throw new Error("TronWeb not initialized");
+
+    await window.tronWeb.contract(TRC20ABI, token).methods.approve(ContractAddress.Swap, amount.toString()).send({ shouldPollResponse: true });
+
+    this.requestTRC20TokenAllowance(token);
+  }
 }
 

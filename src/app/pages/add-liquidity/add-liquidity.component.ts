@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { Observable } from 'rxjs';
+import { BigNumber } from 'bignumber.js';
+import { combineLatest, Observable, Subject } from 'rxjs';
+import { map, tap } from 'rxjs/operators';
 
 import { StateService } from '../../services/state.service';
 import { Token } from '../../constants/tokens';
@@ -12,20 +14,61 @@ import { TokenInfo } from '../../types/TokenInfo';
 })
 export class AddLiquidityComponent implements OnInit {
 
+  Token = Token;
+
   usdt$: Observable<TokenInfo>;
   usdj$: Observable<TokenInfo>;
+
+  inputUSDT = new BigNumber(0);
+  inputUSDJ = new BigNumber(0);
+
+  inputUSDT$ = new Subject<BigNumber>();
+  inputUSDJ$ = new Subject<BigNumber>();
+
+  shouldApproveUSDT = false;
+  shouldApproveUSDJ = false;
+
+  isApprovingUSDT = false;
+  isApprovingUSDJ = false;
+
+  canSupply$: Observable<boolean>;
 
   constructor(private stateService: StateService) {
     this.usdt$ = stateService.getToken$(Token.USDT);
     this.usdj$ = stateService.getToken$(Token.USDJ);
 
-    this.stateService.getInitialized$().subscribe(() => {
-      this.stateService.requestTRC20TokenBalance(Token.USDT);
-      this.stateService.requestTRC20TokenBalance(Token.USDJ);
-    });
+    this.canSupply$ = combineLatest([this.usdt$, this.usdj$, this.inputUSDT$, this.inputUSDJ$]).pipe(
+      map(([usdt, usdj, inputUSDT, inputUSDJ]) => {
+        if (usdt.balance.lt(inputUSDT) || usdj.balance.lt(inputUSDJ))
+          return false;
+
+        return usdt.allowance.gte(inputUSDT) && usdj.allowance.gte(inputUSDJ);
+      }),
+      tap(r => console.warn(r)),
+    );
  }
 
   ngOnInit(): void {
+  }
+
+  async approveUSDT() {
+    this.isApprovingUSDT = true;
+    try {
+      await this.stateService.approve(Token.USDT, this.inputUSDT);
+    } finally {
+      this.isApprovingUSDT = false;
+    }
+  }
+  async approveUSDJ() {
+    this.isApprovingUSDJ = true;
+    try {
+      await this.stateService.approve(Token.USDJ, this.inputUSDJ);
+    } finally {
+      this.isApprovingUSDJ = false;
+    }
+  }
+
+  async supply() {
   }
 
 }
