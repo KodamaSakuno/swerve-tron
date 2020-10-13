@@ -10,7 +10,7 @@ import { HeaderComponent } from './shared/header/header.component';
 import { StateService } from './services/state.service';
 import { AddLiquidityComponent } from './pages/add-liquidity/add-liquidity.component';
 import { RemoveLiquidityComponent } from './pages/remove-liquidity/remove-liquidity.component';
-import { BignumberPipe } from './bignumber.pipe';
+import { BigNumberPipe } from './bignumber.pipe';
 
 @NgModule({
   declarations: [
@@ -21,7 +21,7 @@ import { BignumberPipe } from './bignumber.pipe';
     HeaderComponent,
     AddLiquidityComponent,
     RemoveLiquidityComponent,
-    BignumberPipe
+    BigNumberPipe
   ],
   imports: [
     BrowserModule,

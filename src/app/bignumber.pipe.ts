@@ -4,7 +4,7 @@ import { BigNumber } from 'bignumber.js';
 @Pipe({
   name: 'bignumber'
 })
-export class BignumberPipe implements PipeTransform {
+export class BigNumberPipe implements PipeTransform {
 
   transform(value: string | BigNumber | null, decimals = 18): string {
     if (!value)
