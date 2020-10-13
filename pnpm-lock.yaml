@@ -7,7 +7,7 @@ dependencies:
   '@angular/platform-browser': 10.1.5_4c5fee6efec7bb2121ef2dd0964d0d81
   '@angular/platform-browser-dynamic': 10.1.5_f98166849b774a7df2e06a1fd2f2e528
   '@angular/router': 10.1.5_faa2eba427bc1ebf5f07a6f3c0d91320
-  '@ethersproject/units': 5.0.6
+  bignumber.js: 9.0.1
   rxjs: 6.6.3
   tslib: 2.0.3
   zone.js: 0.10.3
@@ -1308,38 +1308,6 @@ packages:
     dev: true
     resolution:
       integrity: sha512-bvM7Qz6eKnJVFIn+1LPtjlBFPVN5jNDc1XmN15vWe7Q3DPBufWWsLiIvUu7xW87uTG6QoggpIDnUgLQvPheU+Q==
-  /@ethersproject/bignumber/5.0.8:
-    dependencies:
-      '@ethersproject/bytes': 5.0.5
-      '@ethersproject/logger': 5.0.6
-      bn.js: 4.11.9
-    dev: false
-    resolution:
-      integrity: sha512-KXFVAFKS1jdTXYN8BE5Oj+ZfPMh28iRdFeNGBVT6cUFdtiPVqeXqc0ggvBqA3A1VoFFGgM7oAeaagA393aORHA==
-  /@ethersproject/bytes/5.0.5:
-    dependencies:
-      '@ethersproject/logger': 5.0.6
-    dev: false
-    resolution:
-      integrity: sha512-IEj9HpZB+ACS6cZ+QQMTqmu/cnUK2fYNE6ms/PVxjoBjoxc6HCraLpam1KuRvreMy0i523PLmjN8OYeikRdcUQ==
-  /@ethersproject/constants/5.0.5:
-    dependencies:
-      '@ethersproject/bignumber': 5.0.8
-    dev: false
-    resolution:
-      integrity: sha512-foaQVmxp2+ik9FrLUCtVrLZCj4M3Ibgkqvh+Xw/vFRSerkjVSYePApaVE5essxhoSlF1U9oXfWY09QI2AXtgKA==
-  /@ethersproject/logger/5.0.6:
-    dev: false
-    resolution:
-      integrity: sha512-FrX0Vnb3JZ1md/7GIZfmJ06XOAA8r3q9Uqt9O5orr4ZiksnbpXKlyDzQtlZ5Yv18RS8CAUbiKH9vwidJg1BPmQ==
-  /@ethersproject/units/5.0.6:
-    dependencies:
-      '@ethersproject/bignumber': 5.0.8
-      '@ethersproject/constants': 5.0.5
-      '@ethersproject/logger': 5.0.6
-    dev: false
-    resolution:
-      integrity: sha512-tsJuy4mipppdmooukRfhXt8fGx9nxvfvG6Xdy0RDm7LzHsjghjwQ69m2bCpId6SDSR1Uq1cQ9irPiUBSyWolUA==
   /@istanbuljs/schema/0.1.2:
     dev: true
     engines:
@@ -2110,6 +2078,10 @@ packages:
     dev: true
     resolution:
       integrity: sha512-vyL2OymJxmarO8gxMr0mhChsO9QGwhynfuu4+MHTAW6czfq9humCB7rKpUjDd9YUiDPU4mzpyupFSvOClAwbmQ==
+  /bignumber.js/9.0.1:
+    dev: false
+    resolution:
+      integrity: sha512-IdZR9mh6ahOBv/hYGiXyVuyCetmGJhtYkqLBpTStdhEGjegpPlUawydyaF3pbIOFynJTpllEs+NP+CS9jKFLjA==
   /binary-extensions/1.13.1:
     dev: true
     engines:
@@ -2147,6 +2119,7 @@ packages:
     resolution:
       integrity: sha512-XpNj6GDQzdfW+r2Wnn7xiSAd7TM3jzkxGXBGTtWKuSXv1xUV+azxAm8jdWZN06QTQk+2N2XB9jRDkvbmQmcRtg==
   /bn.js/4.11.9:
+    dev: true
     resolution:
       integrity: sha512-E6QoYqCKZfgatHTdHzs1RRKP7ip4vvm+EyRUeE2RF0NblwVvb0p6jSVeNTOFxPn26QXN2o6SMfNxKp6kU8zQaw==
   /bn.js/5.1.3:
@@ -3248,20 +3221,6 @@ packages:
   /debug/4.2.0:
     dependencies:
       ms: 2.1.2
-    dev: true
-    engines:
-      node: '>=6.0'
-    peerDependencies:
-      supports-color: '*'
-    peerDependenciesMeta:
-      supports-color:
-        optional: true
-    resolution:
-      integrity: sha512-IX2ncY78vDTjZMFUdmsvIRFY2Cf4FnD0wRs+nQwJU8Lu99/tPFdb0VybiiMTPe3I6rQmwsqQqRBvxU+bZ/I8sg==
-  /debug/4.2.0_supports-color@6.1.0:
-    dependencies:
-      ms: 2.1.2
-      supports-color: 6.1.0
     dev: true
     engines:
       node: '>=6.0'
@@ -8214,31 +8173,27 @@ packages:
     dev: true
     resolution:
       integrity: sha512-+orQK83kyMva3WyPf59k1+Y525csj5JejicWut55zeTWANuN17qSiSLUXWtzHeNWORSvT7GLDJ/E/XiIWoXBTw==
-  /spdy-transport/3.0.0_supports-color@6.1.0:
+  /spdy-transport/3.0.0:
     dependencies:
-      debug: 4.2.0_supports-color@6.1.0
+      debug: 4.2.0
       detect-node: 2.0.4
       hpack.js: 2.1.6
       obuf: 1.1.2
       readable-stream: 3.6.0
       wbuf: 1.7.3
     dev: true
-    peerDependencies:
-      supports-color: '*'
     resolution:
       integrity: sha512-hsLVFE5SjA6TCisWeJXFKniGGOpBgMLmerfO2aCyCU5s7nJ/rpAepqmFifv/GCbSbueEeAJJnmSQ2rKC/g8Fcw==
-  /spdy/4.0.2_supports-color@6.1.0:
+  /spdy/4.0.2:
     dependencies:
-      debug: 4.2.0_supports-color@6.1.0
+      debug: 4.2.0
       handle-thing: 2.0.1
       http-deceiver: 1.2.7
       select-hose: 2.0.0
-      spdy-transport: 3.0.0_supports-color@6.1.0
+      spdy-transport: 3.0.0
     dev: true
     engines:
       node: '>=6.0.0'
-    peerDependencies:
-      supports-color: '*'
     resolution:
       integrity: sha512-r46gZQZQV+Kl9oItvl1JZZqJKGr+oEkB08A6BzkiR7593/7IbtuncXHd2YoYeTsG4157ZssMu9KYvUHLcjcDoA==
   /speed-measure-webpack-plugin/1.3.3_webpack@4.44.1:
@@ -9201,7 +9156,7 @@ packages:
       chokidar: 2.1.8
       compression: 1.7.4
       connect-history-api-fallback: 1.6.0
-      debug: 4.2.0_supports-color@6.1.0
+      debug: 4.2.0
       del: 4.1.1
       express: 4.17.1
       html-entities: 1.3.1
@@ -9221,7 +9176,7 @@ packages:
       serve-index: 1.9.1
       sockjs: 0.3.20
       sockjs-client: 1.4.0
-      spdy: 4.0.2_supports-color@6.1.0
+      spdy: 4.0.2
       strip-ansi: 3.0.1
       supports-color: 6.1.0
       url: 0.11.0
@@ -9568,10 +9523,10 @@ specifiers:
   '@angular/platform-browser': ~10.1.5
   '@angular/platform-browser-dynamic': ~10.1.5
   '@angular/router': ~10.1.5
-  '@ethersproject/units': ^5.0.6
   '@types/jasmine': ~3.5.0
   '@types/jasminewd2': ~2.0.3
   '@types/node': ^12.11.1
+  bignumber.js: ^9.0.1
   codelyzer: ^6.0.0
   jasmine-core: ~3.6.0
   jasmine-spec-reporter: ~5.0.0

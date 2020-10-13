@@ -58,7 +58,10 @@
             "styles": [
               "src/styles.styl"
             ],
-            "scripts": []
+            "scripts": [],
+            "allowedCommonJsDependencies": [
+              "bignumber.js"
+           ]
           },
           "configurations": {
             "production": {

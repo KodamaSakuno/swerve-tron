@@ -1,7 +1,5 @@
 declare global {
   interface TronWebInstance {
-    BigNumber: BigNumberConstructor;
-
     ready?: boolean;
 
     defaultAddress: {
@@ -21,15 +19,6 @@ declare global {
         call: () => Promise<any>,
       },
     };
-  }
-
-  interface BigNumberConstructor {
-    new(value: number): BigNumber;
-  }
-  class BigNumber {
-    constructor(value: number);
-
-    toString(): string;
   }
 }
 
