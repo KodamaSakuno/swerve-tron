@@ -1,13 +1,19 @@
 import { Pipe, PipeTransform } from '@angular/core';
-import { formatUnits } from '@ethersproject/units';
+import { BigNumber } from 'bignumber.js';
 
 @Pipe({
   name: 'bignumber'
 })
 export class BignumberPipe implements PipeTransform {
 
-  transform(value: BigNumber, decimals = 18): unknown {
-    return formatUnits(value.toString(), decimals);
+  transform(value: string | BigNumber | null, decimals = 18): string {
+    if (!value)
+      return '';
+
+    if (typeof value === 'string')
+      value = new BigNumber(value);
+
+    return value.div(new BigNumber(10).pow(decimals)).toString();
   }
 
 }

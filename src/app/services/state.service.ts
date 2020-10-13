@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { BigNumber } from 'bignumber.js';
 import { BehaviorSubject, Observable, Subject } from 'rxjs';
 import { scan, filter, take, map } from "rxjs/operators";
 
@@ -107,7 +108,10 @@ export class StateService {
     const contract = window.tronWeb.contract(TRC20ABI, token);
 
     contract.methods.balanceOf(window.tronWeb.defaultAddress.base58).call().then(result => {
-      const balance = result;
+      let balance = result;
+
+      if (balance._ethersType === "BigNumber")
+        balance = new BigNumber(balance.toHexString());
 
       this.update$.next(state => {
         state.tokens[token].balance = balance;
