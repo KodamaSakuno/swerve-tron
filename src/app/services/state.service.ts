@@ -109,10 +109,7 @@ export class StateService {
     const contract = window.tronWeb.contract(TRC20ABI, token);
 
     contract.methods.balanceOf(window.tronWeb.defaultAddress.base58).call().then(result => {
-      let balance = result;
-
-      if (balance._ethersType === "BigNumber")
-        balance = new BigNumber(balance.toHexString());
+      const balance = this.convertBadBigNumber(result);
 
       this.update$.next(state => {
         state.tokens[token].balance = balance;
@@ -126,10 +123,7 @@ export class StateService {
     const contract = window.tronWeb.contract(TRC20ABI, token);
 
     contract.methods.allowance(window.tronWeb.defaultAddress.base58, ContractAddress.Swap).call().then(result => {
-      let allowance = result;
-
-      if (allowance._ethersType === "BigNumber")
-        allowance = new BigNumber(allowance.toHexString());
+      const allowance = this.convertBadBigNumber(result);
 
       this.update$.next(state => {
         state.tokens[token].allowance = allowance;
@@ -151,6 +145,12 @@ export class StateService {
     await window.tronWeb.contract(TRC20ABI, token).methods.approve(ContractAddress.Swap, amount.toString()).send({ shouldPollResponse: true });
 
     this.requestTRC20TokenAllowance(token);
+  }
+  private convertBadBigNumber(value: any) {
+    if (value._ethersType === "BigNumber")
+      value = new BigNumber(value.toHexString());
+
+    return value;
   }
 }
 
