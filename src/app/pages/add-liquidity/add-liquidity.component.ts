@@ -39,12 +39,14 @@ export class AddLiquidityComponent implements OnInit {
 
     this.canSupply$ = combineLatest([this.usdt$, this.usdj$, this.inputUSDT$, this.inputUSDJ$]).pipe(
       map(([usdt, usdj, inputUSDT, inputUSDJ]) => {
+        if (inputUSDT.eq(0) && inputUSDJ.eq(0))
+          return false;
+
         if (usdt.balance.lt(inputUSDT) || usdj.balance.lt(inputUSDJ))
           return false;
 
         return usdt.allowance.gte(inputUSDT) && usdj.allowance.gte(inputUSDJ);
       }),
-      tap(r => console.warn(r)),
     );
  }
 
