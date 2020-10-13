@@ -4,6 +4,7 @@ import { BehaviorSubject, Observable, Subject } from 'rxjs';
 import { scan, filter, take, map } from "rxjs/operators";
 
 import TRC20ABI from '../constants/abis/TRC20.json';
+import SwapABI from '../constants/abis/Swap.json';
 import { ContractAddress } from '../constants/contracts';
 import { Token } from '../constants/tokens';
 import { TokenInfo } from '../types/TokenInfo';
@@ -146,6 +147,21 @@ export class StateService {
 
     this.requestTRC20TokenAllowance(token);
   }
+
+  async addLiquidity(usdt: BigNumber, usdj: BigNumber) {
+    const swapContract = window.tronWeb.contract(SwapABI, ContractAddress.Swap);
+    const swapTokenContract = window.tronWeb.contract(TRC20ABI, ContractAddress.SwapToken);
+
+    const amounts = [usdt.toString(), usdj.toString()];
+
+    let minAmount = new BigNumber(0);
+    const totalSupply = this.convertBadBigNumber(await swapTokenContract.methods.totalSupply().call());
+    if (totalSupply.gt(0)) {
+    }
+
+    await swapContract.methods.add_liquidity(amounts, minAmount.toString()).send({ shouldPollResponse: true });
+  }
+
   private convertBadBigNumber(value: any) {
     if (value._ethersType === "BigNumber")
       value = new BigNumber(value.toHexString());

@@ -71,6 +71,7 @@ export class AddLiquidityComponent implements OnInit {
   }
 
   async supply() {
+    await this.stateService.addLiquidity(this.inputUSDT, this.inputUSDJ);
   }
 
 }
