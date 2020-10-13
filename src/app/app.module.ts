@@ -11,6 +11,7 @@ import { StateService } from './services/state.service';
 import { AddLiquidityComponent } from './pages/add-liquidity/add-liquidity.component';
 import { RemoveLiquidityComponent } from './pages/remove-liquidity/remove-liquidity.component';
 import { BigNumberPipe } from './bignumber.pipe';
+import { TokenAmountInputComponent } from './shared/token-amount-input/token-amount-input.component';
 
 @NgModule({
   declarations: [
@@ -21,7 +22,8 @@ import { BigNumberPipe } from './bignumber.pipe';
     HeaderComponent,
     AddLiquidityComponent,
     RemoveLiquidityComponent,
-    BigNumberPipe
+    BigNumberPipe,
+    TokenAmountInputComponent
   ],
   imports: [
     BrowserModule,

@@ -1,0 +1,6 @@
+<div>
+  Balance:
+  <span>{{ token.balance | bignumber:token.decimals }}</span>
+</div>
+<input [value]="amount | bignumber:token.decimals" [disabled]="disabled" #amountInput />
+<button [disabled]="disabled" (click)="setMaxAmount()">MAX</button>

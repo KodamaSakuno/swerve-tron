@@ -4,6 +4,7 @@ import { BehaviorSubject, Observable, Subject } from 'rxjs';
 import { scan, filter, take, map } from "rxjs/operators";
 
 import TRC20ABI from '../constants/abis/TRC20.json';
+import { ContractAddress } from '../constants/contracts';
 import { Token } from '../constants/tokens';
 import { TokenInfo } from '../types/TokenInfo';
 
@@ -26,15 +27,15 @@ function getDefaultState(): TronState {
         address: Token.USDT,
         name: 'USDT',
         decimals: 6,
-        balance: '0',
-        allowance: '0',
+        balance: new BigNumber(0),
+        allowance: new BigNumber(0),
       },
       [Token.USDJ]: {
         address: Token.USDJ,
         name: 'USDJ',
         decimals: 18,
-        balance: '0',
-        allowance: '0',
+        balance: new BigNumber(0),
+        allowance: new BigNumber(0),
       },
     }
   };
@@ -115,6 +116,23 @@ export class StateService {
 
       this.update$.next(state => {
         state.tokens[token].balance = balance;
+      });
+    });
+  }
+  requestTRC20TokenAllowance(token: Token) {
+    if (!window.tronWeb)
+      throw new Error("TronWeb not initialized");
+
+    const contract = window.tronWeb.contract(TRC20ABI, token);
+
+    contract.methods.allowance(window.tronWeb.defaultAddress.base58, ContractAddress.Swap).call().then(result => {
+      let allowance = result;
+
+      if (allowance._ethersType === "BigNumber")
+        allowance = new BigNumber(allowance.toHexString());
+
+      this.update$.next(state => {
+        state.tokens[token].allowance = allowance;
       });
     });
   }
