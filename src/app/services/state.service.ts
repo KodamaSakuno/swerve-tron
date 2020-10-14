@@ -163,7 +163,7 @@ export class StateService {
   }
 
   private convertBadBigNumber(value: any) {
-    if (value._ethersType === "BigNumber")
+    if (value._ethersType === 'BigNumber')
       value = new BigNumber(value.toHexString());
 
     return value;

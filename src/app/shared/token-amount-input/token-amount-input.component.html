@@ -2,5 +2,5 @@
   Balance:
   <span>{{ token.balance | bignumber:token.decimals }}</span>
 </div>
-<input [value]="amount | bignumber:token.decimals" [disabled]="disabled" #amountInput />
+<input [ngModel]="amount | bignumber:token.decimals" (ngModelChange)="input$.next($event)" [disabled]="disabled" #amountInput />
 <button [disabled]="disabled" (click)="setMaxAmount()">MAX</button>

@@ -1,6 +1,6 @@
 import { Component, ElementRef, Input, OnInit, Output, ViewChild } from '@angular/core';
 import { BigNumber } from 'bignumber.js';
-import { Subject, BehaviorSubject, fromEvent, combineLatest } from 'rxjs';
+import { Subject, BehaviorSubject, combineLatest } from 'rxjs';
 import { debounceTime, distinctUntilChanged, map, delay } from 'rxjs/operators';
 
 import { TokenInfo } from '../../types/TokenInfo';
@@ -21,6 +21,7 @@ export class TokenAmountInputComponent implements OnInit {
 
   @Input()
   amount = new BigNumber(0);
+  input$ = new Subject<string>();
   @Output()
   amountChange = new Subject<BigNumber>();
 
@@ -31,6 +32,11 @@ export class TokenAmountInputComponent implements OnInit {
   disabled = false;
 
   constructor(private stateService: StateService) {
+    this.input$.pipe(
+      debounceTime(300),
+      distinctUntilChanged(),
+      map(input => new BigNumber(input).times(new BigNumber(10).pow(this.token.decimals)))
+    ).subscribe(this.amountChange);
   }
 
   ngOnInit(): void {
@@ -38,16 +44,6 @@ export class TokenAmountInputComponent implements OnInit {
       this.stateService.requestTRC20TokenBalance(this.token.address);
       this.stateService.requestTRC20TokenAllowance(this.token.address);
     });
-
-    fromEvent<InputEvent>(this.input.nativeElement, 'input').pipe(
-      debounceTime(300),
-      distinctUntilChanged(),
-      map(event => {
-        const inputText = (event.target as HTMLInputElement).value || '0';
-
-        return new BigNumber(inputText).times(new BigNumber(10).pow(this.token.decimals));
-      }),
-    ).subscribe(this.amountChange);
 
     const allowance$ = this.stateService.getToken$(this.token.address).pipe(
       map(token => token.allowance)
