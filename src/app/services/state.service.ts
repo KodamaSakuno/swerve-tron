@@ -38,6 +38,13 @@ function getDefaultState(): TronState {
         balance: new BigNumber(0),
         allowance: new BigNumber(0),
       },
+      [Token.swUSD]: {
+        address: Token.swUSD,
+        name: 'Swerve-Tron USDT/USDJ',
+        decimals: 18,
+        balance: new BigNumber(0),
+        allowance: new BigNumber(0),
+      },
     }
   };
 }
@@ -160,6 +167,14 @@ export class StateService {
     }
 
     await swapContract.methods.add_liquidity(amounts, minAmount.toString()).send({ shouldPollResponse: true });
+  }
+  async removeLiquidity(amount: BigNumber) {
+    const swapContract = window.tronWeb.contract(SwapABI, ContractAddress.Swap);
+    const swapTokenContract = window.tronWeb.contract(TRC20ABI, ContractAddress.SwapToken);
+
+    const amounts = ["0", "0"];
+
+    await swapContract.methods.remove_liquidity(amount.toString(), amounts).send({ shouldPollResponse: true });
   }
 
   private convertBadBigNumber(value: any) {
