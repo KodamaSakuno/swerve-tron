@@ -1,7 +1,7 @@
 import { Component, ElementRef, Input, OnInit, Output, ViewChild } from '@angular/core';
 import { BigNumber } from 'bignumber.js';
-import { Subject, BehaviorSubject, combineLatest } from 'rxjs';
-import { debounceTime, distinctUntilChanged, map, delay } from 'rxjs/operators';
+import { Subject } from 'rxjs';
+import { debounceTime, distinctUntilChanged, map } from 'rxjs/operators';
 
 import { TokenInfo } from '../../types/TokenInfo';
 import { StateService } from '../../services/state.service';
@@ -25,9 +25,6 @@ export class TokenAmountInputComponent implements OnInit {
   @Output()
   amountChange = new Subject<BigNumber>();
 
-  @Output()
-  shouldApproveChange = new BehaviorSubject<boolean>(false);
-
   @Input()
   disabled = false;
 
@@ -44,19 +41,6 @@ export class TokenAmountInputComponent implements OnInit {
       this.stateService.requestTRC20TokenBalance(this.token.address);
       this.stateService.requestTRC20TokenAllowance(this.token.address);
     });
-
-    const allowance$ = this.stateService.getToken$(this.token.address).pipe(
-      map(token => token.allowance)
-    );
-    combineLatest([this.amountChange, allowance$]).pipe(
-      delay(0),
-      map(([amount, allowance]) => {
-        if (amount.eq(0))
-          return false;
-
-        return amount.gt(allowance);
-      }),
-    ).subscribe(this.shouldApproveChange);
   }
 
   setMaxAmount() {
