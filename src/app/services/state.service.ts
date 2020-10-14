@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { BigNumber } from 'bignumber.js';
-import { BehaviorSubject, Observable, Subject } from 'rxjs';
+import { BehaviorSubject, Observable, Subject, defer } from 'rxjs';
 import { scan, filter, take, map } from "rxjs/operators";
 
 import TRC20ABI from '../constants/abis/TRC20.json';
@@ -173,9 +173,8 @@ export class StateService {
   }
   async removeLiquidity(amount: BigNumber) {
     const swapContract = window.tronWeb.contract(SwapABI, ContractAddress.Swap);
-    const swapTokenContract = window.tronWeb.contract(TRC20ABI, ContractAddress.SwapToken);
 
-    const amounts = ["0", "0"];
+    const amounts = ['0', '0'];
 
     await swapContract.methods.remove_liquidity(amount.toString(), amounts).send({ shouldPollResponse: true });
 
@@ -187,6 +186,28 @@ export class StateService {
       value = new BigNumber(value.toHexString());
 
     return value;
+  }
+
+  getTargetAmount$(token: Token, input: BigNumber) {
+    return defer(async () => {
+      const swapContract = window.tronWeb.contract(SwapABI, ContractAddress.Swap);
+
+      const i = token === Token.USDT ? 0 : 1;
+      const j = token === Token.USDT ? 1 : 0;
+
+      return this.convertBadBigNumber(await swapContract.methods.get_dy_underlying(i, j, input.toString()).call());
+    })
+  }
+
+  async swap(token: Token, amount: BigNumber) {
+    const swapContract = window.tronWeb.contract(SwapABI, ContractAddress.Swap);
+
+    const i = token === Token.USDT ? 0 : 1;
+    const j = token === Token.USDT ? 1 : 0;
+
+    await swapContract.methods.exchange(i, j, amount.toString(), '0').send({ shouldPollResponse: true });
+
+    this.requestAccountBalance();
   }
 }
 
