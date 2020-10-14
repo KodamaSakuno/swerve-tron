@@ -153,6 +153,7 @@ export class StateService {
     await window.tronWeb.contract(TRC20ABI, token).methods.approve(ContractAddress.Swap, amount.toString()).send({ shouldPollResponse: true });
 
     this.requestTRC20TokenAllowance(token);
+    this.requestAccountBalance();
   }
 
   async addLiquidity(usdt: BigNumber, usdj: BigNumber) {
@@ -167,6 +168,8 @@ export class StateService {
     }
 
     await swapContract.methods.add_liquidity(amounts, minAmount.toString()).send({ shouldPollResponse: true });
+
+    this.requestAccountBalance();
   }
   async removeLiquidity(amount: BigNumber) {
     const swapContract = window.tronWeb.contract(SwapABI, ContractAddress.Swap);
@@ -175,6 +178,8 @@ export class StateService {
     const amounts = ["0", "0"];
 
     await swapContract.methods.remove_liquidity(amount.toString(), amounts).send({ shouldPollResponse: true });
+
+    this.requestAccountBalance();
   }
 
   private convertBadBigNumber(value: any) {
