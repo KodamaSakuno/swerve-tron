@@ -1,7 +1,7 @@
 import { Component, ElementRef, Input, OnInit, Output, ViewChild } from '@angular/core';
 import { BigNumber } from 'bignumber.js';
 import { Subject } from 'rxjs';
-import { debounceTime, distinctUntilChanged, map } from 'rxjs/operators';
+import { filter, debounceTime, distinctUntilChanged, map } from 'rxjs/operators';
 
 import { TokenInfo } from '../../types/TokenInfo';
 import { StateService } from '../../services/state.service';
@@ -30,6 +30,7 @@ export class TokenAmountInputComponent implements OnInit {
 
   constructor(private stateService: StateService) {
     this.input$.pipe(
+      filter(input => input.length > 0),
       debounceTime(300),
       distinctUntilChanged(),
       map(input => new BigNumber(input).times(new BigNumber(10).pow(this.token.decimals)))
