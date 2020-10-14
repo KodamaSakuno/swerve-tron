@@ -21,5 +21,7 @@
   </button>
 </div>
 <div>
-  <button [disabled]="!(canSupply$ | async)" (click)="supply()">Supply</button>
+  <button [disabled]="!(canSupply$ | async)" (click)="supply()">
+    {{ isSupplying ? 'Supplying' : 'Supply' }}
+  </button>
 </div>

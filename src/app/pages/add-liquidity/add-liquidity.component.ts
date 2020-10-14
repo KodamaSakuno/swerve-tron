@@ -32,6 +32,7 @@ export class AddLiquidityComponent implements OnInit {
   isApprovingUSDJ = false;
 
   canSupply$: Observable<boolean>;
+  isSupplying = false;
 
   constructor(private stateService: StateService) {
     this.usdt$ = stateService.getToken$(Token.USDT);
@@ -86,7 +87,12 @@ export class AddLiquidityComponent implements OnInit {
   }
 
   async supply() {
-    await this.stateService.addLiquidity(this.inputUSDT, this.inputUSDJ);
+    this.isSupplying = true;
+    try {
+      await this.stateService.addLiquidity(this.inputUSDT, this.inputUSDJ);
+    } finally {
+      this.isSupplying = false;
+    }
   }
 
 }
