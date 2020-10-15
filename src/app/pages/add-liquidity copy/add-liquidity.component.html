@@ -1,0 +1,27 @@
+<div>
+  <a routerLink="/pool">
+    Back
+  </a>
+  <span>Add Liquidity</span>
+</div>
+
+<app-token-amount-input [token]="usdt" [(amount)]="inputUSDT" (amountChange)="inputUSDT$.next($event)" [disabled]="isApprovingUSDT"
+  *ngIf="usdt$ | async as usdt">
+</app-token-amount-input>
+<app-token-amount-input [token]="usdj" [(amount)]="inputUSDJ" (amountChange)="inputUSDJ$.next($event)" [disabled]="isApprovingUSDJ"
+  *ngIf="usdj$ | async as usdj">
+</app-token-amount-input>
+
+<div>
+  <button [disabled]="isApprovingUSDT" (click)="approveUSDT()" *ngIf="shouldApproveUSDT$ | async">
+    {{ isApprovingUSDT ? 'Approving' : 'Approve' }} USDT
+  </button>
+  <button [disabled]="isApprovingUSDJ" (click)="approveUSDJ()" *ngIf="shouldApproveUSDJ$ | async">
+    {{ isApprovingUSDJ ? 'Approving' : 'Approve' }} USDJ
+  </button>
+</div>
+<div>
+  <button [disabled]="!(canSupply$ | async)" (click)="supply()">
+    {{ isSupplying ? 'Supplying' : 'Supply' }}
+  </button>
+</div>

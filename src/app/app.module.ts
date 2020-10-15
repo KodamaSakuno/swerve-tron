@@ -7,7 +7,11 @@ import { AppComponent } from './app.component';
 import { SwapComponent } from './pages/swap/swap.component';
 import { PoolComponent } from './pages/pool/pool.component';
 import { NavTabsComponent } from './shared/nav-tabs/nav-tabs.component';
+import { SwapOrPoolNavComponent } from './shared/swap-or-pool-nav/swap-or-pool-nav.component';
+import { BoxHeaderComponent } from './shared/box-header/box-header.component';
+import { YourPositionComponent } from './shared/your-position/your-position.component';
 import { HeaderComponent } from './shared/header/header.component';
+import { SetingComponent } from './shared/seting/seting.component';
 import { StateService } from './services/state.service';
 import { AddLiquidityComponent } from './pages/add-liquidity/add-liquidity.component';
 import { RemoveLiquidityComponent } from './pages/remove-liquidity/remove-liquidity.component';
@@ -20,11 +24,15 @@ import { TokenAmountInputComponent } from './shared/token-amount-input/token-amo
     SwapComponent,
     PoolComponent,
     NavTabsComponent,
+    SwapOrPoolNavComponent,
+    BoxHeaderComponent,
+    YourPositionComponent,
     HeaderComponent,
+    SetingComponent,
     AddLiquidityComponent,
     RemoveLiquidityComponent,
     BigNumberPipe,
-    TokenAmountInputComponent
+    TokenAmountInputComponent,
   ],
   imports: [
     BrowserModule,

@@ -1,0 +1,29 @@
+.nav {
+  margin-bottom: 20px;
+  display: flex;
+  flex-flow: row nowrap;
+  -webkit-box-align: center;
+  align-items: center;
+  border-radius: 3rem;
+  justify-content: space-evenly;
+  a {
+    display: flex;
+    flex-flow: row nowrap;
+    -webkit-box-align: center;
+    align-items: center;
+    -webkit-box-pack: center;
+    justify-content: center;
+    height: 3rem;
+    border-radius: 3rem;
+    outline: none;
+    cursor: pointer;
+    text-decoration: none;
+    color: rgb(108, 114, 132);
+    font-size: 20px;
+    &.active {
+      border-radius: 12px;
+      font-weight: 500;
+      color: rgb(255, 255, 255);
+    }
+  }
+}

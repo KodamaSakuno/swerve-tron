@@ -1,2 +1,120 @@
-{{ account$ | async }}
-{{ balance$ | async | bignumber:6 }}
+<header class="header">
+    <div class="h-container">
+    <div class="hc-container">
+        <div class="h-logo">
+        <a :to="/swap" class="h-logo-link">
+            <div class="hll-img">
+                <!-- <img src="../assets/image/logo.png" alt="logo" /> -->
+                💖
+            </div>
+            <!-- <div class="hll-img">
+            <img src="../assets/media/logo_white.svg" alt="logo" />
+            </div> -->
+            <!-- <div class="hll-text">
+            <img src="../assets/media/wordmark_white.svg" alt="logo" />
+            </div> -->
+        </a>
+        </div>
+        <div class="h-info">
+        <!-- account -->
+        <!-- v-if="tronweb.network !== 'Mainnet'" -->
+        <div class="network">
+            <div>Shasta</div>
+        </div>
+        <div class="hi-account">
+            <!-- <div class="account-empty"></div> -->
+            <div class="hic-account">
+            <div class="hicc-balance">100 TRX</div>
+            <button
+                id="web3-status-connected"
+                class="hicc-connected"
+            >
+                <p class="hiccc-account">xxxxx</p>
+                <!-- <Avatar :address="tronweb.account" size="16" /> -->
+            </button>
+            </div>
+        </div>
+        <!-- connect to a wallet -->
+        <div class="connect-account">
+            <div class="account-empty"></div>
+            <div class="ca-content">
+            <button
+                id="connect-wallet"
+                class="connect-wallet"
+            >
+                <p class="cw-text">Connect to a wallet</p>
+            </button>
+            </div>
+        </div>
+
+        <div class="hic-operating">
+            <div class="hico-setting">
+                <button id="open-settings-dialog-button" class="hicos-button">
+                    <!-- <IconSettings /> -->
+                    ⚙️
+                </button>
+                <seting></seting>
+            </div>
+            <!-- <div class="hico-setting">
+            <button class="hicos-button" @click.stop="showAboutMenu = !showAboutMenu">
+                <IconMoreHorz />
+            </button>
+            <AboutMenu v-if="showAboutMenu" />
+            </div> -->
+        </div>
+        </div>
+    </div>
+    </div>
+
+    <!-- <Modal v-model="dialogVisibleAccount" customClass="account-wallet-dialog" width="420px"> -->
+    <!-- <template v-slot:header>Account</template> -->
+    <!-- <div class="adc-account">
+        <div>
+        <div class="adcc-content">
+            <div class="adccc-header">
+            <div class="adccch-title">Connected with TronLink</div>
+            <div>
+                <button class="adccch-change">Change</button>
+            </div>
+            </div>
+            <div id="web3-account-identifier-row" class="account-address">
+            <div class="aa-content">
+                <div>
+                <Avatar :address="tronweb.account" size="16" class="aac-avatar" />
+                <p>{{ account$ | async }}</p>
+                </div>
+            </div>
+            </div>
+            <div class="adccc-footer">
+            <div class="af-content">
+                <div>
+                <button
+                    v-if="copyStatue"
+                    class="afc-button"
+                    @click="copyAddress(tronweb.account)"
+                >
+                    <CheckCircleIcon class="afcb-icon" />
+                    <span style="margin-left: 4px">Copied</span>
+                </button>
+                <button v-else class="afc-button" @click="copyAddress(tronweb.account)">
+                    <CopyIcon class="afcb-icon" />
+                    <span style="margin-left: 4px">Copy Address</span>
+                </button>
+                <a
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    :href="`https://tronscan.org/#/address/${tronweb.account}`"
+                    class="afcb-link"
+                >
+                    <IconExternalLink class="afcb-icon" />
+                    <span style="margin-left: 4px">View on Tronscan</span>
+                </a>
+                </div>
+            </div>
+            </div>
+        </div>
+        </div>
+    </div> -->
+    <!-- <TransactionsHistory></TransactionsHistory> -->
+    <!-- </Modal> -->
+</header>
