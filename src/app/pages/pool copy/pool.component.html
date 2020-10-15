@@ -1,3 +1,4 @@
+<!-- before -->
 <app-nav-tabs></app-nav-tabs>
 <div class="content" *ngIf="swUSD$ | async as swUSD">
   <div *ngIf="swUSD.balance.gt(0); else noLiquidity">
@@ -16,4 +17,21 @@
       Add Liquidity
     </a>
   </ng-template>
+</div>
+
+<!-- after -->
+<app-nav-tabs></app-nav-tabs>
+<div class="content">
+  <div *ngIf="position$ | async as position; else noLiquidity">
+    <div>Pool token: {{ position.lpToken.balance | bignumber:position.lpToken.decimals}}</div>
+    <div>Your pooled USDT: {{ position.pooledTokens.usdt.balance | bignumber:position.pooledTokens.usdt.decimals }}</div>
+    <div>Your pooled USDT: {{ position.pooledTokens.usdj.balance | bignumber:position.pooledTokens.usdj.decimals }}</div>
+
+    <a routerLink="/add">
+      Add Liquidity
+    </a>
+    <a routerLink="/remove">
+      Remove Liquidity
+    </a>
+  </div>
 </div>
