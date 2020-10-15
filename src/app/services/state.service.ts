@@ -8,6 +8,7 @@ import SwapABI from '../constants/abis/Swap.json';
 import { ContractAddress } from '../constants/contracts';
 import { Token } from '../constants/tokens';
 import { TokenInfo } from '../types/TokenInfo';
+import { PositionInfo } from '../types/PositionInfo';
 
 export interface TronState {
   tronWeb: TronWebInstance | null;
@@ -15,6 +16,11 @@ export interface TronState {
   balance: number;
   tokens: {
     [address: string]: TokenInfo,
+  };
+  pool: {
+    totalSupply: BigNumber,
+    usdtBalance: BigNumber,
+    usdjBalance: BigNumber,
   };
 }
 
@@ -45,7 +51,12 @@ function getDefaultState(): TronState {
         balance: new BigNumber(0),
         allowance: new BigNumber(0),
       },
-    }
+    },
+    pool: {
+      totalSupply: new BigNumber(0),
+      usdtBalance: new BigNumber(0),
+      usdjBalance: new BigNumber(0),
+    },
   };
 }
 
@@ -165,6 +176,13 @@ export class StateService {
     let minAmount = new BigNumber(0);
     const totalSupply = this.convertBadBigNumber(await swapTokenContract.methods.totalSupply().call());
     if (totalSupply.gt(0)) {
+      debugger
+      minAmount = this.convertBadBigNumber(await swapContract.methods.calc_token_amount(amounts, true).call());
+
+      let fee = this.convertBadBigNumber(await swapContract.methods.fee().call());
+      fee = fee.div(100).times(2).div(4 * (2 - 1));
+
+      minAmount = minAmount.times(new BigNumber(1).minus(fee));
     }
 
     await swapContract.methods.add_liquidity(amounts, minAmount.toString()).send({ shouldPollResponse: true });
@@ -208,6 +226,50 @@ export class StateService {
     await swapContract.methods.exchange(i, j, amount.toString(), '0').send({ shouldPollResponse: true });
 
     this.requestAccountBalance();
+  }
+
+  getPositionInfo$(): Observable<PositionInfo | null> {
+    return this.state$.pipe(
+      filter(state => !!state.tronWeb),
+      map(state => {
+        const lpTokenBalance = state.tokens[Token.swUSD].balance;
+        if (lpTokenBalance.eq(0))
+          return null;
+
+        const poolShare = lpTokenBalance.div(state.pool.totalSupply);
+
+        return {
+          lpToken: state.tokens[Token.swUSD],
+          pooledTokens: {
+            usdt: {
+              decimals: state.tokens[Token.USDT].decimals,
+              balance: state.pool.usdtBalance.times(poolShare),
+            },
+            usdj: {
+              decimals: state.tokens[Token.USDJ].decimals,
+              balance: state.pool.usdjBalance.times(poolShare),
+            }
+          }
+        };
+      }),
+    )
+  }
+  async requestPoolInfo() {
+    if (!window.tronWeb)
+      throw new Error("TronWeb not initialized");
+
+    const swapContract = window.tronWeb.contract(SwapABI, ContractAddress.Swap);
+    const swapTokenContract = window.tronWeb.contract(TRC20ABI, ContractAddress.SwapToken);
+
+    const totalSupply = this.convertBadBigNumber(await swapTokenContract.methods.totalSupply().call());
+    const usdtBalance = this.convertBadBigNumber(await swapContract.methods.balances(0).call());
+    const usdjBalance = this.convertBadBigNumber(await swapContract.methods.balances(1).call());
+
+    this.update$.next(state => {
+      state.pool.totalSupply = totalSupply;
+      state.pool.usdtBalance = usdtBalance;
+      state.pool.usdjBalance = usdjBalance;
+    });
   }
 }
 

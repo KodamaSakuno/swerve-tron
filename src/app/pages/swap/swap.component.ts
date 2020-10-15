@@ -31,8 +31,7 @@ export class SwapComponent implements OnInit {
   }
   input$ = new Subject<BigNumber>();
 
-  targetAmount = new BigNumber(0);
-  targetAmount$: Observable<BigNumber>;
+  targetAmount$ = new BehaviorSubject<BigNumber>(new BigNumber(0));
 
   isApproving = false;
   shouldApprove$: Observable<boolean>;
@@ -56,10 +55,9 @@ export class SwapComponent implements OnInit {
       mergeMap(token => stateService.getToken$(token))
     );
 
-    this.targetAmount$ = combineLatest([this.from$, this.input$]).pipe(
+    combineLatest([this.from$, this.input$]).pipe(
       mergeMap(([token, input]) => stateService.getTargetAmount$(token.address, input)),
-      tap(value => this.targetAmount = value),
-    );
+    ).subscribe(this.targetAmount$);
 
     const allowance$ = this.from$.pipe(
       map(token => token.allowance)
