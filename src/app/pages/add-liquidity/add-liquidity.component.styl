@@ -1,0 +1,230 @@
+
+// common start
+.token-select {
+  -webkit-box-align: center;
+  align-items: center;
+  height: 2.2rem;
+  font-size: 20px;
+  font-weight: 500;
+  background-color: rgb(33, 36, 41);
+  color: rgb(255, 255, 255);
+  border-radius: 12px;
+  box-shadow: none;
+  outline: none;
+  cursor: pointer;
+  user-select: none;
+  border: none;
+  padding: 0px 0.5rem;
+  letter-spacing: -0.018em;
+  &:hover {
+    background-color: rgb(44, 47, 54);
+  }
+}
+.token-select-symbol {
+  display: flex;
+  -webkit-box-align: center;
+  align-items: center;
+  -webkit-box-pack: justify;
+  justify-content: space-between;
+}
+.token-select-symbol-logo {
+  width: 24px;
+  height: 24px;
+  box-shadow: rgba(0, 0, 0, 0.075) 0px 6px 10px;
+  border-radius: 24px;
+}
+.token-select-token {
+  margin: 0px 0.25rem 0px 0.75rem;
+  font-size: 20px;
+}
+
+// common end
+
+.swap-page {
+  position: relative;
+}
+.sp-content {
+  display: grid;
+  grid-auto-rows: auto;
+  row-gap: 20px;
+  box-sizing: border-box;
+}
+
+// ---
+
+.swap-arrow {
+  display: grid;
+  grid-auto-rows: auto;
+}
+.sa-content {
+  box-sizing: border-box;
+  margin: 0px;
+  min-width: 0px;
+  width: 100%;
+  display: flex;
+  padding: 0px 1rem;
+  -webkit-box-align: center;
+  align-items: center;
+  flex-wrap: wrap;
+  -webkit-box-pack: center;
+  justify-content: center;
+}
+.sac-icon {
+  padding: 2px;
+  width: 16px;
+  height: 16px;
+  color: #c3c5cb;
+}
+// ---
+
+.swap-button-content {
+  margin: 0;
+  line-height: inherit;
+  box-sizing: border-box;
+  min-width: 0px;
+  appearance: none;
+  #swap-button {
+    margin-top: 16px;
+  }
+  .swap-button-insufficient {
+    margin-top: 16px;
+    opacity: 0.5;
+    cursor: auto;
+    box-shadow: none;
+    background-color: rgb(255, 104, 113);
+    border: 1px solid rgb(255, 104, 113);
+    cursor: auto;
+    &:active {
+      filter: brightness(1);
+    }
+  }
+}
+
+.first-tips {
+  display: flex;
+  flex-direction: column;
+  -webkit-box-pack: start;
+  justify-content: flex-start;
+  width: 100%;
+  -webkit-box-align: center;
+  align-items: center;
+  box-sizing: border-box;
+}
+.ft-content {
+  box-sizing: border-box;
+  margin: 0px;
+  min-width: 0px;
+  padding: 1.25rem;
+  background-color: rgba(21, 61, 111, 0.44);
+  color: rgb(33, 114, 229);
+  border-radius: 12px;
+  width: fit-content;
+}
+.ftc-box {
+  box-sizing: border-box;
+  margin: 0px;
+  min-width: 0px;
+  font-weight: 500;
+  color: rgb(33, 114, 229);
+}
+.ftcb-content {
+  display: grid;
+  grid-auto-rows: auto;
+  row-gap: 10px;
+}
+.ftcbc-item {
+  color: rgb(109, 168, 255);
+  &.css-title {
+    box-sizing: border-box;
+    margin: 0px;
+    min-width: 0px;
+    font-weight: 600;
+  }
+  &.css-text {
+    box-sizing: border-box;
+    margin: 0px;
+    min-width: 0px;
+    font-weight: 400;
+  }
+}
+
+// prices and pool share
+.prices-box {
+  box-sizing: border-box;
+  margin: 0px;
+  min-width: 0px;
+  width: 100%;
+  padding: 0px;
+  border-radius: 20px;
+  background-color: rgb(64, 68, 79);
+}
+.pb-header {
+  box-sizing: border-box;
+  margin: 0px;
+  min-width: 0px;
+  width: 100%;
+  display: flex;
+  -webkit-box-align: center;
+  align-items: center;
+  padding: 1rem;
+  -webkit-box-pack: justify;
+  justify-content: space-between;
+  .pbh-text {
+    box-sizing: border-box;
+    margin: 0px;
+    min-width: 0px;
+    font-weight: 500;
+    font-size: 14px;
+  }
+}
+.pb-content {
+  box-sizing: border-box;
+  margin: 0px;
+  min-width: 0px;
+  width: 100%;
+  padding: 1rem;
+  border-radius: 20px;
+  border: 1px solid rgb(44, 47, 54);
+  background-color: rgb(33, 36, 41);
+}
+.pbc-box {
+  display: grid;
+  grid-auto-rows: auto;
+  row-gap: 12px;
+}
+.pbcb-content {
+  box-sizing: border-box;
+  min-width: 0px;
+  width: 100%;
+  display: flex;
+  padding: 0px;
+  -webkit-box-align: center;
+  align-items: center;
+  flex-wrap: wrap;
+  margin: -4px;
+  justify-content: space-around;
+  & > * {
+    margin: 4px !important;
+  }
+}
+.pbc-item {
+  display: grid;
+  grid-auto-rows: auto;
+  justify-items: center;
+  .pbci-data {
+    box-sizing: border-box;
+    margin: 0px;
+    min-width: 0px;
+    font-weight: 500;
+    color: #fff;
+  }
+  .pbci-text {
+    box-sizing: border-box;
+    margin: 0px;
+    min-width: 0px;
+    font-weight: 500;
+    font-size: 14px;
+    color: rgb(195, 197, 203);
+    padding-top: 4px;
+  }
+}

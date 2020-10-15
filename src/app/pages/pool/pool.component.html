@@ -1,19 +1,36 @@
-<app-nav-tabs></app-nav-tabs>
-<div class="content" *ngIf="swUSD$ | async as swUSD">
-  <div *ngIf="swUSD.balance.gt(0); else noLiquidity">
-    <div>{{ swUSD.name }}</div>
-    <div>Pool token: {{ swUSD.balance | bignumber:swUSD.decimals}}</div>
-
-    <a routerLink="/add">
-      Add Liquidity
-    </a>
-    <a routerLink="/remove">
-      Remove Liquidity
-    </a>
+<div class="container">
+  <div class="content-box">
+    <swap-or-pool-nav></swap-or-pool-nav>
+    <div class="pool-page">
+      <a
+        id="join-pool-button"
+        class="join-pool-button"
+      >
+        <div class="jpb-text">Add Liquidity</div>
+      </a>
+      <div class="liquidity">
+        <div class="l-header">
+          <div class="lh-title">Your Liquidity</div>
+          <span class="lh-help">
+            ❓
+          </span>
+        </div>
+        <div class="l-list">
+          <!-- {{ true ? 'Loading...' : 'No liquidity found.' }} -->
+          <div class="ll-empty">No liquidity found.</div>
+          <div class="ll-connect">Connect to a wallet to view your liquidity.</div>
+        </div>
+        <!-- <div>
+          <div class="l-join" style="padding: 0.5rem 0px">
+            Don't see a pool you joined?
+            <a
+              id="import-pool-link"
+              class="lj-import"
+              >Import it.</a
+            >
+          </div>
+        </div> -->
+      </div>
+    </div>
   </div>
-  <ng-template #noLiquidity>
-    <a routerLink="/add">
-      Add Liquidity
-    </a>
-  </ng-template>
 </div>

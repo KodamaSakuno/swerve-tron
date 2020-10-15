@@ -1,27 +1,103 @@
-<div>
-  <a routerLink="/pool">
-    Back
-  </a>
-  <span>Add Liquidity</span>
-</div>
 
-<app-token-amount-input [token]="usdt" [(amount)]="inputUSDT" (amountChange)="inputUSDT$.next($event)" [disabled]="isApprovingUSDT"
-  *ngIf="usdt$ | async as usdt">
-</app-token-amount-input>
-<app-token-amount-input [token]="usdj" [(amount)]="inputUSDJ" (amountChange)="inputUSDJ$.next($event)" [disabled]="isApprovingUSDJ"
-  *ngIf="usdj$ | async as usdj">
-</app-token-amount-input>
-
-<div>
-  <button [disabled]="isApprovingUSDT" (click)="approveUSDT()" *ngIf="shouldApproveUSDT$ | async">
-    {{ isApprovingUSDT ? 'Approving' : 'Approve' }} USDT
-  </button>
-  <button [disabled]="isApprovingUSDJ" (click)="approveUSDJ()" *ngIf="shouldApproveUSDJ$ | async">
-    {{ isApprovingUSDJ ? 'Approving' : 'Approve' }} USDJ
-  </button>
-</div>
-<div>
-  <button [disabled]="!(canSupply$ | async)" (click)="supply()">
-    {{ isSupplying ? 'Supplying' : 'Supply' }}
-  </button>
+<div class="container">
+  <div class="content-box">
+    <!-- <BoxHeader
+      :pathWay="'/pool'"
+      helpContent="When you add liquidity, you are given pool tokens representing your position. These tokens automatically earn fees proportional to your share of the pool, and can be redeemed at any time."
+    >
+      <template slot="title">Add Liquidity</template>
+    </BoxHeader> -->
+    <box-header>
+      <span name=title>Add Liquidity</span>
+    </box-header>
+    <div id="swap-page" class="swap-page">
+      <div class="sp-content">
+        <div class="first-tips">
+          <div class="ft-content">
+            <div class="ftc-box">
+              <div class="ftcb-content">
+                <div class="ftcbc-item css-title">You are the first liquidity provider.</div>
+                <div class="ftcbc-item css-text">The ratio of tokens you add will set the price of this pool.</div>
+                <div class="ftcbc-item css-text">Once you are happy with the rate click supply to review.</div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <input type="text">
+        <div class="swap-arrow">
+          <div class="sa-content">
+            ➕
+          </div>
+        </div>
+        <input type="text">
+        <div class="prices-box">
+          <div class="pb-header">
+            <div class="pbh-text">Prices and pool share</div>
+          </div>
+          <div class="pb-content">
+            <div class="pbc-box">
+              <div class="pbcb-content">
+                <div class="pbc-item">
+                  <div class="pbci-data">100</div>
+                  <div class="pbci-text">
+                    TRON
+                    per
+                    ETH
+                  </div>
+                </div>
+                <div class="pbc-item">
+                  <div class="pbci-data">100</div>
+                  <div class="pbci-text">
+                    ETH
+                    per
+                    TRON
+                  </div>
+                </div>
+                <div class="pbc-item">
+                  <div class="pbci-data">100%</div>
+                  <div class="pbci-text">Share of Pool</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="swap-button-content">
+        <!-- <ApproveButton
+          v-if="tokenA && tokenA !== 'TRX' && tokenA !== 'undefined' && tronweb.account"
+          id="swap-button"
+          :tokenAddress="tokenA"
+          :spender="spender"
+          :howMuchToSpend="tokenAAmountAsBN"
+          :isAllowanceEnough.sync="tokenAApproved"
+        >
+          Approve {{ { ...tokenAInfo }.symbol }}
+        </ApproveButton>
+        <ApproveButton
+          v-if="tokenB && tokenB !== 'TRX' && tokenB !== 'undefined' && tronweb.account"
+          id="swap-button"
+          :tokenAddress="tokenB"
+          :spender="spender"
+          :howMuchToSpend="tokenBAmountAsBN"
+          :isAllowanceEnough.sync="tokenBApproved"
+        >
+          Approve {{ { ...tokenBInfo }.symbol }}
+        </ApproveButton> -->
+        <div class="create-pair">
+          <button class="main-button">Connect Wallet</button>
+          <button class="main-button" disabled="false">Create Pair and Supply</button>
+        </div>
+        <div class="alreay-have-pair">
+          <!-- <MainButton style="margin-top: 16px;" :disabled="true">Approve {{ addLiquidityPrice.B.symbol }}</MainButton> -->
+          <button class="main-button swap-button-insufficient">Insufficient TRONN balance</button>
+          <button class="main-button">Supply</button>
+          <!-- <router-link :to="`/pair/${this.pair}/info`"
+            ><button class="swap-button">
+              Go to see pair data
+            </button></router-link> -->
+        </div>
+      </div>
+    </div>
+  </div>
+  <your-position></your-position>
 </div>

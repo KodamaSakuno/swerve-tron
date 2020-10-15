@@ -1,0 +1,15 @@
+<div>
+  <a routerLink="/pool">
+    Back
+  </a>
+  <span>Remove Liquidity</span>
+</div>
+
+<div>
+  <label>Share</label>
+  <input type="range" min="0" max="100" [(ngModel)]="share" #shareInput />
+</div>
+
+<div>
+  <button [disabled]="buttonDisabled" (click)="remove()">Remove Liquidity</button>
+</div>
