@@ -1,0 +1,62 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  padding-top: 160px;
+  -webkit-box-align: center;
+  align-items: center;
+  flex: 1 1 0%;
+  overflow: hidden auto;
+  z-index: 1;
+}
+
+.content-box {
+  position: relative;
+  max-width: 420px;
+  width: 100%;
+  background: rgb(33, 36, 41);
+  box-shadow: rgba(0, 0, 0, 0.01) 0px 0px 1px, rgba(0, 0, 0, 0.04) 0px 4px 8px, rgba(0, 0, 0, 0.04) 0px 16px 24px, rgba(0, 0, 0, 0.01) 0px 24px 32px;
+  border-radius: 30px;
+  padding: 1rem;
+  box-sizing: border-box;
+}
+
+// your position
+.r-position-box {
+  min-width: 20rem;
+  margin-top: 1rem;
+  margin-bottom: 100px;
+}
+
+// Button components
+.main-button
+  box-sizing: border-box;
+  margin: 0px;
+  min-width: 0px;
+  appearance: none;
+  line-height: inherit;
+  padding: 18px;
+  width: 100%;
+  text-align: center;
+  border-radius: 20px;
+  outline: none;
+  border: 1px solid transparent;
+  text-decoration: none;
+  display: flex;
+  -webkit-box-pack: center;
+  justify-content: center;
+  flex-wrap: nowrap;
+  -webkit-box-align: center;
+  align-items: center;
+  cursor: pointer;
+  position: relative;
+  z-index: 1;
+  background-color: rgba(21, 61, 111, 0.44);
+  color: rgb(109, 168, 255);
+  font-size: 16px;
+  font-weight: 500;
+  &:focus
+    box-shadow: rgba(19, 54, 98, 0.44) 0px 0px 0px 1pt;
+    background-color: rgba(19, 54, 98, 0.44);
+  &:hover
+    background-color: rgba(19, 54, 98, 0.44);

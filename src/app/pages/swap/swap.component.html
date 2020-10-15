@@ -1,21 +1,120 @@
-<app-nav-tabs></app-nav-tabs>
+<div class="container">
+  <div class="content-box swap-box">
+    <swap-or-pool-nav></swap-or-pool-nav>
+    <div id="swap-page" class="swap-page">
+      <!-- swap content -->
+      <div class="sp-content">
+        <input type="text">
+        ⬇️
+        <input type="text">
+        <div class="swap-info">
+          <div *ngIf="true">
+            <div class="info-content" *ngIf="true">
+              <div class="sc-content">
+                <div class="scc-text">Price</div>
+                <div class="scc-text">
+                  00.00
+                  <button class="price-toggle">
+                    🔁
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="info-content" *ngIf="true">
+            <div class="sc-content">
+              <div class="scc-text">Slippage Tolerance</div>
+              <div class="scc-text">0.5%</div>
+            </div>
+          </div>
+        </div>
 
-<div class="content">
-  <div *ngIf="from$ | async as from">
-    <span>{{ from.name }}</span>
-    <app-token-amount-input [token]="from" [(amount)]="input"></app-token-amount-input>
+      </div>
+
+      <!-- swap button -->
+      <div class="swap-button-content">
+        <!-- 需要判断是否链接钱包 -->
+        <button class="main-button" *ngIf="true">Connect Wallet</button>
+        <button
+          class="main-button"
+          *ngIf="true"
+          id="swap-button"
+          disabled="false"
+        >Swap</button>
+      </div>
+    </div>
   </div>
-  <button (click)="pairSwitch$.next()">Swap Direction</button>
-  <div *ngIf="to$ | async as to">
-    <span>{{ to.name }}</span>
-    <app-token-amount-input [token]="to" [amount]="targetAmount$ | async" [disabled]="true"></app-token-amount-input>
-  </div>
-  <div>
-    <button [disabled]="isApproving" (click)="approve()" *ngIf="shouldApprove$ | async">
-      {{ isApproving ? 'Approving' : 'Approve'}}
-    </button>
-    <button [disabled]="isSwapping" (click)="swap()" *ngIf="!(shouldApprove$ | async)">
-      {{ isSwapping ? 'Swapping' : 'Swap' }}
-    </button>
+  <!-- swap detail -->
+  <!-- 这里有一个判断 -->
+  <!-- :class="(tokenAAmount && tokenBAmount) && 'open'" -->
+  <div class="swap-detail open">
+    <div class="sd-content">
+      <div class="sdc-item" style="padding: 0px 20px;" *ngIf="true">
+        <div class="sdci-item">
+          <div class="sdci-box">
+            <div class="sd-title">Minimum received</div>
+            <span style="margin-left: 4px;">
+              <div class="sdh-box">
+                ❓
+              </div>
+            </span>
+          </div>
+          <div class="sdci-box">
+            <div class="sd-token">
+              20 ETH
+            </div>
+          </div>
+        </div>
+        <div class="sdci-item">
+          <div class="sdci-box">
+            <div class="sd-title">Price Impact</div>
+            <span style="margin-left: 4px;">
+              <div class="sdh-box">
+                ❓
+              </div>
+            </span>
+          </div>
+          <!-- 颜色判断 -->
+          <!-- :class="priceImpactClassName" -->
+          <div class="sd-percentage">100%</div>
+        </div>
+        <div class="sdci-item">
+          <div class="sdci-box">
+            <div class="sd-title">Liquidity Provider Fee</div>
+            <span style="margin-left: 4px;">
+              <div class="sdh-box">
+                ❓
+              </div>
+            </span>
+          </div>
+          <div class="sd-token">
+            20 ETH
+          </div>
+        </div>
+      </div>
+      <div class="sd-line"></div>
+      <div class="sdc-item" style="padding: 0px 24px;">
+        <div class="sdci-box">
+          <div class="sd-title">Route</div>
+          <span style="margin-left: 4px;">
+            <div class="sdh-box">
+              ❓
+            </div>
+          </span>
+        </div>
+        <div class="sd-route" style="border: 1px solid rgb(64, 68, 79); border-radius: 1rem;">
+          <!-- *ngFor="let item of list" -->
+          <div class="sdr-item" style="flex-shrink: 0;" :key="idx">
+            🤔
+            <div class="sdri-symbol">TRON {{ item }}</div>
+          </div>
+            ➡️
+          <div class="sdr-item" style="flex-shrink: 0;" :key="idx">
+            🤔
+            <div class="sdri-symbol">TRON {{ item }}</div>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
 </div>

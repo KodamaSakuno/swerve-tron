@@ -1,0 +1,21 @@
+<app-nav-tabs></app-nav-tabs>
+
+<div class="content">
+  <div *ngIf="from$ | async as from">
+    <span>{{ from.name }}</span>
+    <app-token-amount-input [token]="from" [(amount)]="input"></app-token-amount-input>
+  </div>
+  <button (click)="pairSwitch$.next()">Swap Direction</button>
+  <div *ngIf="to$ | async as to">
+    <span>{{ to.name }}</span>
+    <app-token-amount-input [token]="to" [amount]="targetAmount$ | async" [disabled]="true"></app-token-amount-input>
+  </div>
+  <div>
+    <button [disabled]="isApproving" (click)="approve()" *ngIf="shouldApprove$ | async">
+      {{ isApproving ? 'Approving' : 'Approve'}}
+    </button>
+    <button [disabled]="isSwapping" (click)="swap()" *ngIf="!(shouldApprove$ | async)">
+      {{ isSwapping ? 'Swapping' : 'Swap' }}
+    </button>
+  </div>
+</div>

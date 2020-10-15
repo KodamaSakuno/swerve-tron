@@ -7,6 +7,7 @@ import { AppComponent } from './app.component';
 import { SwapComponent } from './pages/swap/swap.component';
 import { PoolComponent } from './pages/pool/pool.component';
 import { NavTabsComponent } from './shared/nav-tabs/nav-tabs.component';
+import { SwapOrPoolNavComponent } from './shared/swap-or-pool-nav/swap-or-pool-nav.component';
 import { HeaderComponent } from './shared/header/header.component';
 import { StateService } from './services/state.service';
 import { AddLiquidityComponent } from './pages/add-liquidity/add-liquidity.component';
@@ -20,6 +21,7 @@ import { TokenAmountInputComponent } from './shared/token-amount-input/token-amo
     SwapComponent,
     PoolComponent,
     NavTabsComponent,
+    SwapOrPoolNavComponent,
     HeaderComponent,
     AddLiquidityComponent,
     RemoveLiquidityComponent,

@@ -1,0 +1,227 @@
+
+.swap-box {
+  // z-index: 9999; // need to be higher than swap details
+}
+.swap-page {
+  position: relative;
+}
+.sp-content {
+  display: grid;
+  grid-auto-rows: auto;
+  row-gap: 12px;
+  box-sizing: border-box;
+}
+
+.sac-icon {
+  padding: 2px;
+  width: 16px;
+  height: 16px;
+  color: #c3c5cb;
+}
+
+.swap-button-content {
+  margin: 1rem 0 0 0;
+  line-height: inherit;
+  box-sizing: border-box;
+  min-width: 0px;
+  appearance: none;
+  #swap-button {
+    margin-top: 16px;
+  }
+}
+.swap-info {
+  box-sizing: border-box;
+  margin: 0px;
+  min-width: 0px;
+  width: 100%;
+  padding: 0.25rem 0.75rem 0px;
+  border-radius: 20px;
+}
+.info-content {
+  display: grid;
+  grid-auto-rows: auto;
+  row-gap: 4px;
+  line-height: 24px;
+}
+.sc-content {
+  box-sizing: border-box;
+  margin: 0px;
+  min-width: 0px;
+  width: 100%;
+  display: flex;
+  padding: 0px;
+  -webkit-box-align: center;
+  align-items: center;
+  -webkit-box-pack: justify;
+  justify-content: space-between;
+}
+.scc-text {
+  box-sizing: border-box;
+  margin: 0px;
+  min-width: 0px;
+  font-weight: 500;
+  font-size: 14px;
+  color: rgb(195, 197, 203);
+}
+
+// swap detail
+.swap-detail {
+  padding-top: calc(16px + 2rem);
+  padding-bottom: 20px;
+  margin-top: -2rem;
+  width: 100%;
+  max-width: 400px;
+  border-bottom-left-radius: 20px;
+  border-bottom-right-radius: 20px;
+  color: rgb(195, 197, 203);
+  background-color: rgba(0, 0, 0, 0.1);
+  z-index: 0;
+  // transform: translateY(-100%);
+  transform: translateY(0%);
+  transition: transform 300ms ease-in-out 0s;
+  box-sizing: border-box;
+  display: none;
+  &.open {
+    display: block;
+    // transform: translateY(0%);
+  }
+}
+.sd-content {
+  display: grid;
+  grid-auto-rows: auto;
+  row-gap: 12px;
+}
+.sdc-item {
+  display: grid;
+  grid-auto-rows: auto;
+}
+.sdci-item {
+  box-sizing: border-box;
+  margin: 0px;
+  min-width: 0px;
+  width: 100%;
+  display: flex;
+  padding: 0px;
+  -webkit-box-align: center;
+  align-items: center;
+  -webkit-box-pack: justify;
+  justify-content: space-between;
+}
+.sdci-box {
+  box-sizing: border-box;
+  margin: 0px;
+  min-width: 0px;
+  display: flex;
+  padding: 0px;
+  -webkit-box-align: center;
+  align-items: center;
+  width: fit-content;
+}
+.sd-title {
+  box-sizing: border-box;
+  margin: 0px;
+  min-width: 0px;
+  font-weight: 400;
+  color: rgb(195, 197, 203);
+  font-size: 14px;
+}
+.sdh-box {
+  display: inline-block;
+}
+.sd-token {
+  box-sizing: border-box;
+  margin: 0px;
+  min-width: 0px;
+  font-weight: 500;
+  color: rgb(255, 255, 255);
+  font-size: 14px;
+}
+.sd-line {
+  height: 1px;
+  width: 100%;
+  background-color: rgb(64, 68, 79);
+}
+.sd-percentage {
+  box-sizing: border-box;
+  margin: 0px;
+  min-width: 0px;
+  font-weight: 500;
+  &.green {
+    color: rgb(39, 174, 96);
+  }
+  &.red {
+    color: rgb(255, 104, 113);
+  }
+}
+.sd-route {
+  box-sizing: border-box;
+  margin: 0.5rem 0px;
+  min-width: 0px;
+  padding: 0.5rem 1rem;
+  flex-wrap: wrap;
+  width: 100%;
+  justify-content: space-evenly;
+  -webkit-box-align: center;
+  align-items: center;
+  display: flex;
+}
+.sdr-item {
+  box-sizing: border-box;
+  margin: 0.5rem 0px;
+  min-width: 0px;
+  -webkit-box-align: center;
+  align-items: center;
+  display: flex;
+}
+.sdri-icon {
+  width: 1.5rem;
+  height: 1.5rem;
+  border-radius: 1.5rem;
+  box-shadow: rgba(0, 0, 0, 0.075) 0px 6px;
+  overflow: hidden;
+}
+.sdri-symbol {
+  box-sizing: border-box;
+  margin: 0px 0px 0px 0.5rem;
+  min-width: 0px;
+  font-weight: 500;
+  color: rgb(255, 255, 255);
+  font-size: 14px;
+}
+.sdri-arrow {
+  width: 24px;
+  height: 24px;
+}
+
+.price-toggle {
+  height: 22px;
+  width: 22px;
+  background-color: rgb(44, 47, 54);
+  border: none;
+  border-radius: 50%;
+  padding: 0.2rem;
+  font-size: 0.875rem;
+  font-weight: 400;
+  margin-left: 0.4rem;
+  cursor: pointer;
+  color: rgb(195, 197, 203);
+  display: flex;
+  -webkit-box-pack: center;
+  justify-content: center;
+  -webkit-box-align: center;
+  align-items: center;
+  float: right;
+  user-select: none;
+  outline: none;
+  .pt-icon {
+    width: 14px;
+    height: 14px;
+  }
+}
+.clickable {
+  cursor: pointer;
+}
+
+.not-bad-input .tai-inner-container{
+  border: 1px solid #2c2f36;
+}
