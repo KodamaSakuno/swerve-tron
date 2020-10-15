@@ -1,0 +1,41 @@
+<div class="settings-container">
+  <div class="settings-title">Transaction Settings</div>
+  <div class="txsettings-container">
+    <span class="setting-text">
+      Slippage tolerance
+      ❓
+    </span>
+    <div class="slippage-btn-group">
+      <!-- v-for="(item, idx) in slippageList"
+      :key="idx"
+      :class="Number(input) == Number(item.value) && 'active'"
+      @click="input = item.value" -->
+      <button class="slippage-btn">0.1%</button>
+      <button class="slippage-btn">0.5%</button>
+      <button class="slippage-btn">1%</button>
+      <button class="slippage-input-btn">
+        <div>
+          <!-- <span class="input-warning"><span role="img" aria-label="warning">⚠️</span></span> -->
+          <input class="slippage-input" size="small" placeholder="1.00" />%
+        </div>
+      </button>
+    </div>
+    <div class="tips warning">Your transaction may fail</div>
+    <div class="tips warning">Your transaction may be frontrun</div>
+    <!-- 未写错误提示 -->
+    <!-- <div class="tips error">Enter a valid slippage percentage</div> -->
+    <!-- <span class="setting-text">
+      Transaction deadline
+      <HelpTooltip
+        placement="bottom"
+        content="Your transaction will revert if it is pending for more than this long."
+      ></HelpTooltip>
+    </span>
+    <div class="deadline-group">
+      <button tabindex="-1" class="deadline-btn">
+        <input class="deadline-input" :placeholder="deadlineInput" v-model="deadlineInput" />
+      </button>
+      <span>minutes</span>
+    </div> -->
+  </div>
+</div>

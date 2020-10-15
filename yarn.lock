@@ -211,6 +211,13 @@
   dependencies:
     tslib "^2.0.0"
 
+"@angular/material@^10.2.5":
+  version "10.2.5"
+  resolved "https://registry.yarnpkg.com/@angular/material/-/material-10.2.5.tgz#bdfc0bfdbadbca47db2dfd0170b8a31a3484ffd7"
+  integrity sha512-gYFqpXdLLuRYb9N1jVj9Gig/AlqsEfT/m+RtzHm4mawmHqeQbEV+0C0Qvc6fKRb1060Nkzfz8TDNGu5B+Xzq5A==
+  dependencies:
+    tslib "^2.0.0"
+
 "@angular/platform-browser-dynamic@~10.1.5":
   version "10.1.6"
   resolved "https://registry.yarnpkg.com/@angular/platform-browser-dynamic/-/platform-browser-dynamic-10.1.6.tgz#7442f8d25642f4828d78c2a251574b74a806ee5c"
@@ -1124,6 +1131,13 @@
     loader-utils "^2.0.0"
     merge-source-map "^1.1.0"
     schema-utils "^2.7.0"
+
+"@ng-bootstrap/ng-bootstrap@^7.0.0":
+  version "7.0.0"
+  resolved "https://registry.yarnpkg.com/@ng-bootstrap/ng-bootstrap/-/ng-bootstrap-7.0.0.tgz#3bfa62eb52fdb891b1ce693ea11c39127e2d1ab7"
+  integrity sha512-SxUaptGWJmCxM0d2Zy1mx7K7p/YBwGZ69NmmBQVY4BE6p5av0hWrVmv9rzzfBz0rhxU7RPZLor2Jpaoq8Xyl4w==
+  dependencies:
+    tslib "^2.0.0"
 
 "@ngtools/webpack@10.1.7":
   version "10.1.7"
