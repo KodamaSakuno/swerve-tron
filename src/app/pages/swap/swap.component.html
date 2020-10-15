@@ -8,7 +8,7 @@
   <button (click)="pairSwitch$.next()">Swap Direction</button>
   <div *ngIf="to$ | async as to">
     <span>{{ to.name }}</span>
-    <app-token-amount-input [token]="to" [amount]="targetAmount" [disabled]="true"></app-token-amount-input>
+    <app-token-amount-input [token]="to" [amount]="targetAmount$ | async" [disabled]="true"></app-token-amount-input>
   </div>
   <div>
     <button [disabled]="isApproving" (click)="approve()" *ngIf="shouldApprove$ | async">
