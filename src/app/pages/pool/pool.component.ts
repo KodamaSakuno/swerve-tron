@@ -1,10 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
-import { map } from 'rxjs/operators';
 
 import { StateService } from '../../services/state.service';
-import { TokenInfo } from '../../types/TokenInfo';
 import { Token } from '../../constants/tokens';
+import { PositionInfo } from '../../types/PositionInfo';
 
 @Component({
   selector: 'app-pool',
@@ -13,15 +12,16 @@ import { Token } from '../../constants/tokens';
 })
 export class PoolComponent implements OnInit {
 
-  swUSD$: Observable<TokenInfo>;
+  position$: Observable<PositionInfo | null>;
 
   constructor(private stateService: StateService) {
-    this.swUSD$ = stateService.getToken$(Token.swUSD);
+    this.position$ = stateService.getPositionInfo$();
   }
 
   ngOnInit(): void {
     this.stateService.getInitialized$().subscribe(() => {
       this.stateService.requestTRC20TokenBalance(Token.swUSD);
+      this.stateService.requestPoolInfo();
     });
   }
 
