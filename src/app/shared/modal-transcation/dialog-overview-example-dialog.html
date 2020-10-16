@@ -1,0 +1,73 @@
+<!-- <h1 mat-dialog-title>Hi {{data.name}}</h1>
+<div mat-dialog-content>
+  <p>What's your favorite animal?</p>
+</div>
+<div mat-dialog-actions>
+  <button mat-button (click)="onNoClick()">No Thanks</button>
+  <button mat-button cdkFocusInitial>Ok</button>
+</div> -->
+
+<!-- 这里有三种状态
+reject
+loading
+done -->
+
+<div class="c-model c-model-container transcation-dialog">
+  <div class="c-model-header">
+    <div class="c-model-header-content">
+      Error
+      <!-- or -->
+      <!-- '' -->
+    </div>
+  </div>
+  <div class="c-model-body">
+    <div class="t-container">
+      <!-- reject -->
+      <div class="tc-error" style="margin-top: 24px; padding: 20px 0px;">
+        ⚠️
+        <!-- <ArrowUpCircleIcon class="td-icon"></ArrowUpCircleIcon> -->
+        <div class="tc-text" style="text-align: center; width: 85%;">Transaction rejected.</div>
+      </div>
+      <!-- loading -->
+      <div class="t-loading">
+        <img src="../assets/media/blue-loader.svg" alt="loader" class="tl-icon" />
+      </div>
+      <div class="t-detail">
+        <div class="td-title">Waiting For Confirmation</div>
+        <div class="td-text">
+          <div class="tdt-content">TRX SWAP WTRX 100 ....</div>
+        </div>
+        <div class="td-tips">Confirm this transaction in your wallet</div>
+      </div>
+      <!-- done -->
+      <div class="t-done">
+        ⚠️
+        <!-- <ArrowUpCircleIcon class="td-icon"></ArrowUpCircleIcon> -->
+      </div>
+      <div class="td-content">
+        <div class="tdc-text">Transaction Submitted</div>
+        <a
+          target="_blank"
+          rel="noopener noreferrer"
+          :href="`${tronscan}/#/transaction/${txId}`"
+          class="td-link"
+        >
+          <div class="tdl-text">View on Tronscan</div>
+        </a>
+        <button
+          class="td-button"
+          style="margin: 20px 0px 0px"
+        >
+          <div class="tdc-text">Close</div>
+        </button>
+      </div>
+    </div>
+    <!-- reject -->
+    <div class="dismiss-button" >
+      <button class="db-button">Dismiss</button>
+    </div>
+  </div>
+  <!-- <div class="c-model-footer">
+    <slot name="footer"></slot>
+  </div> -->
+</div>

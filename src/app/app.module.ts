@@ -65,6 +65,8 @@ import { TokenAmountInputComponent } from './shared/token-amount-input/token-amo
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import { DialogOverviewConnectWallet } from './shared/modal-connect-wallet/modal.component';
 import { DialogOverviewAccount } from './shared/modal-account/modal.component';
+import { DialogOverviewTranscation } from './shared/modal-transcation/modal.component';
+import { DialogOverviewConfirmSwap } from './shared/modal-confirm-swap/modal.component';
 
 @NgModule({
   declarations: [
@@ -82,7 +84,9 @@ import { DialogOverviewAccount } from './shared/modal-account/modal.component';
     BigNumberPipe,
     TokenAmountInputComponent,
     DialogOverviewConnectWallet,
-    DialogOverviewAccount
+    DialogOverviewAccount,
+    DialogOverviewTranscation,
+    DialogOverviewConfirmSwap
   ],
   imports: [
     BrowserModule,
