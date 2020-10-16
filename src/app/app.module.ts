@@ -69,7 +69,6 @@ import { DialogOverviewTranscation } from './shared/modal-transcation/modal.comp
 import { DialogOverviewConfirmSwap } from './shared/modal-confirm-swap/modal.component';
 import { DialogOverviewConfirmSupply } from './shared/modal-confirm-supply/modal.component';
 
-
 @NgModule({
   declarations: [
     AppComponent,
