@@ -105,7 +105,6 @@
           <button class="main-button" [disabled]="!(canSupply$ | async)" (click)="supply()" *ngIf="!(shouldApproveUSDT$ | async) && !(shouldApproveUSDJ$ | async)">
             {{ isSupplying ? 'Supplying' : 'Supply' }}
           </button>
-          {{ canSupply$ | async | json }}
           <!-- <router-link :to="`/pair/${this.pair}/info`"
             ><button class="swap-button">
               Go to see pair data

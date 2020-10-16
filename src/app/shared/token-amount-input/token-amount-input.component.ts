@@ -48,7 +48,7 @@ export class TokenAmountInputComponent implements OnInit {
       filter(input => input.length > 0),
       debounceTime(300),
       distinctUntilChanged(),
-      map(input => new BigNumber(input).times(new BigNumber(10).pow(this.token.decimals)))
+      map(input => new BigNumber(input).times(new BigNumber(10).pow(this.token!.decimals)))
     ).subscribe(this.amountChange);
   }
 
@@ -60,7 +60,7 @@ export class TokenAmountInputComponent implements OnInit {
   }
 
   setMaxAmount() {
-    this.amount = this.token.balance;
+    this.amount = this.token!.balance;
     this.amountChange.next(this.amount);
   }
 
