@@ -6,6 +6,7 @@ import { map } from 'rxjs/operators';
 import { StateService } from '../../services/state.service';
 import { Token } from '../../constants/tokens';
 import { TokenInfo } from '../../types/TokenInfo';
+import { PositionInfo } from '../../types/PositionInfo';
 
 @Component({
   selector: 'app-add-liquidity',
@@ -33,6 +34,8 @@ export class AddLiquidityComponent implements OnInit {
 
   canSupply$: Observable<boolean>;
   isSupplying = false;
+
+  position$: Observable<PositionInfo | null>;
 
   constructor(private stateService: StateService) {
     this.usdt$ = stateService.getToken$(Token.USDT);
@@ -64,9 +67,15 @@ export class AddLiquidityComponent implements OnInit {
         return usdt.allowance.gte(inputUSDT) && usdj.allowance.gte(inputUSDJ);
       }),
     );
+
+    this.position$ = stateService.getPositionInfo$();
  }
 
   ngOnInit(): void {
+    this.stateService.getInitialized$().subscribe(() => {
+      this.stateService.requestTRC20TokenBalance(Token.swUSD);
+      this.stateService.requestPoolInfo();
+    });
   }
 
   async approveUSDT() {

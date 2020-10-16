@@ -1,4 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
+
+import { PositionInfo } from '../../types/PositionInfo';
 
 @Component({
   selector: 'your-position',
@@ -6,6 +8,9 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./your-position.component.styl']
 })
 export class YourPositionComponent implements OnInit {
+
+  @Input()
+  position!: PositionInfo;
 
   constructor() { }
 

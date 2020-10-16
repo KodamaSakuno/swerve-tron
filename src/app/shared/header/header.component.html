@@ -24,18 +24,18 @@
         <div class="hi-account">
             <!-- <div class="account-empty"></div> -->
             <div class="hic-account">
-            <div class="hicc-balance">100 TRX</div>
+            <div class="hicc-balance">{{ balance$ | async | bignumber:6 }} TRX</div>
             <button
                 id="web3-status-connected"
                 class="hicc-connected"
             >
-                <p class="hiccc-account">xxxxx</p>
+                <p class="hiccc-account">{{ account$ | async }}</p>
                 <!-- <Avatar :address="tronweb.account" size="16" /> -->
             </button>
             </div>
         </div>
         <!-- connect to a wallet -->
-        <div class="connect-account">
+        <!-- <div class="connect-account">
             <div class="account-empty"></div>
             <div class="ca-content">
             <button
@@ -45,23 +45,23 @@
                 <p class="cw-text">Connect to a wallet</p>
             </button>
             </div>
-        </div>
+        </div> -->
 
-        <div class="hic-operating">
+        <!-- <div class="hic-operating">
             <div class="hico-setting">
                 <button id="open-settings-dialog-button" class="hicos-button">
-                    <!-- <IconSettings /> -->
+                    <IconSettings />
                     ⚙️
                 </button>
                 <seting></seting>
             </div>
-            <!-- <div class="hico-setting">
+            <div class="hico-setting">
             <button class="hicos-button" @click.stop="showAboutMenu = !showAboutMenu">
                 <IconMoreHorz />
             </button>
             <AboutMenu v-if="showAboutMenu" />
-            </div> -->
-        </div>
+            </div>
+        </div> -->
         </div>
     </div>
     </div>

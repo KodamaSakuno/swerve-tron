@@ -11,23 +11,23 @@
           <div class="rp-token">
             🤔🤔
           </div>
-          <div class="token-text">TRX/WTRX</div>
+          <div class="token-text">USDT/USDJ</div>
         </div>
         <div class="rpl-list">
-          <div class="token-text">100</div>
+          <div class="token-text">{{ position.lpToken.balance | bignumber:position.lpToken.decimals }}</div>
         </div>
       </div>
       <div class="rp-detail">
         <div class="rp-list">
-          <div class="rpd-symbol">TRX:</div>
+          <div class="rpd-symbol">USDT:</div>
           <div class="rpl-list">
-            <div class="rpd-amount">100</div>
+            <div class="rpd-amount">{{ position.pooledTokens.usdt.balance | bignumber:position.pooledTokens.usdt.decimals }}</div>
           </div>
         </div>
         <div class="rp-list">
-          <div class="rpd-symbol">WTRX:</div>
+          <div class="rpd-symbol">USDJ:</div>
           <div class="rpl-list">
-            <div class="rpd-amount">100</div>
+            <div class="rpd-amount">{{ position.pooledTokens.usdj.balance | bignumber:position.pooledTokens.usdj.decimals }}</div>
           </div>
         </div>
       </div>

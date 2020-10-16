@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 
 @Component({
   selector: 'box-header',
@@ -6,6 +6,9 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./box-header.component.styl']
 })
 export class BoxHeaderComponent implements OnInit {
+
+  @Input()
+  link = '';
 
   constructor() { }
 

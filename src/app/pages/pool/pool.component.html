@@ -5,6 +5,7 @@
       <a
         id="join-pool-button"
         class="join-pool-button"
+        routerLink="/add"
       >
         <div class="jpb-text">Add Liquidity</div>
       </a>
@@ -17,8 +18,24 @@
         </div>
         <div class="l-list">
           <!-- {{ true ? 'Loading...' : 'No liquidity found.' }} -->
-          <div class="ll-empty">No liquidity found.</div>
-          <div class="ll-connect">Connect to a wallet to view your liquidity.</div>
+
+          <div *ngIf="position$ | async as position; else noLiquidity">
+            <div class="token-text">USDT/USDJ</div>
+            <div>Pooled USDT: {{ position.pooledTokens.usdt.balance | bignumber:position.pooledTokens.usdt.decimals }}</div>
+            <div>Pooled USDJ: {{ position.pooledTokens.usdj.balance | bignumber:position.pooledTokens.usdj.decimals }}</div>
+
+            <a
+            id="join-pool-button"
+            class="join-pool-button"
+            routerLink="/remove"
+          >
+            <div class="jpb-text">Remove Liquidity</div>
+          </a>
+          </div>
+
+          <ng-template #noLiquidity>
+            <div class="ll-empty">No liquidity found.</div>
+          </ng-template>
         </div>
         <!-- <div>
           <div class="l-join" style="padding: 0.5rem 0px">
