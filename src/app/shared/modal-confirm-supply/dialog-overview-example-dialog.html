@@ -1,0 +1,68 @@
+<!-- <h1 mat-dialog-title>Hi {{data.name}}</h1>
+<div mat-dialog-content>
+  <p>What's your favorite animal?</p>
+</div>
+<div mat-dialog-actions>
+  <button mat-button (click)="onNoClick()">No Thanks</button>
+  <button mat-button cdkFocusInitial>Ok</button>
+</div> -->
+
+
+<div class="c-model c-model-container confirm-supply-dialog">
+  <div class="c-model-header">
+    <div class="c-model-header-content">
+      You will receive
+    </div>
+  </div>
+  <div class="c-model-body">
+    <div class="supply-des">
+      <div class="supply-pool">
+        <div class="sp-amount" style="margin-top: 20px;">
+          <div class="spa-amount"> 0.000004 </div>
+          <div class="spa-logo">
+            🤔🤔
+          </div>
+        </div>
+        <div class="s-token">
+          <div class="st-symbol">WTRX/TRX Pool Tokens</div>
+        </div>
+        <div
+          class="s-tips"
+        >Output is estimated. If the price changes by more than 100% your transaction will revert.</div>
+      </div>
+    </div>
+    <div class="s-detail">
+      <div class="sd-item">
+        <div class="sdi-text">WTRX Deposited</div>
+        <div class="sdi-token">
+          🤔
+          <div class="sdi-text">{{ tokenAAmount }}</div>
+        </div>
+      </div>
+      <div class="sd-item">
+        <div class="sdi-text">TRX Deposited</div>
+        <div class="sdi-token">
+          🤔
+          <div class="sdi-text">{{ tokenBAmount }}</div>
+        </div>
+      </div>
+      <div class="sd-item">
+        <div class="sdi-text">Rates</div>
+        <div class="sdi-text">1 WTRX = 1TRX</div>
+      </div>
+      <div class="sd-item" style="justify-content: flex-end;">
+        <div class="sdi-text">1 TRX = 1WTRX</div>
+      </div>
+      <div class="sd-item">
+        <div class="sdi-text">Share of Pool:</div>
+        <div class="sdi-text">100%</div>
+      </div>
+      <button style="margin: 20px 0px 0px;" class="main-button">
+        Supply
+      </button>
+    </div>
+  </div>
+  <!-- <div class="c-model-footer">
+    <slot name="footer"></slot>
+  </div> -->
+</div>

@@ -67,6 +67,8 @@ import { DialogOverviewConnectWallet } from './shared/modal-connect-wallet/modal
 import { DialogOverviewAccount } from './shared/modal-account/modal.component';
 import { DialogOverviewTranscation } from './shared/modal-transcation/modal.component';
 import { DialogOverviewConfirmSwap } from './shared/modal-confirm-swap/modal.component';
+import { DialogOverviewConfirmSupply } from './shared/modal-confirm-supply/modal.component';
+
 
 @NgModule({
   declarations: [
@@ -86,7 +88,8 @@ import { DialogOverviewConfirmSwap } from './shared/modal-confirm-swap/modal.com
     DialogOverviewConnectWallet,
     DialogOverviewAccount,
     DialogOverviewTranscation,
-    DialogOverviewConfirmSwap
+    DialogOverviewConfirmSwap,
+    DialogOverviewConfirmSupply
   ],
   imports: [
     BrowserModule,
