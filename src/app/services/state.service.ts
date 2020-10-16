@@ -176,13 +176,6 @@ export class StateService {
     let minAmount = new BigNumber(0);
     const totalSupply = this.convertBadBigNumber(await swapTokenContract.methods.totalSupply().call());
     if (totalSupply.gt(0)) {
-      debugger
-      minAmount = this.convertBadBigNumber(await swapContract.methods.calc_token_amount(amounts, true).call());
-
-      let fee = this.convertBadBigNumber(await swapContract.methods.fee().call());
-      fee = fee.div(100).times(2).div(4 * (2 - 1));
-
-      minAmount = minAmount.times(new BigNumber(1).minus(fee));
     }
 
     await swapContract.methods.add_liquidity(amounts, minAmount.toString()).send({ shouldPollResponse: true });

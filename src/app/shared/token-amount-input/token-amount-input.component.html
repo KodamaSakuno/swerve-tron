@@ -1,6 +1,15 @@
-<div>
-  Balance:
-  <span>{{ token.balance | bignumber:token.decimals }}</span>
+<div class="inner-container">
+  <div class="info" *ngIf="token">
+    <div class="content">
+      <div class="title">{{ token.name }}</div>
+      <div class="balance">
+        Balance:
+        <span *ngIf="token">{{ token.balance | bignumber:decimals }}</span>
+      </div>
+    </div>
+  </div>
+  <div class="input-container">
+    <input [ngModel]="amount | bignumber:decimals" (ngModelChange)="input$.next($event)" [disabled]="disabled" #amountInput />
+    <button class="max-button" [disabled]="disabled" (click)="setMaxAmount()">MAX</button>
+  </div>
 </div>
-<input [ngModel]="amount | bignumber:token.decimals" (ngModelChange)="input$.next($event)" [disabled]="disabled" #amountInput />
-<button [disabled]="disabled" (click)="setMaxAmount()">MAX</button>

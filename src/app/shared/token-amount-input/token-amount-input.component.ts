@@ -16,8 +16,23 @@ export class TokenAmountInputComponent implements OnInit {
   @ViewChild('amountInput', { static: true })
   input!: ElementRef<HTMLInputElement>;
 
+  private _token: TokenInfo | null = null;
+  get token() {
+    return this._token!;
+  }
   @Input()
-  token!: TokenInfo;
+  set token(value: TokenInfo | null) {
+    this._token = value;
+    if (!this._token)
+      return;
+
+    this.stateService.requestTRC20TokenBalance(this._token.address);
+    this.stateService.requestTRC20TokenAllowance(this._token.address);
+  }
+
+  get decimals() {
+    return this._token?.decimals ?? 0;
+  }
 
   @Input()
   amount = new BigNumber(0);
@@ -38,10 +53,10 @@ export class TokenAmountInputComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.stateService.getInitialized$().subscribe(() => {
-      this.stateService.requestTRC20TokenBalance(this.token.address);
-      this.stateService.requestTRC20TokenAllowance(this.token.address);
-    });
+    // this.stateService.getInitialized$().subscribe(() => {
+    //   this.stateService.requestTRC20TokenBalance(this.token.address);
+    //   this.stateService.requestTRC20TokenAllowance(this.token.address);
+    // });
   }
 
   setMaxAmount() {

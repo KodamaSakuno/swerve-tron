@@ -5,6 +5,7 @@ import { map, distinctUntilChanged, tap } from 'rxjs/operators';
 
 import { StateService } from '../../services/state.service';
 import { Token } from '../../constants/tokens';
+import { PositionInfo } from 'src/app/types/PositionInfo';
 
 @Component({
   selector: 'app-remove-liquidity',
@@ -33,6 +34,8 @@ export class RemoveLiquidityComponent implements OnInit {
 
   buttonDisabled = true;
 
+  position$: Observable<PositionInfo | null>;
+
   constructor(private stateService: StateService) {
     this.balance$ = stateService.getToken$(Token.swUSD).pipe(
       map(token => token.balance)
@@ -45,11 +48,14 @@ export class RemoveLiquidityComponent implements OnInit {
     combineLatest([share$, this.balance$]).pipe(
       map(([share, balance]) => balance.times(share).div(100))
     ).subscribe(this.inputAmount$);
+
+    this.position$ = stateService.getPositionInfo$();
   }
 
   ngOnInit(): void {
     this.stateService.getInitialized$().subscribe(() => {
       this.stateService.requestTRC20TokenBalance(Token.swUSD);
+      this.stateService.requestPoolInfo();
     });
   }
 

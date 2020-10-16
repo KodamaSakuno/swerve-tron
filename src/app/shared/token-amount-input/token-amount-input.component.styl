@@ -1,2 +1,105 @@
 :host
-  display block
+  display: flex;
+  flex-flow: column nowrap;
+  position: relative;
+  border-radius: 20px;
+  background-color: rgb(44, 47, 54);
+  z-index: 1;
+  box-sizing: border-box;
+
+.inner-container
+  border-radius: 20px;
+  border: 1px solid rgb(44, 47, 54);
+  background-color: rgb(33, 36, 41);
+
+.info {
+  display: flex;
+  flex-flow: row nowrap;
+  -webkit-box-align: center;
+  align-items: center;
+  color: rgb(255, 255, 255);
+  font-size: 0.75rem;
+  line-height: 1rem;
+  padding: 0.75rem 1rem 0px;
+}
+.content {
+  box-sizing: border-box;
+  margin: 0px;
+  min-width: 0px;
+  width: 100%;
+  display: flex;
+  padding: 0px;
+  -webkit-box-align: center;
+  align-items: center;
+  -webkit-box-pack: justify;
+  justify-content: space-between;
+}
+
+.title {
+  box-sizing: border-box;
+  margin: 0px;
+  min-width: 0px;
+  font-weight: 500;
+  font-size: 14px;
+  color: rgb(195, 197, 203);
+}
+.balance {
+  box-sizing: border-box;
+  margin: 0px;
+  // min-width: 0;
+  font-weight: 500;
+  font-size: 14px;
+  color: rgb(195, 197, 203);
+  display: inline-block;
+  cursor: pointer;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  width: 160px;
+  text-align: right;
+}
+
+.input-container
+  display: flex;
+  flex-flow: row nowrap;
+  -webkit-box-align: center;
+  align-items: center;
+  padding: 0.75rem 0.75rem 0.75rem 1rem;
+  box-sizing: border-box;
+
+input
+  color rgb(255, 255, 255)
+  width 0px
+  position relative
+  font-weight 500
+  outline none
+  border none
+  flex 1 1 auto
+  background-color rgb(33, 36, 41)
+  font-size 24px
+  white-space nowrap
+  overflow hidden
+  text-overflow ellipsis
+  padding 0px
+  appearance textfield
+  letter-spacing -0.018em
+
+.max-button {
+  height: 28px;
+  background-color: rgba(21, 61, 111, 0.44);
+  border: 1px solid rgba(21, 61, 111, 0.44);
+  border-radius: 0.5rem;
+  font-size: 0.875rem;
+  font-weight: 500;
+  cursor: pointer;
+  margin-right: 0.5rem;
+  color: rgb(109, 168, 255);
+  user-select: none;
+  letter-spacing: -0.018em;
+  &:focus {
+    outline: none;
+  }
+  &:hover {
+    border: 1px solid rgb(33, 114, 229);
+  }
+}
