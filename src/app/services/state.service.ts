@@ -112,8 +112,6 @@ export class StateService {
       initialNode$.complete();
       initialAccount$.next(window.tronWeb.defaultAddress.base58);
       initialAccount$.complete();
-
-      this.requestAccountBalance();
     }, 500);
 
     const event$ = fromEvent<MessageEvent>(window, 'message').pipe(
@@ -137,6 +135,13 @@ export class StateService {
       distinctUntilChanged(),
       map(account => (state: State) => state.account = account),
     ).subscribe(this._update$);
+
+    this._state$.pipe(
+      map(state => [state.node, state.account]),
+      filter(([node, account]) => node !== '' && account !== ''),
+      distinctUntilChanged((oldValue, newValue) => oldValue[0] === newValue[0] && oldValue[1] === newValue[1]),
+      delay(0),
+    ).subscribe(() => this.requestAccountBalance());
   }
 
   getInitialized$() {
