@@ -6,6 +6,9 @@ declare global {
       hex: string,
       base58: string,
     };
+    fullNode: {
+      host: string,
+    };
     trx: {
       getBalance(): Promise<number>,
     };

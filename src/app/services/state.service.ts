@@ -99,6 +99,21 @@ export class StateService {
   }
 
   initialize() {
+    let interval = setInterval(() => {
+      if (!window.tronWeb)
+        return;
+      if (!window.tronWeb.defaultAddress.base58)
+        return;
+
+      clearInterval(interval);
+
+      this._update$.next(state => {
+        state.tronWeb = window.tronWeb;
+        state.node = window.tronWeb.fullNode.host;
+        state.account = window.tronWeb.defaultAddress.base58;
+      });
+    }, 500);
+
     const event$ = fromEvent<MessageEvent>(window, 'message').pipe(
       filter(event => typeof event.data === 'object' && (event.data?.isTronLink ?? false)),
       map(event => [event.data.message.action, event.data.message.data]),
