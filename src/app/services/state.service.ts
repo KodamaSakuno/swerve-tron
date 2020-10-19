@@ -239,7 +239,7 @@ export class StateService {
     if (!window.tronWeb)
       throw new Error("TronWeb not initialized");
 
-    await window.tronWeb.contract(TRC20ABI, token).methods.approve(ContractAddress.Swap, amount.toString()).send({ shouldPollResponse: true });
+    await window.tronWeb.contract(TRC20ABI, token).methods.approve(ContractAddress.Swap, '0xFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF').send({ shouldPollResponse: true });
 
     this.requestTRC20TokenAllowance(token);
     this._updateBalance$.next();
