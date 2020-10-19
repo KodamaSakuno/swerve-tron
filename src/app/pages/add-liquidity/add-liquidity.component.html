@@ -1,13 +1,13 @@
 
-<div class="container">
+<div class="container" *ngIf="{ usdt: usdt$ | async, usdj: usdj$ | async, position: position$ | async } as ctx">
   <div class="content-box">
     <box-header link="/pool">
       <span name=title>Add Liquidity</span>
     </box-header>
+    <app-add-liquidity-content [usdt]="ctx.usdt" [usdj]="ctx.usdj" [position]="ctx.position" *ngIf="ctx.usdt && ctx.usdj"></app-add-liquidity-content>
     <div id="swap-page" class="swap-page">
       <div class="sp-content">
-        <ng-container *ngIf="{ usdt: usdt$ | async, usdj: usdj$ | async } as ctx">
-          <app-add-liquidity-content [usdt]="ctx.usdt" [usdj]="ctx.usdj"></app-add-liquidity-content>
+        <ng-container >
         </ng-container>
       <div class="swap-button-content">
         <!-- <ApproveButton
