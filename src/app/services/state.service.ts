@@ -271,7 +271,7 @@ export class StateService {
 
     const amounts = ['0', '0'];
 
-    await swapContract.methods.remove_liquidity(amount.toString(), amounts).send();
+    await swapContract.methods.remove_liquidity(amount.toFixed(0), amounts).send();
 
     await this.delay(5000);
 
