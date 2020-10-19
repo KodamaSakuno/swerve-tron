@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { BigNumber } from 'bignumber.js';
-import { BehaviorSubject, Observable, Subject, defer, fromEvent, merge, combineLatest } from 'rxjs';
-import { scan, filter, take, map, distinctUntilChanged, mergeMap, withLatestFrom, delay } from "rxjs/operators";
+import { BehaviorSubject, Observable, Subject, defer, fromEvent, merge, combineLatest, from } from 'rxjs';
+import { scan, filter, take, map, distinctUntilChanged, mergeMap, withLatestFrom, delay, tap } from "rxjs/operators";
 
 import TRC20ABI from '../constants/abis/TRC20.json';
 import SwapABI from '../constants/abis/Swap.json';
@@ -70,7 +70,6 @@ export class StateService {
 
   private _state$ = new BehaviorSubject<State>(getDefaultState());
   private _update$ = new Subject<(state: State) => void>();
-  private _updateBalance$ = new Subject<void>();
 
   readonly state$: Observable<State>;
   readonly tron$: Observable<TronInfo>;
@@ -84,13 +83,6 @@ export class StateService {
       }, getDefaultState())
     ).subscribe(this._state$);
 
-    this._updateBalance$.pipe(
-      withLatestFrom(this._state$),
-      delay(0),
-      mergeMap(([, state]) => defer(() => state.tronWeb!.trx.getBalance())),
-      map(balance => (state: State) => state.balance = new BigNumber(balance)),
-    ).subscribe(this._update$);
-
     this.state$ = this._state$.asObservable();
     this.tron$ = this.state$.pipe(
       filter(state => !!state.tronWeb && state.node !== '' && state.account !== ''),
@@ -99,6 +91,9 @@ export class StateService {
   }
 
   initialize() {
+    const initialNode$ = new Subject<string>();
+    const initialAccount$ = new Subject<string>();
+
     let interval = setInterval(() => {
       if (!window.tronWeb)
         return;
@@ -112,58 +107,36 @@ export class StateService {
         state.node = window.tronWeb.fullNode.host;
         state.account = window.tronWeb.defaultAddress.base58;
       });
+
+      initialNode$.next(window.tronWeb.fullNode.host);
+      initialNode$.complete();
+      initialAccount$.next(window.tronWeb.defaultAddress.base58);
+      initialAccount$.complete();
+
+      this.requestAccountBalance();
     }, 500);
 
     const event$ = fromEvent<MessageEvent>(window, 'message').pipe(
       filter(event => typeof event.data === 'object' && (event.data?.isTronLink ?? false)),
       map(event => [event.data.message.action, event.data.message.data]),
     );
-    const initial$ = event$.pipe(
-      filter(([type, ]) => type === 'tabReply'),
-      delay(0),
-      map(([, data]) => data.data),
+    const nodeFromEvent$ = event$.pipe(
+      filter(([type, ]) => type === 'setNode'),
+      map(([, data]) => data.node.fullNode),
     );
-    const node$ = merge(
-      initial$.pipe(
-        filter(data => typeof data.node.fullNode === 'string'),
-        map(data => data.node.fullNode),
-      ),
-      event$.pipe(
-        filter(([type, ]) => type === 'setNode'),
-        map(([, data]) => data.node.fullNode),
-      ),
-    ).pipe(distinctUntilChanged());
-    const account$ = merge(
-      initial$.pipe(
-        filter(data => typeof data.address === 'string'),
-        map(data => data.address),
-      ),
-      event$.pipe(
-        filter(([type, ]) => type === 'setAccount'),
-        map(([, data]) => data.address),
-      ),
-    ).pipe(distinctUntilChanged());
+    const accountFromEvent$ = event$.pipe(
+      filter(([type, ]) => type === 'setAccount'),
+      map(([, data]) => data.address),
+    );
 
-    initial$.pipe(
-      map(() => (state: State) => state.tronWeb = window.tronWeb),
+    merge(initialNode$, nodeFromEvent$).pipe(
+      distinctUntilChanged(),
+      map(node => (state: State) => state.node = node),
     ).subscribe(this._update$);
-
-    node$.pipe(
-      map(node => (state: State) => {
-        state.node = node;
-        state.balance = new BigNumber(0);
-      }),
+    merge(initialAccount$, accountFromEvent$).pipe(
+      distinctUntilChanged(),
+      map(account => (state: State) => state.account = account),
     ).subscribe(this._update$);
-    account$.pipe(
-      map(account => (state: State) => {
-        state.account = account;
-        state.balance = new BigNumber(0);
-      }),
-    ).subscribe(this._update$);
-
-    combineLatest([node$, account$, initial$]).pipe(
-      map(() => undefined),
-    ).subscribe(this._updateBalance$);
   }
 
   getInitialized$() {
@@ -183,8 +156,9 @@ export class StateService {
     if (!window.tronWeb)
       throw new Error("TronWeb not initialized");
 
-    window.tronWeb.trx.getBalance().then(balance => {
+    window.tronWeb.trx.getUnconfirmedBalance().then(balance => {
       this._update$.next(state => {
+        console.warn(state.balance.toString(), "=>", balance.toString());
         state.balance = new BigNumber(balance);
       });
     });
@@ -250,14 +224,18 @@ export class StateService {
     )
   }
 
+  delay(time: number) {
+    return new Promise(resolve => setTimeout(resolve, time));
+  }
+
   async approve(token: Token, amount: BigNumber) {
     if (!window.tronWeb)
       throw new Error("TronWeb not initialized");
 
-    await window.tronWeb.contract(TRC20ABI, token).methods.approve(ContractAddress.Swap, '0xFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF').send({ shouldPollResponse: true });
+    await window.tronWeb.contract(TRC20ABI, token).methods.approve(ContractAddress.Swap, '0xFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF').send();
 
     this.requestTRC20TokenAllowance(token);
-    this._updateBalance$.next();
+    this.requestAccountBalance();
   }
 
   async addLiquidity(usdt: BigNumber, usdj: BigNumber) {
@@ -271,18 +249,28 @@ export class StateService {
     if (totalSupply.gt(0)) {
     }
 
-    await swapContract.methods.add_liquidity(amounts, minAmount.toString()).send({ shouldPollResponse: true });
+    const txId = await swapContract.methods.add_liquidity(amounts, minAmount.toString()).send();
 
-    this._updateBalance$.next();
+    await this.delay(5000);
+
+    console.warn(await window.tronWeb.trx.getTransaction(txId));
+
+    this.requestAccountBalance();
+    this.requestTRC20TokenBalance(Token.USDT);
+    this.requestTRC20TokenBalance(Token.USDJ);
+    this.requestPoolInfo();
   }
   async removeLiquidity(amount: BigNumber) {
     const swapContract = window.tronWeb.contract(SwapABI, ContractAddress.Swap);
 
     const amounts = ['0', '0'];
 
-    await swapContract.methods.remove_liquidity(amount.toString(), amounts).send({ shouldPollResponse: true });
+    await swapContract.methods.remove_liquidity(amount.toString(), amounts).send();
 
-    this._updateBalance$.next();
+    this.requestAccountBalance();
+    this.requestTRC20TokenBalance(Token.USDT);
+    this.requestTRC20TokenBalance(Token.USDJ);
+    this.requestPoolInfo();
   }
 
   private convertBadBigNumber(value: any): BigNumber {
@@ -309,9 +297,9 @@ export class StateService {
     const i = token === Token.USDT ? 0 : 1;
     const j = token === Token.USDT ? 1 : 0;
 
-    await swapContract.methods.exchange(i, j, amount.toString(), '0').send({ shouldPollResponse: true });
+    await swapContract.methods.exchange(i, j, amount.toString(), '0').send();
 
-    this._updateBalance$.next();
+    this.requestAccountBalance();
   }
 
   getPositionInfo$(): Observable<PositionInfo | null> {
@@ -356,6 +344,16 @@ export class StateService {
       state.pool.usdtBalance = usdtBalance;
       state.pool.usdjBalance = usdjBalance;
     });
+  }
+
+  async isTransactionSuccess(transactionId: string) {
+    try {
+      const result = await window.tronWeb.trx.getTransaction(transactionId);
+
+      return result.ret?.[0]?.contractRet === "SUCCESS";
+    } catch {
+      return false;
+    }
   }
 }
 

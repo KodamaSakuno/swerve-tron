@@ -10,7 +10,8 @@ declare global {
       host: string,
     };
     trx: {
-      getBalance(): Promise<number>,
+      getUnconfirmedBalance(): Promise<number>,
+      getTransaction(transactionId: string): Promise<any>,
     };
 
     contract(abi: any, address: string): TronWebContract;
