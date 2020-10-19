@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, Input, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import BigNumber from 'bignumber.js';
 import { Observable } from 'rxjs';
 
@@ -34,6 +34,9 @@ export class TokenInputComponent implements OnInit {
   balance$: Observable<BigNumber> | null = null;
 
   isBadInput = false;
+
+  @Output()
+  amountChange = new EventEmitter<BigNumber>();
 
   constructor(private stateService: StateService) {
   }

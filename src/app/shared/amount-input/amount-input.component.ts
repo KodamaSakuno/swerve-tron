@@ -12,6 +12,9 @@ import { debounceTime, distinctUntilChanged, filter, map, startWith, tap, withLa
 export class AmountInputComponent implements OnInit {
 
   private _decimals = 0;
+  get decimals() {
+    return this._decimals;
+  }
   @Input()
   set decimals(value: number) {
     this._decimals = value;
@@ -73,12 +76,13 @@ export class AmountInputComponent implements OnInit {
     );
 
     amount$.pipe(
-      filter(amount => amount.lte(this.maxAmount)),
+      withLatestFrom(this.maxAmount$),
+      filter(([amount, maxAmount]) => amount.lte(maxAmount)),
+      map(([amount, ]) => amount),
     ).subscribe(this.amountChange);
   }
 
   ngOnInit(): void {
-
   }
 
   setMaxAmount() {

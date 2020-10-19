@@ -203,6 +203,30 @@ export class StateService {
       });
     });
   }
+  getTRC20TokenBalance$(token: Token) {
+    if (!window.tronWeb)
+      throw new Error("TronWeb not initialized");
+
+    const contract = window.tronWeb.contract(TRC20ABI, token);
+
+    return defer(async () => {
+      const balance = await contract.methods.balanceOf(window.tronWeb.defaultAddress.base58).call();
+
+      return this.convertBadBigNumber(balance);
+    });
+  }
+  getTRC20TokenAllowance$(token: Token) {
+    if (!window.tronWeb)
+      throw new Error("TronWeb not initialized");
+
+    const contract = window.tronWeb.contract(TRC20ABI, token);
+
+    return defer(async () => {
+      const allowance = await contract.methods.allowance(window.tronWeb.defaultAddress.base58, ContractAddress.Swap).call();
+
+      return this.convertBadBigNumber(allowance);
+    });
+  }
 
   getToken$(token: Token): Observable<TokenInfo> {
     return this._state$.pipe(
@@ -246,7 +270,7 @@ export class StateService {
     this._updateBalance$.next();
   }
 
-  private convertBadBigNumber(value: any) {
+  private convertBadBigNumber(value: any): BigNumber {
     if (value._ethersType === 'BigNumber')
       value = new BigNumber(value.toHexString());
 
