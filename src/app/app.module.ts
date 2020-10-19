@@ -20,6 +20,7 @@ import { TokenAmountInputComponent } from './shared/token-amount-input/token-amo
 import { TronStatusComponent } from './shared/tron-status/tron-status.component';
 import { AmountInputComponent } from './shared/amount-input/amount-input.component';
 import { TokenInputComponent } from './shared/token-input/token-input.component';
+import { AddLiquidityContentComponent } from './pages/add-liquidity/add-liquidity-content/add-liquidity-content.component';
 
 @NgModule({
   declarations: [
@@ -39,6 +40,7 @@ import { TokenInputComponent } from './shared/token-input/token-input.component'
     TronStatusComponent,
     AmountInputComponent,
     TokenInputComponent,
+    AddLiquidityContentComponent,
   ],
   imports: [
     BrowserModule,
