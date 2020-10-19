@@ -1,6 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { APP_INITIALIZER, NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
+import { CountUpModule } from 'ngx-countup';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -21,6 +22,7 @@ import { TronStatusComponent } from './shared/tron-status/tron-status.component'
 import { AmountInputComponent } from './shared/amount-input/amount-input.component';
 import { TokenInputComponent } from './shared/token-input/token-input.component';
 import { AddLiquidityContentComponent } from './pages/add-liquidity/add-liquidity-content/add-liquidity-content.component';
+import { ValueComponent } from './shared/value/value.component';
 
 @NgModule({
   declarations: [
@@ -41,11 +43,13 @@ import { AddLiquidityContentComponent } from './pages/add-liquidity/add-liquidit
     AmountInputComponent,
     TokenInputComponent,
     AddLiquidityContentComponent,
+    ValueComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     FormsModule,
+    CountUpModule,
   ],
   providers: [
     {

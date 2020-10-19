@@ -4,10 +4,14 @@ dependencies:
   '@angular/compiler': 10.1.5
   '@angular/core': 10.1.5_rxjs@6.6.3+zone.js@0.10.3
   '@angular/forms': 10.1.5_faa2eba427bc1ebf5f07a6f3c0d91320
+  '@angular/material': 10.2.5_3c72da7e1a97a3a2be411af1994d62ee
   '@angular/platform-browser': 10.1.5_4c5fee6efec7bb2121ef2dd0964d0d81
   '@angular/platform-browser-dynamic': 10.1.5_f98166849b774a7df2e06a1fd2f2e528
   '@angular/router': 10.1.5_faa2eba427bc1ebf5f07a6f3c0d91320
+  '@ng-bootstrap/ng-bootstrap': 7.0.0_91fd55f67fb7e503844519bf42f06463
   bignumber.js: 9.0.1
+  countup.js: 2.0.7
+  ngx-countup: 7.3.3_1e08fe2de1fde4d3ed9b653cfa4ed886
   rxjs: 6.6.3
   tslib: 2.0.3
   zone.js: 0.10.3
@@ -316,6 +320,22 @@ packages:
       rxjs: ^6.5.3
     resolution:
       integrity: sha512-fkXKCwXL0XeFMUkmzJpm+FHYrv1CCfFGxYEBQ/bzfd3Op+dFJqEPiOwK3wG943Y09THday6H509RwwEIyF/4yw==
+  /@angular/material/10.2.5_3c72da7e1a97a3a2be411af1994d62ee:
+    dependencies:
+      '@angular/animations': 10.1.5_@angular+core@10.1.5
+      '@angular/common': 10.1.5_@angular+core@10.1.5+rxjs@6.6.3
+      '@angular/core': 10.1.5_rxjs@6.6.3+zone.js@0.10.3
+      '@angular/forms': 10.1.5_faa2eba427bc1ebf5f07a6f3c0d91320
+      tslib: 2.0.3
+    dev: false
+    peerDependencies:
+      '@angular/animations': ^10.0.0 || ^11.0.0-0
+      '@angular/cdk': 10.2.5
+      '@angular/common': ^10.0.0 || ^11.0.0-0
+      '@angular/core': ^10.0.0 || ^11.0.0-0
+      '@angular/forms': ^10.0.0 || ^11.0.0-0
+    resolution:
+      integrity: sha512-gYFqpXdLLuRYb9N1jVj9Gig/AlqsEfT/m+RtzHm4mawmHqeQbEV+0C0Qvc6fKRb1060Nkzfz8TDNGu5B+Xzq5A==
   /@angular/platform-browser-dynamic/10.1.5_f98166849b774a7df2e06a1fd2f2e528:
     dependencies:
       '@angular/common': 10.1.5_@angular+core@10.1.5+rxjs@6.6.3
@@ -1324,6 +1344,22 @@ packages:
     dev: true
     resolution:
       integrity: sha512-EUCPEkaRPvmHjWAAZkWMT7JDzpw7FKB00WTISaiXsbNOd5hCHg77XLA8sLYLFDo1zepYLo2w7GstN8YBqRXZfA==
+  /@ng-bootstrap/ng-bootstrap/7.0.0_91fd55f67fb7e503844519bf42f06463:
+    dependencies:
+      '@angular/common': 10.1.5_@angular+core@10.1.5+rxjs@6.6.3
+      '@angular/core': 10.1.5_rxjs@6.6.3+zone.js@0.10.3
+      '@angular/forms': 10.1.5_faa2eba427bc1ebf5f07a6f3c0d91320
+      rxjs: 6.6.3
+      tslib: 2.0.3
+    dev: false
+    peerDependencies:
+      '@angular/common': ^10.0.0
+      '@angular/core': ^10.0.0
+      '@angular/forms': ^10.0.0
+      '@angular/localize': ^10.0.0
+      rxjs: ^6.5.5
+    resolution:
+      integrity: sha512-SxUaptGWJmCxM0d2Zy1mx7K7p/YBwGZ69NmmBQVY4BE6p5av0hWrVmv9rzzfBz0rhxU7RPZLor2Jpaoq8Xyl4w==
   /@ngtools/webpack/10.1.6_0c5a6520eb7c8577706826978c50f693:
     dependencies:
       '@angular-devkit/core': 10.1.6
@@ -2900,6 +2936,10 @@ packages:
       node: '>=4'
     resolution:
       integrity: sha512-H65gsXo1SKjf8zmrJ67eJk8aIRKV5ff2D4uKZIBZShbhGSpEmsQOPW/SKMKYhSTrqR7ufy6RP69rPogdaPh/kA==
+  /countup.js/2.0.7:
+    dev: false
+    resolution:
+      integrity: sha512-FO0nQdvG1iQwHp28wdvkErxnNUSbdkzztqZ6YNHKLHydngD2tdiKEW8dFrqpahF3tj+Ma70h0vyYrCBzxlVWdg==
   /create-ecdh/4.0.4:
     dependencies:
       bn.js: 4.11.9
@@ -6027,6 +6067,18 @@ packages:
     dev: true
     resolution:
       integrity: sha1-yobR/ogoFpsBICCOPchCS524NCw=
+  /ngx-countup/7.3.3_1e08fe2de1fde4d3ed9b653cfa4ed886:
+    dependencies:
+      '@angular/common': 10.1.5_@angular+core@10.1.5+rxjs@6.6.3
+      '@angular/core': 10.1.5_rxjs@6.6.3+zone.js@0.10.3
+      countup.js: 2.0.7
+      tslib: 1.14.1
+    dev: false
+    peerDependencies:
+      '@angular/common': '>=7.0.0'
+      '@angular/core': '>=7.0.0'
+    resolution:
+      integrity: sha512-Vu+amEzO0ZrfXxWUFXl61qTDxFpKvxTwHg7Uw/psCIj2vhZzZEIBWliZ6m6FzBBHvvfJzb1xhK/6+Ab7RivuMg==
   /nice-try/1.0.5:
     dev: true
     resolution:
@@ -9520,14 +9572,17 @@ specifiers:
   '@angular/compiler-cli': ~10.1.5
   '@angular/core': ~10.1.5
   '@angular/forms': ~10.1.5
+  '@angular/material': ^10.2.5
   '@angular/platform-browser': ~10.1.5
   '@angular/platform-browser-dynamic': ~10.1.5
   '@angular/router': ~10.1.5
+  '@ng-bootstrap/ng-bootstrap': ^7.0.0
   '@types/jasmine': ~3.5.0
   '@types/jasminewd2': ~2.0.3
   '@types/node': ^12.11.1
   bignumber.js: ^9.0.1
   codelyzer: ^6.0.0
+  countup.js: ^2.0.7
   jasmine-core: ~3.6.0
   jasmine-spec-reporter: ~5.0.0
   karma: ~5.0.0
@@ -9535,6 +9590,7 @@ specifiers:
   karma-coverage-istanbul-reporter: ~3.0.2
   karma-jasmine: ~4.0.0
   karma-jasmine-html-reporter: ^1.5.0
+  ngx-countup: ^7.3.3
   protractor: ~7.0.0
   rxjs: ~6.6.0
   ts-node: ~8.3.0
