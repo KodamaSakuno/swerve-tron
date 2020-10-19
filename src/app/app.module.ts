@@ -17,6 +17,7 @@ import { AddLiquidityComponent } from './pages/add-liquidity/add-liquidity.compo
 import { RemoveLiquidityComponent } from './pages/remove-liquidity/remove-liquidity.component';
 import { BigNumberPipe } from './bignumber.pipe';
 import { TokenAmountInputComponent } from './shared/token-amount-input/token-amount-input.component';
+import { TronStatusComponent } from './shared/tron-status/tron-status.component';
 
 @NgModule({
   declarations: [
@@ -33,6 +34,7 @@ import { TokenAmountInputComponent } from './shared/token-amount-input/token-amo
     RemoveLiquidityComponent,
     BigNumberPipe,
     TokenAmountInputComponent,
+    TronStatusComponent,
   ],
   imports: [
     BrowserModule,
