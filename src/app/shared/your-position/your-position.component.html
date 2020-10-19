@@ -1,36 +1,18 @@
-<div class="r-position">
-  <div class="rp-content">
-    <div class="rpc-content">
-      <div class="rp-list">
-        <div class="rpl-list">
-          <div class="rp-title">Your position</div>
-        </div>
-      </div>
-      <div class="rp-list">
-        <div class="rpl-list">
-          <div class="rp-token">
-            🤔🤔
-          </div>
-          <div class="token-text">USDT/USDJ</div>
-        </div>
-        <div class="rpl-list">
-          <div class="token-text">{{ position.lpToken.balance | bignumber:position.lpToken.decimals }}</div>
-        </div>
-      </div>
-      <div class="rp-detail">
-        <div class="rp-list">
-          <div class="rpd-symbol">USDT:</div>
-          <div class="rpl-list">
-            <div class="rpd-amount">{{ position.pooledTokens.usdt.balance | bignumber:position.pooledTokens.usdt.decimals }}</div>
-          </div>
-        </div>
-        <div class="rp-list">
-          <div class="rpd-symbol">USDJ:</div>
-          <div class="rpl-list">
-            <div class="rpd-amount">{{ position.pooledTokens.usdj.balance | bignumber:position.pooledTokens.usdj.decimals }}</div>
-          </div>
-        </div>
-      </div>
-    </div>
+<span class="header">Your position</span>
+<div class="pool-info">
+  <div class="token-icons">
+    🤔🤔
+  </div>
+  <span class="token-text">USDT/USDJ</span>
+  <app-value class="token-text" [value]="position.lpToken.balance" [decimals]="position.lpToken.decimals "></app-value>
+</div>
+<div class="pool-detail">
+  <div class="pool-detail-item">
+    <span>USDT:</span>
+    <span>{{ position.pooledTokens.usdt.balance | bignumber:position.pooledTokens.usdt.decimals }}</span>
+  </div>
+  <div class="pool-detail-item">
+    <span>USDJ:</span>
+    <span>{{ position.pooledTokens.usdj.balance | bignumber:position.pooledTokens.usdj.decimals }}</span>
   </div>
 </div>
