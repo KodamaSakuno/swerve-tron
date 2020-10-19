@@ -5,55 +5,5 @@
       <span name=title>Add Liquidity</span>
     </box-header>
     <app-add-liquidity-content [usdt]="ctx.usdt" [usdj]="ctx.usdj" [position]="ctx.position" *ngIf="ctx.usdt && ctx.usdj"></app-add-liquidity-content>
-    <div id="swap-page" class="swap-page">
-      <div class="sp-content">
-        <ng-container >
-        </ng-container>
-      <div class="swap-button-content">
-        <!-- <ApproveButton
-          v-if="tokenA && tokenA !== 'TRX' && tokenA !== 'undefined' && tronweb.account"
-          id="swap-button"
-          :tokenAddress="tokenA"
-          :spender="spender"
-          :howMuchToSpend="tokenAAmountAsBN"
-          :isAllowanceEnough.sync="tokenAApproved"
-        >
-          Approve {{ { ...tokenAInfo }.symbol }}
-        </ApproveButton>
-        <ApproveButton
-          v-if="tokenB && tokenB !== 'TRX' && tokenB !== 'undefined' && tronweb.account"
-          id="swap-button"
-          :tokenAddress="tokenB"
-          :spender="spender"
-          :howMuchToSpend="tokenBAmountAsBN"
-          :isAllowanceEnough.sync="tokenBApproved"
-        >
-          Approve {{ { ...tokenBInfo }.symbol }}
-        </ApproveButton> -->
-        <!-- <div class="create-pair">
-          <button class="main-button">Connect Wallet</button>
-          <button class="main-button" disabled="false">Create Pair and Supply</button>
-        </div> -->
-        <div class="alreay-have-pair">
-          <div class="approve-buttons">
-            <button class="main-button" [disabled]="isApprovingUSDT" (click)="approveUSDT()" *ngIf="shouldApproveUSDT$ | async">
-              {{ isApprovingUSDT ? 'Approving' : 'Approve' }} USDT
-            </button>
-            <button class="main-button" [disabled]="isApprovingUSDJ" (click)="approveUSDJ()" *ngIf="shouldApproveUSDJ$ | async">
-              {{ isApprovingUSDJ ? 'Approving' : 'Approve' }} USDJ
-            </button>
-          </div>
-          <!-- <MainButton style="margin-top: 16px;" :disabled="true">Approve {{ addLiquidityPrice.B.symbol }}</MainButton> -->
-          <!-- <button class="main-button swap-button-insufficient">Insufficient TRONN balance</button> -->
-          <button class="main-button" [disabled]="!(canSupply$ | async)" (click)="supply()" *ngIf="!(shouldApproveUSDT$ | async) && !(shouldApproveUSDJ$ | async)">
-            {{ isSupplying ? 'Supplying' : 'Supply' }}
-          </button>
-          <!-- <router-link :to="`/pair/${this.pair}/info`"
-            ><button class="swap-button">
-              Go to see pair data
-            </button></router-link> -->
-        </div>
-      </div>
-    </div>
   </div>
 </div>
