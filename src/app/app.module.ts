@@ -18,6 +18,8 @@ import { RemoveLiquidityComponent } from './pages/remove-liquidity/remove-liquid
 import { BigNumberPipe } from './bignumber.pipe';
 import { TokenAmountInputComponent } from './shared/token-amount-input/token-amount-input.component';
 import { TronStatusComponent } from './shared/tron-status/tron-status.component';
+import { AmountInputComponent } from './shared/amount-input/amount-input.component';
+import { TokenInputComponent } from './shared/token-input/token-input.component';
 
 @NgModule({
   declarations: [
@@ -35,6 +37,8 @@ import { TronStatusComponent } from './shared/tron-status/tron-status.component'
     BigNumberPipe,
     TokenAmountInputComponent,
     TronStatusComponent,
+    AmountInputComponent,
+    TokenInputComponent,
   ],
   imports: [
     BrowserModule,
