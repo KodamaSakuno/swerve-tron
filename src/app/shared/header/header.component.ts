@@ -3,6 +3,7 @@ import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 
 import { StateService } from '../../services/state.service';
+import { TronInfo } from '../../types/TronInfo';
 
 @Component({
   selector: 'app-header',
@@ -11,18 +12,10 @@ import { StateService } from '../../services/state.service';
 })
 export class HeaderComponent implements OnInit {
 
-  account$: Observable<string>;
-  balance$: Observable<any>;
+  tron$: Observable<TronInfo>;
 
-  constructor(private StateService: StateService) {
-    const state$ = StateService.getState$();
-
-    this.account$ = state$.pipe(
-      map(state => state.account)
-    );
-    this.balance$ = state$.pipe(
-      map(state => state.balance)
-    );
+  constructor(stateService: StateService) {
+    this.tron$ = stateService.tron$;
   }
 
   ngOnInit(): void {

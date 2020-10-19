@@ -1,4 +1,4 @@
-<header class="header">
+<header class="header" *ngIf="tron$ | async as tron">
     <div class="h-container">
     <div class="hc-container">
         <div class="h-logo">
@@ -19,17 +19,20 @@
         <!-- account -->
         <!-- v-if="tronweb.network !== 'Mainnet'" -->
         <div class="network">
-            <div>Shasta</div>
+            <div [ngSwitch]="tron.node">
+              <ng-container *ngSwitchCase="'https://api.trongrid.io'">Main</ng-container>
+              <ng-container *ngSwitchCase="'https://api.shasta.trongrid.io'">Shasta</ng-container>
+            </div>
         </div>
         <div class="hi-account">
             <!-- <div class="account-empty"></div> -->
             <div class="hic-account">
-            <div class="hicc-balance">{{ balance$ | async | bignumber:6 }} TRX</div>
+            <div class="hicc-balance">{{ tron.balance | bignumber:6 }} TRX</div>
             <button
                 id="web3-status-connected"
                 class="hicc-connected"
             >
-                <p class="hiccc-account">{{ account$ | async }}</p>
+                <p class="hiccc-account">{{ tron.account }}</p>
                 <!-- <Avatar :address="tronweb.account" size="16" /> -->
             </button>
             </div>
