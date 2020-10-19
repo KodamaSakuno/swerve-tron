@@ -11,7 +11,7 @@
   </button>
 </div>
 <div>
-  <button class="main-button" [disabled]="!(canSupply$ | async)" (click)="supply()" *ngIf="!(shouldApproveUSDT$ | async) && !(shouldApproveUSDJ$ | async)">
+  <button class="main-button" [disabled]="!(canSupply$ | async) || hasBadInput$ | async" (click)="supply()" *ngIf="!(shouldApproveUSDT$ | async) && !(shouldApproveUSDJ$ | async)">
     {{ isSupplying ? 'Supplying' : 'Supply' }}
   </button>
 </div>

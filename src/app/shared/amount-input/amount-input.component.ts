@@ -57,7 +57,7 @@ export class AmountInputComponent implements OnInit {
 
     merge(
       preAmount$.pipe(
-        filter(([amount, input]) => input !== '' && amount.isNaN()),
+        filter(([amount, input]) => amount.isNaN()),
         map(() => true),
       ),
       amount$.pipe(
@@ -65,6 +65,8 @@ export class AmountInputComponent implements OnInit {
         map(([amount, maxAmount]) => amount.gt(maxAmount)),
       ),
     ).subscribe(this.badInput);
+
+    this.badInput.pipe(map(() => new BigNumber(NaN))).subscribe(this.amountChange);
 
     this.maxButtonVisible$ = merge(
       this.maxAmount$.pipe(

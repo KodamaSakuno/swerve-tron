@@ -36,6 +36,8 @@ export class AddLiquidityContentComponent implements OnInit {
   canSupply$: Observable<boolean>;
   isSupplying = false;
 
+  hasBadInput$: Observable<boolean>;
+
   constructor(private stateService: StateService) {
     const usdtAllowance$ = this.inputUSDT$.pipe(
       debounceTime(300),
@@ -62,13 +64,17 @@ export class AddLiquidityContentComponent implements OnInit {
     this.shouldApproveUSDJ$ = combineLatest([this.inputUSDJ$, usdjAllowance$]).pipe(shouldApproveMapper);
 
     const canSupplyMapper = map<[BigNumber, BigNumber, BigNumber], boolean>(([inputAmount, allowance, balance]) => {
-      return inputAmount.gt(0) && inputAmount.lte(allowance) && inputAmount.lte(balance);
+      return !inputAmount.isNaN() && inputAmount.gt(0) && inputAmount.lte(allowance) && inputAmount.lte(balance);
     });
     const canSupplyUSDT$ = combineLatest([this.inputUSDT$, usdtAllowance$, usdtBalance$]).pipe(canSupplyMapper);
     const canSupplyUSDJ$ = combineLatest([this.inputUSDJ$, usdjAllowance$, usdjBalance$]).pipe(canSupplyMapper);
 
-    this.canSupply$ = combineLatest([canSupplyUSDT$, canSupplyUSDJ$]).pipe(
-      map(([canSupplyUSDT, canSupplyUSDJ]) => canSupplyUSDT && canSupplyUSDJ),
+    this.hasBadInput$ = combineLatest([this.inputUSDT$, this.inputUSDJ$]).pipe(
+      map(([usdt, usdj]) => usdt.isNaN() || usdj.isNaN()),
+    )
+
+    this.canSupply$ = combineLatest([this.hasBadInput$, canSupplyUSDT$, canSupplyUSDJ$]).pipe(
+      map(([hasBadInput, canSupplyUSDT, canSupplyUSDJ]) => !hasBadInput && canSupplyUSDT && canSupplyUSDJ),
     );
   }
 
