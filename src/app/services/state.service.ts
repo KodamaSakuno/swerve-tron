@@ -239,6 +239,8 @@ export class StateService {
 
     await window.tronWeb.contract(TRC20ABI, token).methods.approve(ContractAddress.Swap, '0xFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF').send();
 
+    await this.delay(5000);
+
     this.requestTRC20TokenAllowance(token);
     this.requestAccountBalance();
   }
@@ -254,15 +256,14 @@ export class StateService {
     if (totalSupply.gt(0)) {
     }
 
-    const txId = await swapContract.methods.add_liquidity(amounts, minAmount.toString()).send();
+    await swapContract.methods.add_liquidity(amounts, minAmount.toString()).send();
 
     await this.delay(5000);
-
-    console.warn(await window.tronWeb.trx.getTransaction(txId));
 
     this.requestAccountBalance();
     this.requestTRC20TokenBalance(Token.USDT);
     this.requestTRC20TokenBalance(Token.USDJ);
+    this.requestTRC20TokenBalance(Token.swUSD);
     this.requestPoolInfo();
   }
   async removeLiquidity(amount: BigNumber) {
@@ -272,9 +273,12 @@ export class StateService {
 
     await swapContract.methods.remove_liquidity(amount.toString(), amounts).send();
 
+    await this.delay(5000);
+
     this.requestAccountBalance();
     this.requestTRC20TokenBalance(Token.USDT);
     this.requestTRC20TokenBalance(Token.USDJ);
+    this.requestTRC20TokenBalance(Token.swUSD);
     this.requestPoolInfo();
   }
 

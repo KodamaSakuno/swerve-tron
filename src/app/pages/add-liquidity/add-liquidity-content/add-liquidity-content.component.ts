@@ -39,19 +39,17 @@ export class AddLiquidityContentComponent implements OnInit {
   hasBadInput$: Observable<boolean>;
 
   constructor(private stateService: StateService) {
-    const usdtAllowance$ = this.inputUSDT$.pipe(
-      debounceTime(300),
-      mergeMap(() => stateService.getTRC20TokenAllowance$(Token.USDT)),
+    const usdtAllowance$ = stateService.state$.pipe(
+      map(state => state.tokens[Token.USDT].allowance),
+    );
+    const usdjAllowance$ = stateService.state$.pipe(
+      map(state => state.tokens[Token.USDJ].allowance),
     );
     const usdtBalance$ = stateService.getToken$(Token.USDT).pipe(
       map(token => token.balance),
     );
     const usdjBalance$ = stateService.getToken$(Token.USDJ).pipe(
       map(token => token.balance),
-    );
-    const usdjAllowance$ = this.inputUSDJ$.pipe(
-      debounceTime(300),
-      mergeMap(() => stateService.getTRC20TokenAllowance$(Token.USDJ)),
     );
 
     const shouldApproveMapper = map<[BigNumber, BigNumber], boolean>(([amount, allowance]) => {
@@ -64,7 +62,7 @@ export class AddLiquidityContentComponent implements OnInit {
     this.shouldApproveUSDJ$ = combineLatest([this.inputUSDJ$, usdjAllowance$]).pipe(shouldApproveMapper);
 
     const canSupplyMapper = map<[BigNumber, BigNumber, BigNumber], boolean>(([inputAmount, allowance, balance]) => {
-      return !inputAmount.isNaN() && inputAmount.gt(0) && inputAmount.lte(allowance) && inputAmount.lte(balance);
+      return !inputAmount.isNaN() && inputAmount.lte(allowance) && inputAmount.lte(balance);
     });
     const canSupplyUSDT$ = combineLatest([this.inputUSDT$, usdtAllowance$, usdtBalance$]).pipe(canSupplyMapper);
     const canSupplyUSDJ$ = combineLatest([this.inputUSDJ$, usdjAllowance$, usdjBalance$]).pipe(canSupplyMapper);
@@ -79,6 +77,8 @@ export class AddLiquidityContentComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.stateService.requestTRC20TokenAllowance(Token.USDT);
+    this.stateService.requestTRC20TokenAllowance(Token.USDJ);
   }
 
   async approveUSDT() {
