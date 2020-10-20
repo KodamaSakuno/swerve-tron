@@ -249,14 +249,14 @@ export class StateService {
     const swapContract = window.tronWeb.contract(SwapABI, ContractAddress.Swap);
     const swapTokenContract = window.tronWeb.contract(TRC20ABI, ContractAddress.SwapToken);
 
-    const amounts = [usdt.toString(), usdj.toString()];
+    const amounts = [usdt.toFixed(), usdj.toFixed()];
 
     let minAmount = new BigNumber(0);
     const totalSupply = this.convertBadBigNumber(await swapTokenContract.methods.totalSupply().call());
     if (totalSupply.gt(0)) {
     }
 
-    await swapContract.methods.add_liquidity(amounts, minAmount.toString()).send();
+    await swapContract.methods.add_liquidity(amounts, minAmount.toFixed(0)).send();
 
     await this.delay(5000);
 
@@ -296,7 +296,7 @@ export class StateService {
       const i = token === Token.USDT ? 0 : 1;
       const j = token === Token.USDT ? 1 : 0;
 
-      return this.convertBadBigNumber(await swapContract.methods.get_dy_underlying(i, j, input.toString()).call());
+      return this.convertBadBigNumber(await swapContract.methods.get_dy_underlying(i, j, input.toFixed()).call());
     })
   }
 
@@ -306,7 +306,7 @@ export class StateService {
     const i = token === Token.USDT ? 0 : 1;
     const j = token === Token.USDT ? 1 : 0;
 
-    await swapContract.methods.exchange(i, j, amount.toString(), '0').send();
+    await swapContract.methods.exchange(i, j, amount.toFixed(), '0').send();
 
     this.requestAccountBalance();
   }
