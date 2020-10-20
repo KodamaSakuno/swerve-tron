@@ -1,6 +1,7 @@
 import { ChangeDetectionStrategy, Component, Input, OnInit } from '@angular/core';
 import BigNumber from 'bignumber.js';
 import type { CountUpOptions } from 'countup.js';
+import { BigNumberPipe } from 'src/app/bignumber.pipe';
 
 @Component({
   selector: 'app-value',
@@ -15,6 +16,10 @@ export class ValueComponent implements OnInit {
 
   @Input()
   decimals = 0;
+
+  get countUp() {
+    return this.value.div(new BigNumber(10).pow(this.decimals)).toNumber();
+  }
 
   get options(): CountUpOptions {
     return {
