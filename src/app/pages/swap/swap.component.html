@@ -13,7 +13,7 @@
               <div class="sc-content">
                 <div class="scc-text">Price</div>
                 <div class="scc-text">
-                  {{ price$ | async }}
+                  {{ price$ | async }} {{ (from$ | async).name }} per {{ (to$ | async).name }}
                   <button class="price-toggle" (click)="priceDirectionSwitch$.next()">
                     🔁
                   </button>
