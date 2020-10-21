@@ -35,7 +35,7 @@ export class SwapComponent implements OnInit {
 
   priceDirection$ = new BehaviorSubject(false);
   priceDirectionSwitch$ = new Subject<void>();
-  price$: Observable<BigNumber>;
+  price$: Observable<string>;
 
   isApproving = false;
   shouldApprove$: Observable<boolean>;
@@ -78,8 +78,14 @@ export class SwapComponent implements OnInit {
     this.priceDirectionSwitch$.pipe(
       scan(direction => !direction, false)
     ).subscribe(this.priceDirection$);
-    this.price$ = combineLatest([this.input$, this.targetAmount$, this.priceDirection$]).pipe(
-      map(([input, targetAmount, direction]) => !direction ? input.div(targetAmount) : targetAmount.div(input))
+    this.price$ = combineLatest([this.from$, this.input$, this.to$, this.targetAmount$, this.priceDirection$]).pipe(
+      map(([from, input, to, targetAmount, direction]) => {
+        input = input.div(new BigNumber(10).pow(from.decimals));
+        targetAmount = targetAmount.div(new BigNumber(10).pow(to.decimals));
+
+        return !direction ? input.div(targetAmount) : targetAmount.div(input);
+      }),
+      map(price => price.toFixed(3)),
     );
   }
 
