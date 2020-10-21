@@ -45,10 +45,9 @@ export class TokenAmountInputComponent implements OnInit {
 
   constructor(private stateService: StateService) {
     this.input$.pipe(
-      filter(input => input.length > 0),
       debounceTime(300),
       distinctUntilChanged(),
-      map(input => new BigNumber(input).times(new BigNumber(10).pow(this.token!.decimals)))
+      map(input => new BigNumber(!isNaN(Number(input)) && input || 0).times(new BigNumber(10).pow(this.token!.decimals)))
     ).subscribe(this.amountChange);
   }
 

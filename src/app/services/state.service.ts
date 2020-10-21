@@ -291,12 +291,18 @@ export class StateService {
 
   getTargetAmount$(token: Token, input: BigNumber) {
     return defer(async () => {
-      const swapContract = window.tronWeb.contract(SwapABI, ContractAddress.Swap);
+      try {
+        const swapContract = window.tronWeb.contract(SwapABI, ContractAddress.Swap);
 
-      const i = token === Token.USDT ? 0 : 1;
-      const j = token === Token.USDT ? 1 : 0;
-
-      return this.convertBadBigNumber(await swapContract.methods.get_dy_underlying(i, j, input.toFixed()).call());
+        const i = token === Token.USDT ? 0 : 1;
+        const j = token === Token.USDT ? 1 : 0;
+        const output = this.convertBadBigNumber(await swapContract.methods.get_dy_underlying(i, j, input.integerValue().toFixed()).call());
+        return input.comparedTo(0) !== 0 ? output : new BigNumber(0);
+      }
+      catch (e) {
+        console.error(e);
+        return new BigNumber(0);
+      }
     })
   }
 
