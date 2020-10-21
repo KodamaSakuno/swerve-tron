@@ -86,7 +86,7 @@ export class SwapComponent implements OnInit {
 
         return !direction ? input.div(targetAmount) : targetAmount.div(input);
       }),
-      map(price => price.toFixed(3)),
+      map(price => !price.isNaN() ? price.toFixed(6) : ''),
     );
   }
 
