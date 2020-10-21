@@ -33,6 +33,9 @@ export class TokenInputComponent implements OnInit {
 
   balance$: Observable<BigNumber> | null = null;
 
+  @Input()
+  text = '';
+
   isBadInput = false;
 
   @Output()

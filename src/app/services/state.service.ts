@@ -308,7 +308,11 @@ export class StateService {
 
     await swapContract.methods.exchange(i, j, amount.toFixed(), '0').send();
 
+    await this.delay(5000);
+
     this.requestAccountBalance();
+    this.requestTRC20TokenBalance(Token.USDT);
+    this.requestTRC20TokenBalance(Token.USDJ);
   }
 
   getPositionInfo$(): Observable<PositionInfo | null> {

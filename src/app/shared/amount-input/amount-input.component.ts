@@ -37,6 +37,7 @@ export class AmountInputComponent implements OnInit {
   @Output()
   amountChange = new Subject<BigNumber>();
 
+  @Input()
   text = '';
   maxAmount$ = new BehaviorSubject(new BigNumber(0));
   input$ = new Subject<string>();

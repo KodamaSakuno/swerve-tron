@@ -4,6 +4,6 @@
     <span *ngIf="balance$ | async as balance">Balance: {{ balance | bignumber:(token?.decimals || 0)}}</span>
   </div>
   <div class="amount-input">
-    <app-amount-input [decimals]="token?.decimals || 0" [maxAmount]="(balance$ | async) || 0" (amountChange)="amountChange.emit($event)" (badInput)="isBadInput = $event" #input></app-amount-input>
+    <app-amount-input [text]="text" [decimals]="token?.decimals || 0" [maxAmount]="(balance$ | async) || 0" (amountChange)="amountChange.emit($event)" (badInput)="isBadInput = $event" #input></app-amount-input>
   </div>
 </div>
