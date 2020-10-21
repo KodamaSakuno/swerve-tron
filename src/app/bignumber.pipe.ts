@@ -13,7 +13,7 @@ export class BigNumberPipe implements PipeTransform {
     if (typeof value === 'string' || typeof value === 'number')
       value = new BigNumber(value);
 
-    return value.div(new BigNumber(10).pow(decimals)).toFixed(decimals);
+    return value.div(new BigNumber(10).pow(decimals)).toFixed(decimals).replace(/(?:\.0*|(\.\d+?)0+)$/,'$1');
   }
 
 }
