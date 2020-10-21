@@ -13,7 +13,7 @@
 </div>
 <div class="info">
   <div>Price</div>
-  <div *ngIf="price ">
+  <div *ngIf="price && from && to">
     {{ price }} {{ from.name }} per {{ to.name }}
     <button class="price-toggle" (click)="priceSwitchClicked.emit()">
       <mat-icon>sync</mat-icon>

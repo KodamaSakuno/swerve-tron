@@ -55,7 +55,7 @@ export class SwapContentComponent implements OnInit {
   priceSwitchClicked = new EventEmitter();
 
   @Input()
-  price: number | null = null;
+  price: string | null = null;
 
   @Input()
   shouldApprove = false;
