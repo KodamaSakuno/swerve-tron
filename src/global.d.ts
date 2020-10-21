@@ -6,8 +6,12 @@ declare global {
       hex: string,
       base58: string,
     };
+    fullNode: {
+      host: string,
+    };
     trx: {
-      getBalance(): Promise<number>,
+      getUnconfirmedBalance(): Promise<number>,
+      getTransaction(transactionId: string): Promise<any>,
     };
 
     contract(abi: any, address: string): TronWebContract;

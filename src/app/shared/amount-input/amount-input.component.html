@@ -1,0 +1,2 @@
+<input [(ngModel)]="text" (ngModelChange)="input$.next($event)" placeholder="0.0" [disabled]="disabled" />
+<button class="max-button" [disabled]="disabled" (click)="setMaxAmount()" *ngIf="maxButtonVisible$ | async">MAX</button>

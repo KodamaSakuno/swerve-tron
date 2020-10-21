@@ -1,0 +1,11 @@
+<div class="node-info status-border">
+  <div class="node" [ngSwitch]="tron.node">
+    <ng-container *ngSwitchCase="'https://api.trongrid.io'">Main</ng-container>
+    <ng-container *ngSwitchCase="'https://api.shasta.trongrid.io'">Shasta</ng-container>
+    <ng-container *ngSwitchDefault>Unknown</ng-container>
+  </div>
+</div>
+<div class="account-info status-border">
+  <div class="balance"><app-value [value]="tron.balance" [decimals]="6"></app-value> TRX</div>
+  <div class="address status-border">{{ tron.account }}</div>
+</div>

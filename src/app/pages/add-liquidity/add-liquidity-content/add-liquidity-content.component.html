@@ -1,0 +1,19 @@
+<app-token-input [token]="usdt" (amountChange)="inputUSDT$.next($event)"></app-token-input>
+<div class="arrow">➕</div>
+<app-token-input [token]="usdj" (amountChange)="inputUSDJ$.next($event)"></app-token-input>
+
+<div class="approve-buttons">
+  <button class="main-button" [disabled]="isApprovingUSDT" (click)="approveUSDT()" *ngIf="shouldApproveUSDT$ | async">
+    {{ isApprovingUSDT ? 'Approving' : 'Approve' }} USDT
+  </button>
+  <button class="main-button" [disabled]="isApprovingUSDJ" (click)="approveUSDJ()" *ngIf="shouldApproveUSDJ$ | async">
+    {{ isApprovingUSDJ ? 'Approving' : 'Approve' }} USDJ
+  </button>
+</div>
+<div>
+  <button class="main-button" [disabled]="!(canSupply$ | async) || (hasBadInput$ | async)" (click)="supply()" *ngIf="!(shouldApproveUSDT$ | async) && !(shouldApproveUSDJ$ | async)">
+    {{ isSupplying ? 'Supplying' : 'Supply' }}
+  </button>
+</div>
+
+<your-position [position]="position" *ngIf="position"></your-position>

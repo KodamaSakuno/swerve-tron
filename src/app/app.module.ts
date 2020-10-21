@@ -1,6 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { APP_INITIALIZER, NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
+import { CountUpModule } from 'ngx-countup';
 
 import {A11yModule} from '@angular/cdk/a11y';
 import {ClipboardModule} from '@angular/cdk/clipboard';
@@ -61,6 +62,11 @@ import { AddLiquidityComponent } from './pages/add-liquidity/add-liquidity.compo
 import { RemoveLiquidityComponent } from './pages/remove-liquidity/remove-liquidity.component';
 import { BigNumberPipe } from './bignumber.pipe';
 import { TokenAmountInputComponent } from './shared/token-amount-input/token-amount-input.component';
+import { TronStatusComponent } from './shared/tron-status/tron-status.component';
+import { AmountInputComponent } from './shared/amount-input/amount-input.component';
+import { TokenInputComponent } from './shared/token-input/token-input.component';
+import { AddLiquidityContentComponent } from './pages/add-liquidity/add-liquidity-content/add-liquidity-content.component';
+import { ValueComponent } from './shared/value/value.component';
 
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import { DialogOverviewConnectWallet } from './shared/modal-connect-wallet/modal.component';
@@ -89,12 +95,18 @@ import { DialogOverviewConfirmSupply } from './shared/modal-confirm-supply/modal
     DialogOverviewTranscation,
     DialogOverviewConfirmSwap,
     DialogOverviewConfirmSupply
+    TronStatusComponent,
+    AmountInputComponent,
+    TokenInputComponent,
+    AddLiquidityContentComponent,
+    ValueComponent,
   ],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
     AppRoutingModule,
     FormsModule,
+    CountUpModule,
     A11yModule,
     ClipboardModule,
     CdkStepperModule,
