@@ -67,6 +67,7 @@ import { AmountInputComponent } from './shared/amount-input/amount-input.compone
 import { TokenInputComponent } from './shared/token-input/token-input.component';
 import { AddLiquidityContentComponent } from './pages/add-liquidity/add-liquidity-content/add-liquidity-content.component';
 import { ValueComponent } from './shared/value/value.component';
+import { HelpTooltipComponent } from './shared/help-tooltip/help-tooltip.component';
 
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import { DialogOverviewConnectWallet } from './shared/modal-connect-wallet/modal.component';
@@ -100,6 +101,7 @@ import { DialogOverviewConfirmSupply } from './shared/modal-confirm-supply/modal
     TokenInputComponent,
     AddLiquidityContentComponent,
     ValueComponent,
+    HelpTooltipComponent
   ],
   imports: [
     BrowserModule,
