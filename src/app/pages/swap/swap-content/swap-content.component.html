@@ -1,0 +1,33 @@
+<app-token-input [text]="input" [token]="from" (amountChange)="inputChange.emit($event)" *ngIf="from"></app-token-input>
+<div class="arrow" (click)="pairSwitch()">
+  <mat-icon>arrow_downward</mat-icon>
+</div>
+<div class="border" *ngIf="to">
+  <div class="header">
+    <span>{{ to.name }}</span>
+    <span>Balance: {{ to.balance | bignumber:to.decimals}}</span>
+  </div>
+  <div class="target-amount">
+    <span>{{ targetAmount | bignumber:to.decimals }}</span>
+  </div>
+</div>
+<div class="info">
+  <div>Price</div>
+  <div *ngIf="price ">
+    {{ price }} {{ from.name }} per {{ to.name }}
+    <button class="price-toggle" (click)="priceSwitchClicked.emit()">
+      <mat-icon>sync</mat-icon>
+    </button>
+  </div>
+</div>
+<div class="info">
+  <div>Slippage Tolerance</div>
+  <div>0.5%</div>
+</div>
+
+<button class="main-button" [disabled]="isApproving" (click)="approve()" *ngIf="shouldApprove">
+  {{ isApproving ? 'Approving' : 'Approve'}}
+</button>
+<button class="main-button" [disabled]="isSwapping" (click)="swap()" *ngIf="!shouldApprove">
+  {{ isSwapping ? 'Swapping' : 'Swap' }}
+</button>

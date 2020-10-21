@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { BigNumber } from 'bignumber.js';
-import { BehaviorSubject, combineLatest, Observable, Subject } from 'rxjs';
-import { scan, map, mergeMap, tap } from 'rxjs/operators';
+import { BehaviorSubject, combineLatest, forkJoin, Observable, Subject } from 'rxjs';
+import { scan, map, mergeMap, tap, filter } from 'rxjs/operators';
 
 import { TokenInfo } from '../../types/TokenInfo';
 import { StateService } from '../../services/state.service';
@@ -60,6 +60,7 @@ export class SwapComponent implements OnInit {
     );
 
     combineLatest([this.from$, this.input$]).pipe(
+      filter(([, input]) => !input.isNaN()),
       mergeMap(([token, input]) => stateService.getTargetAmount$(token.address, input)),
     ).subscribe(this.targetAmount$);
 
@@ -90,23 +91,6 @@ export class SwapComponent implements OnInit {
   }
 
   ngOnInit(): void {
-  }
-
-  async approve() {
-    this.isApproving = true;
-    try {
-      await this.stateService.approve(this.from, this.input);
-    } finally {
-      this.isApproving = false;
-    }
-  }
-  async swap() {
-    this.isSwapping = true;
-    try {
-      await this.stateService.swap(this.from, this.input);
-    } finally {
-      this.isSwapping = false;
-    }
   }
 
 }
