@@ -94,7 +94,7 @@ import { DialogOverviewConfirmSupply } from './shared/modal-confirm-supply/modal
     DialogOverviewAccount,
     DialogOverviewTranscation,
     DialogOverviewConfirmSwap,
-    DialogOverviewConfirmSupply
+    DialogOverviewConfirmSupply,
     TronStatusComponent,
     AmountInputComponent,
     TokenInputComponent,

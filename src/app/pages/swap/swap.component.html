@@ -15,7 +15,7 @@
               <div class="sc-content">
                 <div class="scc-text">Price</div>
                 <div class="scc-text">
-                  {{ price$ | async }} {{ (from$ | async).name }} per {{ (to$ | async).name }}
+                  {{ price$ | async }} {{ (from$ | async).name || '' }} per {{ (to$ | async).name || '' }}
                   <button class="price-toggle" (click)="priceDirectionSwitch$.next()">
                     <mat-icon>sync</mat-icon>
                   </button>
@@ -123,10 +123,4 @@
       </ng-container>
     </div>
   </div>
-  <dialog-overview-connect-wallet></dialog-overview-connect-wallet>
-  <dialog-overview-account></dialog-overview-account>
-  <dialog-overview-transcation></dialog-overview-transcation>
-  <modal-confirm-swap></modal-confirm-swap>
-  <modal-confirm-supply></modal-confirm-supply>
-  <mat-icon>save</mat-icon>
 </div>

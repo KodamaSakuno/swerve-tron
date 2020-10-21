@@ -1,17 +1,18 @@
 dependencies:
   '@angular/animations': 10.1.5_@angular+core@10.1.5
+  '@angular/cdk': 10.2.5_1e08fe2de1fde4d3ed9b653cfa4ed886
   '@angular/common': 10.1.5_@angular+core@10.1.5+rxjs@6.6.3
   '@angular/compiler': 10.1.5
   '@angular/core': 10.1.5_rxjs@6.6.3+zone.js@0.10.3
   '@angular/forms': 10.1.5_faa2eba427bc1ebf5f07a6f3c0d91320
-  '@angular/material': 10.2.5_3c72da7e1a97a3a2be411af1994d62ee
+  '@angular/material': 10.2.5_7d87d5af8f82027db73d7658aaeefd6c
   '@angular/platform-browser': 10.1.5_4c5fee6efec7bb2121ef2dd0964d0d81
   '@angular/platform-browser-dynamic': 10.1.5_f98166849b774a7df2e06a1fd2f2e528
   '@angular/router': 10.1.5_faa2eba427bc1ebf5f07a6f3c0d91320
-  '@ng-bootstrap/ng-bootstrap': 7.0.0_91fd55f67fb7e503844519bf42f06463
   bignumber.js: 9.0.1
   countup.js: 2.0.7
   ngx-countup: 7.3.3_1e08fe2de1fde4d3ed9b653cfa4ed886
+  normalize.css: 8.0.1
   rxjs: 6.6.3
   tslib: 2.0.3
   zone.js: 0.10.3
@@ -200,6 +201,19 @@ packages:
       '@angular/core': 10.1.5
     resolution:
       integrity: sha512-RbUIluxgE5pSWWdODlcEAQuRqc/D1A2v275zBsMFjwJg3/cZl/z+RWcFJedHpJHEtbz7Aay1UWHu9jhXfA8elg==
+  /@angular/cdk/10.2.5_1e08fe2de1fde4d3ed9b653cfa4ed886:
+    dependencies:
+      '@angular/common': 10.1.5_@angular+core@10.1.5+rxjs@6.6.3
+      '@angular/core': 10.1.5_rxjs@6.6.3+zone.js@0.10.3
+      tslib: 2.0.3
+    dev: false
+    optionalDependencies:
+      parse5: 5.1.1
+    peerDependencies:
+      '@angular/common': ^10.0.0 || ^11.0.0-0
+      '@angular/core': ^10.0.0 || ^11.0.0-0
+    resolution:
+      integrity: sha512-SI/YdaxfkttG92A0uGRixyJkfTKHn0GIU+7BCSRq0d31ru3Ugfln+jr+5/xttxWr88CNPTfpGaUt0ZuSqYCzqw==
   /@angular/cli/10.1.6:
     dependencies:
       '@angular-devkit/architect': 0.1001.6
@@ -320,9 +334,10 @@ packages:
       rxjs: ^6.5.3
     resolution:
       integrity: sha512-fkXKCwXL0XeFMUkmzJpm+FHYrv1CCfFGxYEBQ/bzfd3Op+dFJqEPiOwK3wG943Y09THday6H509RwwEIyF/4yw==
-  /@angular/material/10.2.5_3c72da7e1a97a3a2be411af1994d62ee:
+  /@angular/material/10.2.5_7d87d5af8f82027db73d7658aaeefd6c:
     dependencies:
       '@angular/animations': 10.1.5_@angular+core@10.1.5
+      '@angular/cdk': 10.2.5_1e08fe2de1fde4d3ed9b653cfa4ed886
       '@angular/common': 10.1.5_@angular+core@10.1.5+rxjs@6.6.3
       '@angular/core': 10.1.5_rxjs@6.6.3+zone.js@0.10.3
       '@angular/forms': 10.1.5_faa2eba427bc1ebf5f07a6f3c0d91320
@@ -1344,22 +1359,6 @@ packages:
     dev: true
     resolution:
       integrity: sha512-EUCPEkaRPvmHjWAAZkWMT7JDzpw7FKB00WTISaiXsbNOd5hCHg77XLA8sLYLFDo1zepYLo2w7GstN8YBqRXZfA==
-  /@ng-bootstrap/ng-bootstrap/7.0.0_91fd55f67fb7e503844519bf42f06463:
-    dependencies:
-      '@angular/common': 10.1.5_@angular+core@10.1.5+rxjs@6.6.3
-      '@angular/core': 10.1.5_rxjs@6.6.3+zone.js@0.10.3
-      '@angular/forms': 10.1.5_faa2eba427bc1ebf5f07a6f3c0d91320
-      rxjs: 6.6.3
-      tslib: 2.0.3
-    dev: false
-    peerDependencies:
-      '@angular/common': ^10.0.0
-      '@angular/core': ^10.0.0
-      '@angular/forms': ^10.0.0
-      '@angular/localize': ^10.0.0
-      rxjs: ^6.5.5
-    resolution:
-      integrity: sha512-SxUaptGWJmCxM0d2Zy1mx7K7p/YBwGZ69NmmBQVY4BE6p5av0hWrVmv9rzzfBz0rhxU7RPZLor2Jpaoq8Xyl4w==
   /@ngtools/webpack/10.1.6_0c5a6520eb7c8577706826978c50f693:
     dependencies:
       '@angular-devkit/core': 10.1.6
@@ -6177,6 +6176,10 @@ packages:
       node: '>=6'
     resolution:
       integrity: sha512-U+JJi7duF1o+u2pynbp2zXDW2/PADgC30f0GsHZtRh+HOcXHnw137TrNlyxxRvWW5fjKd3bcLHPxofWuCjaeZg==
+  /normalize.css/8.0.1:
+    dev: false
+    resolution:
+      integrity: sha512-qizSNPO93t1YUuUhP22btGOo3chcvDFqFaj2TRybP0DMxkHOCTYwp3n34fel4a31ORXy4m1Xq0Gyqpb5m33qIg==
   /npm-bundled/1.1.1:
     dependencies:
       npm-normalize-package-bin: 1.0.1
@@ -6595,6 +6598,11 @@ packages:
     dev: true
     resolution:
       integrity: sha512-qPuWvbLgvDGilKc5BoicRovlT4MtYT6JfJyBOMDsKoiT+GiuP5qyrPCnR9HcPECIJJmZh5jRndyNThnhhb/vlA==
+  /parse5/5.1.1:
+    dev: false
+    optional: true
+    resolution:
+      integrity: sha512-ugq4DFI0Ptb+WWjAdOK16+u/nHfiIrcE+sh8kZMaM0WllQKLI9rOUq6c2b7cwPkXdzfQESqvoqK6ug7U/Yyzug==
   /parse5/6.0.1:
     dev: true
     resolution:
@@ -9566,6 +9574,7 @@ packages:
 specifiers:
   '@angular-devkit/build-angular': ~0.1001.6
   '@angular/animations': ~10.1.5
+  '@angular/cdk': ^10.2.5
   '@angular/cli': ~10.1.6
   '@angular/common': ~10.1.5
   '@angular/compiler': ~10.1.5
@@ -9576,7 +9585,6 @@ specifiers:
   '@angular/platform-browser': ~10.1.5
   '@angular/platform-browser-dynamic': ~10.1.5
   '@angular/router': ~10.1.5
-  '@ng-bootstrap/ng-bootstrap': ^7.0.0
   '@types/jasmine': ~3.5.0
   '@types/jasminewd2': ~2.0.3
   '@types/node': ^12.11.1
@@ -9591,6 +9599,7 @@ specifiers:
   karma-jasmine: ~4.0.0
   karma-jasmine-html-reporter: ^1.5.0
   ngx-countup: ^7.3.3
+  normalize.css: ^8.0.1
   protractor: ~7.0.0
   rxjs: ~6.6.0
   ts-node: ~8.3.0
