@@ -1,14 +1,14 @@
 <div class="box-header">
   <div class="fph-content">
-    <a [routerLink]="link">
-      ⬅️
+    <a [routerLink]="link" class="fph-back">
+      <mat-icon>keyboard_backspace</mat-icon>
     </a>
     <div class="fph-title">
       <ng-content select="[name=title]"></ng-content>
     </div>
     <span style="margin-left: 4px">
       <div style="display: inline-block">
-        ❓
+        <mat-icon>help</mat-icon>
       </div>
     </span>
   </div>

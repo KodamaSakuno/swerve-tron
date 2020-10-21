@@ -1,0 +1,114 @@
+<!-- <h1 mat-dialog-title>Hi {{data.name}}</h1>
+<div mat-dialog-content>
+  <p>What's your favorite animal?</p>
+</div>
+<div mat-dialog-actions>
+  <button mat-button (click)="onNoClick()">No Thanks</button>
+  <button mat-button cdkFocusInitial>Ok</button>
+</div> -->
+
+
+<div class="c-model c-model-container confirm-swap-dialog">
+  <div class="c-model-header">
+    <div class="c-model-header-content">
+      Confirm Swap
+    </div>
+  </div>
+  <div class="c-model-body">
+    <div class="confirm-swap-token">
+      <div class="cst-item">
+        <div class="csti-box">
+          🤔
+          <div class="csti-amount">10</div>
+        </div>
+        <div class="csti-box">
+          <div class="csti-symbol">TRX</div>
+        </div>
+      </div>
+      <div class="cst-arrow">
+        <!-- <ArrowDownIcon class="csta-icon"></ArrowDownIcon> -->
+        ⬇️
+      </div>
+      <div class="cst-item">
+        <div class="csti-box">
+          🤔
+          <div class="csti-amount">TRX</div>
+        </div>
+        <div class="csti-box">
+          <div class="csti-symbol">WTRX</div>
+        </div>
+      </div>
+      <div class="cst-tips">
+        <div class="cstt-text" style="width: 100%;">
+          Output is estimated. You will receive at least
+          <b>
+            10 TRX
+          </b> or the transaction will revert.
+        </div>
+      </div>
+    </div>
+    <div class="confirm-swap-detail">
+      <div class="csd-detail">
+        <div class="csdd-item">
+          <div class="csddi-title">Price</div>
+          <div
+            class="csdd-price-amount"
+            style="justify-content: center; align-items: center; display: flex; text-align: right; padding-left: 10px;"
+          >
+            0.05368796 TRX per DACC
+            <button class="price-toggle">
+              🔁
+              <!-- <RepeatIcon class="pt-icon"></RepeatIcon> -->
+            </button>
+          </div>
+        </div>
+        <div class="csdd-item">
+          <div class="csddi-content">
+            <div class="csddi-title">Minimum received</div>
+            <span style="margin-left: 4px;">
+              <div class="scddi-box">
+              ❓
+              </div>
+            </span>
+          </div>
+          <div class="csddi-content">
+            <div
+              class="csddi-text"
+            >1</div>
+            <div class="csddi-text">TRX</div>
+          </div>
+        </div>
+        <div class="csdd-item">
+          <div class="csddi-content">
+            <div class="csddi-title">Price Impact</div>
+            <span style="margin-left: 4px;">
+              <div class="scddi-box">
+                ❓
+              </div>
+            </span>
+          </div>
+          <div class="csddi-text" :class="priceImpactClassName">100%</div>
+        </div>
+        <div class="csdd-item">
+          <div class="csddi-content">
+            <div class="csddi-title">Liquidity Provider Fee</div>
+            <span style="margin-left: 4px;">
+              <div class="scddi-box">
+                ❓
+              </div>
+            </span>
+          </div>
+          <div class="csddi-text">
+            1 TRX
+          </div>
+        </div>
+      </div>
+      <div class="cs-button">
+        <button class="main-button">Confirm Swap</button>
+      </div>
+    </div>
+  </div>
+  <!-- <div class="c-model-footer">
+    <slot name="footer"></slot>
+  </div> -->
+</div>

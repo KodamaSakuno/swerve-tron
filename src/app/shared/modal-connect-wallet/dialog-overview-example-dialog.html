@@ -1,0 +1,45 @@
+<!-- <h1 mat-dialog-title>Hi {{data.name}}</h1>
+<div mat-dialog-content>
+  <p>What's your favorite animal?</p>
+</div>
+<div mat-dialog-actions>
+  <button mat-button (click)="onNoClick()">No Thanks</button>
+  <button mat-button cdkFocusInitial>Ok</button>
+</div> -->
+
+
+<div class="c-model c-model-container connect-wallet-dialog">
+  <div class="c-model-header">
+    <div class="c-model-header-content">
+      Connect to a wallet
+    </div>
+  </div>
+  <div class="c-model-body">
+    <div class="cwd-list">
+      <div class="cwd-item">
+        <button
+          class="cwdi-button"
+        >
+          <div class="cwdib-name">
+            <div color="#E8831D" class="cwdibn-name">TronLink</div>
+          </div>
+          <div class="cwdi-icon">
+            <img src="../assets/media/TronLink.svg" alt="Icon" />
+          </div>
+        </button>
+      </div>
+      <div class="new-tron">
+        <span>New to Tron?</span>
+        <a
+          target="_blank"
+          rel="noopener noreferrer"
+          href="https://www.tronlink.org/"
+          class="nt-link"
+        >Learn more about wallets</a>
+      </div>
+    </div>
+  </div>
+  <!-- <div class="c-model-footer">
+    <slot name="footer"></slot>
+  </div> -->
+</div>

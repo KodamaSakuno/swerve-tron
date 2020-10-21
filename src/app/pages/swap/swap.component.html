@@ -5,7 +5,9 @@
       <!-- swap content -->
       <div class="sp-content">
         <app-token-amount-input [token]="from$ | async" [(amount)]="input"></app-token-amount-input>
-        <div class="sac-icon" (click)="pairSwitch$.next()">⬇️</div>
+        <div class="sac-icon" (click)="pairSwitch$.next()">
+          <mat-icon>arrow_downward</mat-icon>
+        </div>
         <app-token-amount-input [token]="to$ | async" [amount]="targetAmount$.value" [disabled]="true"></app-token-amount-input>
         <div class="swap-info">
           <div *ngIf="true">
@@ -15,7 +17,7 @@
                 <div class="scc-text">
                   {{ price$ | async }} {{ (from$ | async).name }} per {{ (to$ | async).name }}
                   <button class="price-toggle" (click)="priceDirectionSwitch$.next()">
-                    🔁
+                    <mat-icon>sync</mat-icon>
                   </button>
                 </div>
               </div>
@@ -100,7 +102,7 @@
             <div class="sd-title">Route</div>
             <span style="margin-left: 4px;">
               <div class="sdh-box">
-                ❓
+                <mat-icon>help</mat-icon>
               </div>
             </span>
           </div>
@@ -110,7 +112,7 @@
               🤔
               <div class="sdri-symbol">{{ from.name }}</div>
             </div>
-              ➡️
+            <mat-icon>chevron_right</mat-icon>
             <div class="sdr-item" style="flex-shrink: 0;" :key="idx">
               🤔
               <div class="sdri-symbol">{{ to.name }}</div>
@@ -121,4 +123,10 @@
       </ng-container>
     </div>
   </div>
+  <dialog-overview-connect-wallet></dialog-overview-connect-wallet>
+  <dialog-overview-account></dialog-overview-account>
+  <dialog-overview-transcation></dialog-overview-transcation>
+  <modal-confirm-swap></modal-confirm-swap>
+  <modal-confirm-supply></modal-confirm-supply>
+  <mat-icon>save</mat-icon>
 </div>

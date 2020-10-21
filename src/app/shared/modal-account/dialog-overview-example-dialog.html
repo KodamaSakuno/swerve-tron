@@ -1,0 +1,125 @@
+<!-- <h1 mat-dialog-title>Hi {{data.name}}</h1>
+<div mat-dialog-content>
+  <p>What's your favorite animal?</p>
+</div>
+<div mat-dialog-actions>
+  <button mat-button (click)="onNoClick()">No Thanks</button>
+  <button mat-button cdkFocusInitial>Ok</button>
+</div> -->
+
+
+<div class="c-model c-model-container account-wallet-dialog">
+  <div class="c-model-header">
+    <div class="c-model-header-content">
+      Account
+    </div>
+  </div>
+  <div class="c-model-body">
+    <div class="adc-account">
+      <div>
+        <div class="adcc-content">
+          <div class="adccc-header">
+            <div class="adccch-title">Connected with TronLink</div>
+            <div>
+              <button class="adccch-change">Change</button>
+            </div>
+          </div>
+          <div id="web3-account-identifier-row" class="account-address">
+            <div class="aa-content">
+              <div>
+                <!-- <Avatar :address="tronweb.account" size="16" class="aac-avatar" /> -->
+                👩‍💻
+                <p>xxx...xxxxxx</p>
+              </div>
+            </div>
+          </div>
+          <div class="adccc-footer">
+            <div class="af-content">
+              <div>
+                <button
+                  class="afc-button"
+                >
+                  <!-- <CheckCircleIcon class="afcb-icon" /> -->
+                  ✅
+                  <span style="margin-left: 4px">Copied</span>
+                </button>
+                <button class="afc-button">
+                  <!-- <CopyIcon class="afcb-icon" /> -->
+                  🔘
+                  <span style="margin-left: 4px">Copy Address</span>
+                </button>
+                <a
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  :href="`https://tronscan.org/#/address/${tronweb.account}`"
+                  class="afcb-link"
+                >
+                  <!-- <IconExternalLink class="afcb-icon" /> -->
+                  ↗️
+                  <span style="margin-left: 4px">View on Tronscan</span>
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- transation history -->
+    <div class="transaction">
+      <!-- for -->
+      <div class="t-header">
+        <div class="th-title">Recent Transactions</div>
+        <button class="th-clear">(clear all)</button>
+      </div>
+      <div class="t-empty"></div>
+      <div class="t-item">
+        <div>
+          <a
+            target="_blank"
+            rel="noopener noreferrer"
+            href="`${tronscan}/#/transaction/${item.hash}`"
+            class="t-link"
+          >
+            <div class="tl-name">
+              <div class="tln-text">TRX SWAP WTRX 100 ↗</div>
+            </div>
+            <!-- <CheckCircleIcon class="tl-icon"></CheckCircleIcon> -->
+            ✅
+          </a>
+        </div>
+        <div>
+          <a
+            target="_blank"
+            rel="noopener noreferrer"
+            href="`${tronscan}/#/transaction/${item.hash}`"
+            class="t-link"
+          >
+            <div class="tl-name">
+              <div class="tln-text">TRX SWAP WTRX 100 ↗</div>
+            </div>
+            <!-- <CheckCircleIcon class="tl-icon"></CheckCircleIcon> -->
+            ✅
+          </a>
+        </div>
+        <div>
+          <a
+            target="_blank"
+            rel="noopener noreferrer"
+            href="`${tronscan}/#/transaction/${item.hash}`"
+            class="t-link"
+          >
+            <div class="tl-name">
+              <div class="tln-text">TRX SWAP WTRX 100 ↗</div>
+            </div>
+            <!-- <CheckCircleIcon class="tl-icon"></CheckCircleIcon> -->
+            ✅
+          </a>
+        </div>
+      </div>
+      <div class="no-transaction">Your transactions will appear here...</div>
+    </div>
+  </div>
+  <!-- <div class="c-model-footer">
+    <slot name="footer"></slot>
+  </div> -->
+</div>
