@@ -2716,6 +2716,11 @@ cosmiconfig@^5.0.0:
     js-yaml "^3.13.1"
     parse-json "^4.0.0"
 
+countup.js@^2.0.5, countup.js@^2.0.7:
+  version "2.0.7"
+  resolved "https://registry.yarnpkg.com/countup.js/-/countup.js-2.0.7.tgz#56b72a87fc0ee3cadb38356c246ccac88fb0a8cc"
+  integrity sha512-FO0nQdvG1iQwHp28wdvkErxnNUSbdkzztqZ6YNHKLHydngD2tdiKEW8dFrqpahF3tj+Ma70h0vyYrCBzxlVWdg==
+
 create-ecdh@^4.0.0:
   version "4.0.4"
   resolved "https://registry.yarnpkg.com/create-ecdh/-/create-ecdh-4.0.4.tgz#d6e7f4bffa66736085a0762fd3a632684dabcc4e"
@@ -5742,6 +5747,14 @@ next-tick@~1.0.0:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/next-tick/-/next-tick-1.0.0.tgz#ca86d1fe8828169b0120208e3dc8424b9db8342c"
   integrity sha1-yobR/ogoFpsBICCOPchCS524NCw=
+
+ngx-countup@^7.3.3:
+  version "7.3.3"
+  resolved "https://registry.yarnpkg.com/ngx-countup/-/ngx-countup-7.3.3.tgz#c68926369d4c3a666e1e8920e62b9649187cb933"
+  integrity sha512-Vu+amEzO0ZrfXxWUFXl61qTDxFpKvxTwHg7Uw/psCIj2vhZzZEIBWliZ6m6FzBBHvvfJzb1xhK/6+Ab7RivuMg==
+  dependencies:
+    countup.js "^2.0.5"
+    tslib "^1.9.0"
 
 nice-try@^1.0.4:
   version "1.0.5"

@@ -18,4 +18,10 @@ export class TronStatusComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  // 需要抽离到功能方法里面
+  shorten(str: string = ''): string {
+    if (!str) return ''
+    return `${str.slice(0, 6)}...${str.slice(str.length - 4)}`
+  }
+
 }

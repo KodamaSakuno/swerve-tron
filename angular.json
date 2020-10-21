@@ -2,7 +2,8 @@
   "$schema": "./node_modules/@angular/cli/lib/config/schema.json",
   "version": 1,
   "cli": {
-    "packageManager": "pnpm"
+    "packageManager": "pnpm",
+    "analytics": false
   },
   "newProjectRoot": "projects",
   "projects": {
@@ -63,7 +64,7 @@
             "scripts": [],
             "allowedCommonJsDependencies": [
               "bignumber.js"
-           ]
+            ]
           },
           "configurations": {
             "production": {
@@ -156,6 +157,7 @@
           }
         }
       }
-    }},
+    }
+  },
   "defaultProject": "swerve-tron"
 }
