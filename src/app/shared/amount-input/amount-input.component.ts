@@ -52,8 +52,7 @@ export class AmountInputComponent implements OnInit {
     );
 
     const amount$ = preAmount$.pipe(
-      filter(([amount, ]) => !amount.isNaN()),
-      map(([amount, ]) => amount.times(new BigNumber(10).pow(this._decimals)))
+      map(([amount, ]) => (!isNaN(Number(amount)) && amount || new BigNumber(0)).times(new BigNumber(10).pow(this._decimals)))
     );
 
     merge(
