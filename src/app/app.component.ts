@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
 import { Observable } from 'rxjs';
-import { distinctUntilChanged, map } from 'rxjs/operators';
 
 import { StateService } from './services/state.service';
+import { TronInfo } from './types/TronInfo';
 
 @Component({
   selector: 'app-root',
@@ -10,12 +10,9 @@ import { StateService } from './services/state.service';
   styleUrls: ['./app.component.styl']
 })
 export class AppComponent {
-  isAvailable$: Observable<boolean>;
+  tron$: Observable<TronInfo>;
 
   constructor(stateService: StateService) {
-    this.isAvailable$ = stateService.state$.pipe(
-      map(state => !!state.tronWeb && !!state.node && !!state.account),
-      distinctUntilChanged(),
-    )
+    this.tron$ = stateService.tron$;
   }
 }

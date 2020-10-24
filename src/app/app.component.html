@@ -1,6 +1,6 @@
 <div class="body">
   <app-header></app-header>
-  <div class="container" *ngIf="isAvailable$ | async; else notAvailable">
+  <div class="container" *ngIf="tron$ | async; else notAvailable">
     <div class="content-box">
       <router-outlet ></router-outlet>
     </div>

@@ -1,6 +1,10 @@
 import { ChangeDetectionStrategy, Component, Input, OnInit } from '@angular/core';
+import { Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
+import { BigNumber } from 'bignumber.js';
 
 import { TronInfo } from '../../types/TronInfo';
+import { StateService } from '../../services/state.service';
 
 @Component({
   selector: 'app-tron-status',
@@ -13,15 +17,15 @@ export class TronStatusComponent implements OnInit {
   @Input()
   tron!: TronInfo;
 
-  constructor() { }
+  balance$: Observable<BigNumber>;
 
-  ngOnInit(): void {
+  constructor(stateService: StateService) {
+    this.balance$ = stateService.state$.pipe(
+      map(state => state.balance),
+    );
   }
 
-  // 需要抽离到功能方法里面
-  shorten(str: string = ''): string {
-    if (!str) return ''
-    return `${str.slice(0, 6)}...${str.slice(str.length - 4)}`
+  ngOnInit(): void {
   }
 
 }

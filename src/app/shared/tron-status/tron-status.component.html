@@ -6,6 +6,9 @@
   </div>
 </div>
 <div class="account-info status-border">
-  <div class="balance"><app-value [value]="tron.balance" [decimals]="6"></app-value> TRX</div>
-  <div class="address status-border">{{ shorten(tron.account) }}</div>
+  <div class="balance">
+    <app-value [value]="balance" [decimals]="6" *ngIf="balance$ | async as balance; else initialBalance"></app-value> TRX
+    <ng-template #initialBalance>0</ng-template>
+  </div>
+  <div class="address status-border">{{ tron.account | slice:0:6 }}...{{ tron.account | slice:-4 }}</div>
 </div>

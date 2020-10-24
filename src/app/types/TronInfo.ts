@@ -4,5 +4,4 @@ export type TronInfo = {
   tronWeb: TronWebInstance,
   node: string,
   account: string,
-  balance: BigNumber,
 }

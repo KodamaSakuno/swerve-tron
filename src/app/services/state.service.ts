@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { BigNumber } from 'bignumber.js';
 import { BehaviorSubject, Observable, Subject, defer, fromEvent, merge, combineLatest, from } from 'rxjs';
-import { scan, filter, take, map, distinctUntilChanged, mergeMap, withLatestFrom, delay, tap } from "rxjs/operators";
+import { scan, filter, take, map, distinctUntilChanged, mergeMap, withLatestFrom, delay, tap, distinctUntilKeyChanged } from "rxjs/operators";
 
 import TRC20ABI from '../constants/abis/TRC20.json';
 import SwapABI from '../constants/abis/Swap.json';
@@ -12,9 +12,6 @@ import { PositionInfo } from '../types/PositionInfo';
 import { TronInfo } from '../types/TronInfo';
 
 export interface State {
-  tronWeb: TronWebInstance | null,
-  node: string,
-  account: string;
   balance: BigNumber;
   tokens: {
     [address: string]: TokenInfo,
@@ -28,9 +25,6 @@ export interface State {
 
 function getDefaultState(): State {
   return {
-    tronWeb: null,
-    node: '',
-    account: '',
     balance: new BigNumber(0),
     tokens: {
       [Token.USDT]: {
@@ -67,12 +61,13 @@ function getDefaultState(): State {
   providedIn: 'root'
 })
 export class StateService {
+  private _tron$ = new Subject<TronInfo>();
+  private _updateTron$ = new Subject<(state: TronInfo) => void>();
+  readonly tron$: Observable<TronInfo>;
 
   private _state$ = new BehaviorSubject<State>(getDefaultState());
   private _update$ = new Subject<(state: State) => void>();
-
   readonly state$: Observable<State>;
-  readonly tron$: Observable<TronInfo>;
 
   constructor() {
     this._update$.pipe(
@@ -82,11 +77,17 @@ export class StateService {
         return state;
       }, getDefaultState())
     ).subscribe(this._state$);
-
     this.state$ = this._state$.asObservable();
-    this.tron$ = this.state$.pipe(
-      filter(state => !!state.tronWeb && state.node !== '' && state.account !== ''),
-      map(({ tronWeb, node, account, balance }) => <TronInfo>({ tronWeb, node, account, balance })),
+
+    this._updateTron$.pipe(
+      scan((state, func) => {
+        func(state);
+
+        return state;
+      }, <TronInfo>{}),
+    ).subscribe(this._tron$);
+    this.tron$ = this._tron$.pipe(
+      tap(() => this.requestAccountBalance()),
     );
   }
 
@@ -102,7 +103,7 @@ export class StateService {
 
       clearInterval(interval);
 
-      this._update$.next(state => {
+      this._updateTron$.next(state => {
         state.tronWeb = window.tronWeb;
         state.node = window.tronWeb.fullNode.host;
         state.account = window.tronWeb.defaultAddress.base58;
@@ -129,19 +130,19 @@ export class StateService {
 
     merge(initialNode$, nodeFromEvent$).pipe(
       distinctUntilChanged(),
-      map(node => (state: State) => state.node = node),
-    ).subscribe(this._update$);
+      map(node => (state: TronInfo) => state.node = node),
+    ).subscribe(this._updateTron$);
     merge(initialAccount$, accountFromEvent$).pipe(
       distinctUntilChanged(),
-      map(account => (state: State) => state.account = account),
-    ).subscribe(this._update$);
+      map(account => (state: TronInfo) => state.account = account),
+    ).subscribe(this._updateTron$);
 
-    this._state$.pipe(
-      map(state => [state.node, state.account]),
-      filter(([node, account]) => node !== '' && account !== ''),
-      distinctUntilChanged((oldValue, newValue) => oldValue[0] === newValue[0] && oldValue[1] === newValue[1]),
-      delay(0),
-    ).subscribe(() => this.requestAccountBalance());
+    // this._state$.pipe(
+    //   map(state => [state.node, state.account]),
+    //   filter(([node, account]) => node !== '' && account !== ''),
+    //   distinctUntilChanged((oldValue, newValue) => oldValue[0] === newValue[0] && oldValue[1] === newValue[1]),
+    //   delay(0),
+    // ).subscribe(() => this.requestAccountBalance());
   }
 
   getInitialized$() {
@@ -322,7 +323,7 @@ export class StateService {
   }
 
   getPositionInfo$(): Observable<PositionInfo | null> {
-    return this._state$.pipe(
+    return this.tron$.pipe(
       filter(state => !!state.tronWeb),
       map(state => {
         const lpTokenBalance = state.tokens[Token.swUSD].balance;
