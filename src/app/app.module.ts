@@ -77,6 +77,7 @@ import { DialogOverviewConfirmSwap } from './shared/modal-confirm-swap/modal.com
 import { DialogOverviewConfirmSupply } from './shared/modal-confirm-supply/modal.component';
 import { SwapContentComponent } from './pages/swap/swap-content/swap-content.component';
 import { LiquidityInfoComponent } from './shared/liquidity-info/liquidity-info.component';
+import { TokenIconComponent } from './shared/token-icon/token-icon.component';
 
 @NgModule({
   declarations: [
@@ -106,6 +107,7 @@ import { LiquidityInfoComponent } from './shared/liquidity-info/liquidity-info.c
     HelpTooltipComponent,
     SwapContentComponent,
     LiquidityInfoComponent,
+    TokenIconComponent,
   ],
   imports: [
     BrowserModule,

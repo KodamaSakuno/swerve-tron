@@ -1,0 +1,8 @@
+<ng-container [ngSwitch]="token">
+  <img src="/assets/images/usdt.png" width="24" height="24" *ngSwitchCase="Token.USDT" />
+  <img src="/assets/images/usdj.png" width="24" height="24" *ngSwitchCase="Token.USDJ" />
+  <div *ngSwitchCase="Token.swUSD">
+    <img src="/assets/images/usdt.png" width="24" height="24" />
+    <img src="/assets/images/usdj.png" width="24" height="24" style="margin-left: -8px" />
+  </div>
+</ng-container>
