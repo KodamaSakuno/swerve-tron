@@ -342,7 +342,8 @@ export class StateService {
               decimals: state.tokens[Token.USDJ].decimals,
               balance: state.pool.usdjBalance.times(poolShare),
             }
-          }
+          },
+          share: poolShare.toNumber(),
         };
       }),
     )

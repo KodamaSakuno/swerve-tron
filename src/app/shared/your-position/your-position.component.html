@@ -15,4 +15,8 @@
     <span>USDJ:</span>
     <span>{{ position.pooledTokens.usdj.balance | bignumber:position.pooledTokens.usdj.decimals }}</span>
   </div>
+  <div class="pool-detail-item">
+    <span>Pool share:</span>
+    <span>{{ position.share | percent }}</span>
+  </div>
 </div>

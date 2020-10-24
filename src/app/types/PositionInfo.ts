@@ -13,4 +13,5 @@ export type PositionInfo = {
     usdt: PooledTokenInfo,
     usdj: PooledTokenInfo,
   },
+  share: number,
 }
