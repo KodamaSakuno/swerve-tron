@@ -53,16 +53,14 @@ export class RemoveLiquidityComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.stateService.getInitialized$().subscribe(() => {
-      this.stateService.requestTRC20TokenBalance(Token.swUSD);
-      this.stateService.requestPoolInfo();
-    });
   }
 
   async remove() {
     const input = this.inputAmount$.value;
 
-    this.stateService.removeLiquidity(input);
+    await this.stateService.removeLiquidity(input);
+
+    this.share = 0;
   }
 
 }

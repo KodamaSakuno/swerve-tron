@@ -72,10 +72,6 @@ export class AddLiquidityComponent implements OnInit {
  }
 
   ngOnInit(): void {
-    this.stateService.getInitialized$().subscribe(() => {
-      this.stateService.requestTRC20TokenBalance(Token.swUSD);
-      this.stateService.requestPoolInfo();
-    });
   }
 
   async approveUSDT() {

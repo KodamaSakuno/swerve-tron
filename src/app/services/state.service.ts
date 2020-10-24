@@ -81,12 +81,15 @@ export class StateService {
 
     this._updateTron$.pipe(
       scan((state, func) => {
-        func(state);
+        const newState = { ...state };
+        func(newState);
 
-        return state;
+        return newState;
       }, <TronInfo>{}),
     ).subscribe(this._tron$);
     this.tron$ = this._tron$.pipe(
+      filter(state => !!state.tronWeb && !!state.node && !!state.account),
+      distinctUntilChanged((previous, current) => previous.node === current.node && previous.account === current.account),
       delay(0),
       tap(async () => {
         await this.requestAccountBalance();
@@ -217,8 +220,8 @@ export class StateService {
 
     await this.delay(5000);
 
-    this.requestTRC20TokenAllowance(token);
-    this.requestAccountBalance();
+    await this.requestTRC20TokenAllowance(token);
+    await this.requestAccountBalance();
   }
 
   async addLiquidity(usdt: BigNumber, usdj: BigNumber) {
@@ -236,11 +239,11 @@ export class StateService {
 
     await this.delay(5000);
 
-    this.requestAccountBalance();
-    this.requestTRC20TokenBalance(Token.USDT);
-    this.requestTRC20TokenBalance(Token.USDJ);
-    this.requestTRC20TokenBalance(Token.swUSD);
-    this.requestPoolInfo();
+    await this.requestAccountBalance();
+    await this.requestTRC20TokenBalance(Token.USDT);
+    await this.requestTRC20TokenBalance(Token.USDJ);
+    await this.requestTRC20TokenBalance(Token.swUSD);
+    await this.requestPoolInfo();
   }
   async removeLiquidity(amount: BigNumber) {
     const swapContract = window.tronWeb.contract(SwapABI, ContractAddress.Swap);
@@ -251,11 +254,11 @@ export class StateService {
 
     await this.delay(5000);
 
-    this.requestAccountBalance();
-    this.requestTRC20TokenBalance(Token.USDT);
-    this.requestTRC20TokenBalance(Token.USDJ);
-    this.requestTRC20TokenBalance(Token.swUSD);
-    this.requestPoolInfo();
+    await this.requestAccountBalance();
+    await this.requestTRC20TokenBalance(Token.USDT);
+    await this.requestTRC20TokenBalance(Token.USDJ);
+    await this.requestTRC20TokenBalance(Token.swUSD);
+    await this.requestPoolInfo();
   }
 
   private convertBadBigNumber(value: any): BigNumber {
@@ -292,9 +295,9 @@ export class StateService {
 
     await this.delay(5000);
 
-    this.requestAccountBalance();
-    this.requestTRC20TokenBalance(Token.USDT);
-    this.requestTRC20TokenBalance(Token.USDJ);
+    await this.requestAccountBalance();
+    await this.requestTRC20TokenBalance(Token.USDT);
+    await this.requestTRC20TokenBalance(Token.USDJ);
   }
 
   getPositionInfo$(): Observable<PositionInfo | null> {
