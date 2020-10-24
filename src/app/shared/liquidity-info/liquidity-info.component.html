@@ -1,0 +1,25 @@
+<div class="pool-info">
+  <div class="token-icons">
+    🤔🤔
+  </div>
+  <span class="token-text-title">USDT/USDJ</span>
+  <app-value class="token-text" [value]="position.lpToken.balance" [decimals]="position.lpToken.decimals "></app-value>
+</div>
+<div class="pool-detail">
+  <div class="pool-detail-item">
+    <span>Pooled USDT:</span>
+    <span>{{ position.pooledTokens.usdt.balance | bignumber:position.pooledTokens.usdt.decimals }}</span>
+  </div>
+  <div class="pool-detail-item">
+    <span>Pooled USDJ:</span>
+    <span>{{ position.pooledTokens.usdj.balance | bignumber:position.pooledTokens.usdj.decimals }}</span>
+  </div>
+</div>
+<div class="buttons">
+  <a class="button" routerLink="/add">
+    <div class="button-text">Add Liquidity</div>
+  </a>
+  <a class="button" routerLink="/remove">
+    <div class="button-text">Remove Liquidity</div>
+  </a>
+</div>

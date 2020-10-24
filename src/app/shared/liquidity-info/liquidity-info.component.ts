@@ -3,12 +3,12 @@ import { ChangeDetectionStrategy, Component, Input, OnInit } from '@angular/core
 import { PositionInfo } from '../../types/PositionInfo';
 
 @Component({
-  selector: 'your-position',
-  templateUrl: './your-position.component.html',
-  styleUrls: ['./your-position.component.styl'],
+  selector: 'app-liquidity-info',
+  templateUrl: './liquidity-info.component.html',
+  styleUrls: ['./liquidity-info.component.styl'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class YourPositionComponent implements OnInit {
+export class LiquidityInfoComponent implements OnInit {
 
   @Input()
   position!: PositionInfo;

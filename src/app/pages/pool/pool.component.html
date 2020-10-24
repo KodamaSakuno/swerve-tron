@@ -1,51 +1,25 @@
 <div class="container">
   <div class="content-box">
     <swap-or-pool-nav></swap-or-pool-nav>
-    <div class="pool-page">
-      <a
-        id="join-pool-button"
-        class="join-pool-button"
-        routerLink="/add"
-      >
-        <div class="jpb-text">Add Liquidity</div>
-      </a>
+    <div class="content">
       <div class="liquidity">
         <div class="l-header">
           <div class="lh-title">Your Liquidity</div>
           <help-tooltip matTooltipClass="tooltip" matTooltip="When you add liquidity, you are given pool tokens that represent your share. If you don’t see a pool you joined in this list, try importing a pool below." matTooltipPosition="left"></help-tooltip>
         </div>
         <div class="l-list">
-          <!-- {{ true ? 'Loading...' : 'No liquidity found.' }} -->
-
-          <div *ngIf="position$ | async as position; else noLiquidity">
-            <div class="token-text">USDT/USDJ</div>
-            <div>Pool token: {{ position.lpToken.balance | bignumber:position.lpToken.decimals}}</div>
-            <div>Pooled USDT: {{ position.pooledTokens.usdt.balance | bignumber:position.pooledTokens.usdt.decimals }}</div>
-            <div>Pooled USDJ: {{ position.pooledTokens.usdj.balance | bignumber:position.pooledTokens.usdj.decimals }}</div>
-
-            <a
-            id="join-pool-button"
-            class="join-pool-button"
-            routerLink="/remove"
-          >
-            <div class="jpb-text">Remove Liquidity</div>
-          </a>
-          </div>
-
+          <app-liquidity-info [position]="position" *ngIf="position$ | async as position; else noLiquidity"></app-liquidity-info>
           <ng-template #noLiquidity>
             <div class="ll-empty">No liquidity found.</div>
+            <a
+              id="join-pool-button"
+              class="join-pool-button"
+              routerLink="/add"
+            >
+              <div class="jpb-text">Add Liquidity</div>
+            </a>
           </ng-template>
         </div>
-        <!-- <div>
-          <div class="l-join" style="padding: 0.5rem 0px">
-            Don't see a pool you joined?
-            <a
-              id="import-pool-link"
-              class="lj-import"
-              >Import it.</a
-            >
-          </div>
-        </div> -->
       </div>
     </div>
   </div>
