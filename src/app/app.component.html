@@ -1,6 +1,10 @@
 <div class="body">
   <app-header></app-header>
-  <router-outlet *ngIf="isAvailable$ | async; else notAvailable"></router-outlet>
+  <div class="container" *ngIf="isAvailable$ | async; else notAvailable">
+    <div class="content-box">
+      <router-outlet ></router-outlet>
+    </div>
+  </div>
 
   <ng-template #notAvailable>
     <div class="not-available">

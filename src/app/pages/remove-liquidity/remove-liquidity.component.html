@@ -1,137 +1,133 @@
-<div class="container">
-  <div class="content-box">
-    <box-header link="/pool">
-      <span name=title>Remove Liquidity</span>
-    </box-header>
-    <div class="r-content">
-      <!-- <div class="rc-content loading">
-        <h1 class="title">Loading</h1>
-        <h4 class="subtitle">Fetching Data from Blockchain</h4>
-        <p>Please wait until everything is clear</p>
-        <p>Loading Items Checklist: </p>
-        <ul>
-          <li>Position Data: ...</li>
-          <li>Reserve Data: ...</li>
-          <li>TokenA Info: ...</li>
-          <li>TokenB Info: ...</li>
-        </ul>
-      </div> -->
-      <div class="rc-content">
-        <div class="box-solid">
-          <div class="amount-content">
-            <div class="common-content lh20">
-              <div class="aca-title">Amount</div>
-              <!-- <div class="aca-toggle">
-                Simple Detailed
-              </div> -->
-            </div>
-            <div class="ac-percentage">
-              <div class="acp-number">{{ share }}%</div>
-            </div>
-            <input
-              size="28"
-              type="range"
-              aria-labelledby="input slider"
-              step="1"
-              min="0"
-              max="100"
-              class="ac-rang"
-              [(ngModel)]="share"
-            />
-            <div class="ac-tag">
-              <button width="20%" class="act-button" (click)="share = 25">25%</button>
-              <button width="20%" class="act-button" (click)="share = 50">50%</button>
-              <button width="20%" class="act-button" (click)="share = 75">75%</button>
-              <button width="20%" class="act-button" (click)="share = 100">Max</button>
-            </div>
-          </div>
+<box-header link="/pool">
+  <span name=title>Remove Liquidity</span>
+</box-header>
+<div class="r-content">
+  <!-- <div class="rc-content loading">
+    <h1 class="title">Loading</h1>
+    <h4 class="subtitle">Fetching Data from Blockchain</h4>
+    <p>Please wait until everything is clear</p>
+    <p>Loading Items Checklist: </p>
+    <ul>
+      <li>Position Data: ...</li>
+      <li>Reserve Data: ...</li>
+      <li>TokenA Info: ...</li>
+      <li>TokenB Info: ...</li>
+    </ul>
+  </div> -->
+  <div class="rc-content">
+    <div class="box-solid">
+      <div class="amount-content">
+        <div class="common-content lh20">
+          <div class="aca-title">Amount</div>
+          <!-- <div class="aca-toggle">
+            Simple Detailed
+          </div> -->
         </div>
-        <!-- <input type="text">
-        <svg
-            xmlns="http://www.w3.org/2000/svg"
-            width="16"
-            height="16"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="#C3C5CB"
-            stroke-width="2"
-            stroke-linecap="round"
-            stroke-linejoin="round"
-          >
-            <line x1="12" y1="5" x2="12" y2="19" />
-            <polyline points="19 12 12 19 5 12" />
-          </svg>
-        <input type="text">
-        <SplitLine>
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            width="16"
-            height="16"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="#C3C5CB"
-            stroke-width="2"
-            stroke-linecap="round"
-            stroke-linejoin="round"
-          >
-            <line x1="12" y1="5" x2="12" y2="19" />
-            <line x1="5" y1="12" x2="19" y2="12" />
-          </svg>
-        </SplitLine>
-        <input type="text"> -->
-        <div class="box-solid" *ngIf="position$ | async as position">
-          <div class="ac-total">
-            <div class="act-list">
-              <div class="actl-text">{{ position.pooledTokens.usdt.balance.times(share).div(100) | bignumber:position.pooledTokens.usdt.decimals }}</div>
-              <div class="actl-token">
-                🤔
-                <div id="remove-liquidity-tokena-symbol" class="actl-text">
-                  USDT
-                </div>
-              </div>
-            </div>
-            <div class="act-list">
-              <div class="actl-text">{{ position.pooledTokens.usdj.balance.times(share).div(100) | bignumber:position.pooledTokens.usdj.decimals }}</div>
-              <div class="actl-token">
-                🤔
-                <div id="remove-liquidity-tokenb-symbol" class="actl-text">
-                USDJ
-                </div>
-              </div>
-            </div>
-            <!-- <div class="receive-token">
-              <a
-                class="rt-toggle"
-                href="#/remove/0x2FfE61437d65B123eCD04b9161f4C5b44Bb49CEd/0xc778417E063141139Fce010982780140Aa0cD5Ab"
-                >Receive WTRX</a
-              >
-            </div> -->
-          </div>
+        <div class="ac-percentage">
+          <div class="acp-number">{{ share }}%</div>
         </div>
-        <!-- <div style="padding: 10px 20px">
-          <div class="common-content lh20">
-            Price:
-            <div>1 TRX = 1 WTRX</div>
-          </div>
-          <div class="common-content lh20">
-            <div></div>
-            <div>1 WTRX = 1 TRX</div>
-          </div>
-        </div> -->
-        <div style="position: relative">
-          <div class="common-content">
-            <!-- <ApproveButton v-if="pair" :tokenAddress="pair" :spender="spender"
-            :howMuchToSpend="amountInput" :isAllowanceEnough.sync="isLPAllowanceEnough" /> -->
-            <!-- <button class="r-button remove">
-              Approve
-            </button> -->
-            <button class="r-button remove" (click)="remove()">
-              <div class>Remove</div>
-            </button>
-          </div>
+        <input
+          size="28"
+          type="range"
+          aria-labelledby="input slider"
+          step="1"
+          min="0"
+          max="100"
+          class="ac-rang"
+          [(ngModel)]="share"
+        />
+        <div class="ac-tag">
+          <button width="20%" class="act-button" (click)="share = 25">25%</button>
+          <button width="20%" class="act-button" (click)="share = 50">50%</button>
+          <button width="20%" class="act-button" (click)="share = 75">75%</button>
+          <button width="20%" class="act-button" (click)="share = 100">Max</button>
         </div>
       </div>
     </div>
+    <!-- <input type="text">
+    <svg
+        xmlns="http://www.w3.org/2000/svg"
+        width="16"
+        height="16"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="#C3C5CB"
+        stroke-width="2"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+      >
+        <line x1="12" y1="5" x2="12" y2="19" />
+        <polyline points="19 12 12 19 5 12" />
+      </svg>
+    <input type="text">
+    <SplitLine>
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        width="16"
+        height="16"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="#C3C5CB"
+        stroke-width="2"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+      >
+        <line x1="12" y1="5" x2="12" y2="19" />
+        <line x1="5" y1="12" x2="19" y2="12" />
+      </svg>
+    </SplitLine>
+    <input type="text"> -->
+    <div class="box-solid" *ngIf="position$ | async as position">
+      <div class="ac-total">
+        <div class="act-list">
+          <div class="actl-text">{{ position.pooledTokens.usdt.balance.times(share).div(100) | bignumber:position.pooledTokens.usdt.decimals }}</div>
+          <div class="actl-token">
+            🤔
+            <div id="remove-liquidity-tokena-symbol" class="actl-text">
+              USDT
+            </div>
+          </div>
+        </div>
+        <div class="act-list">
+          <div class="actl-text">{{ position.pooledTokens.usdj.balance.times(share).div(100) | bignumber:position.pooledTokens.usdj.decimals }}</div>
+          <div class="actl-token">
+            🤔
+            <div id="remove-liquidity-tokenb-symbol" class="actl-text">
+            USDJ
+            </div>
+          </div>
+        </div>
+        <!-- <div class="receive-token">
+          <a
+            class="rt-toggle"
+            href="#/remove/0x2FfE61437d65B123eCD04b9161f4C5b44Bb49CEd/0xc778417E063141139Fce010982780140Aa0cD5Ab"
+            >Receive WTRX</a
+          >
+        </div> -->
+      </div>
+    </div>
+    <!-- <div style="padding: 10px 20px">
+      <div class="common-content lh20">
+        Price:
+        <div>1 TRX = 1 WTRX</div>
+      </div>
+      <div class="common-content lh20">
+        <div></div>
+        <div>1 WTRX = 1 TRX</div>
+      </div>
+    </div> -->
+    <div style="position: relative">
+      <div class="common-content">
+        <!-- <ApproveButton v-if="pair" :tokenAddress="pair" :spender="spender"
+        :howMuchToSpend="amountInput" :isAllowanceEnough.sync="isLPAllowanceEnough" /> -->
+        <!-- <button class="r-button remove">
+          Approve
+        </button> -->
+        <button class="r-button remove" (click)="remove()">
+          <div class>Remove</div>
+        </button>
+      </div>
+    </div>
   </div>
-  <your-position [position]="position" *ngIf="position$ | async as position"></your-position>
 </div>
+<your-position [position]="position" *ngIf="position$ | async as position"></your-position>

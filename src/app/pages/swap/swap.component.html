@@ -1,9 +1,5 @@
-<div class="container">
-  <div class="content-box">
-    <swap-or-pool-nav></swap-or-pool-nav>
-    <app-swap-content [from]="from$ | async" [to]="to$ | async" [targetAmount]="targetAmount$ | async" [price]="price$ | async" [amount]="input$ | async"
-      [shouldApprove]="(shouldApprove$ | async) || false"
-      (inputChange)="input$.next($event)" (pairSwitchClicked)="pairSwitch$.next()" (priceSwitchClicked)="priceDirectionSwitch$.next()">
-    </app-swap-content>
-  </div>
-</div>
+<swap-or-pool-nav></swap-or-pool-nav>
+<app-swap-content [from]="from$ | async" [to]="to$ | async" [targetAmount]="targetAmount$ | async" [price]="price$ | async" [amount]="input$ | async"
+  [shouldApprove]="(shouldApprove$ | async) || false"
+  (inputChange)="input$.next($event)" (pairSwitchClicked)="pairSwitch$.next()" (priceSwitchClicked)="priceDirectionSwitch$.next()">
+</app-swap-content>
