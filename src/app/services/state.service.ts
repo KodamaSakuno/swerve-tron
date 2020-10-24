@@ -87,7 +87,14 @@ export class StateService {
       }, <TronInfo>{}),
     ).subscribe(this._tron$);
     this.tron$ = this._tron$.pipe(
-      tap(() => this.requestAccountBalance()),
+      delay(0),
+      tap(async () => {
+        await this.requestAccountBalance();
+        await this.requestTRC20TokenBalance(Token.USDT);
+        await this.requestTRC20TokenBalance(Token.USDJ);
+        await this.requestTRC20TokenBalance(Token.swUSD);
+        await this.requestPoolInfo();
+      }),
     );
   }
 
@@ -136,67 +143,36 @@ export class StateService {
       distinctUntilChanged(),
       map(account => (state: TronInfo) => state.account = account),
     ).subscribe(this._updateTron$);
-
-    // this._state$.pipe(
-    //   map(state => [state.node, state.account]),
-    //   filter(([node, account]) => node !== '' && account !== ''),
-    //   distinctUntilChanged((oldValue, newValue) => oldValue[0] === newValue[0] && oldValue[1] === newValue[1]),
-    //   delay(0),
-    // ).subscribe(() => this.requestAccountBalance());
   }
 
-  getInitialized$() {
-    return this._state$.pipe(
-      filter(state => !!state.tronWeb),
-      take(1)
-    );
+  async requestAccountBalance() {
+    const balance = new BigNumber(await window.tronWeb.trx.getUnconfirmedBalance());
+
+    this._update$.next(state => state.balance = balance);
   }
-
-  getState$() {
-    return this._state$.pipe(
-      filter(state => !!state.tronWeb)
-    );
-  }
-
-  requestAccountBalance() {
-    if (!window.tronWeb)
-      throw new Error("TronWeb not initialized");
-
-    window.tronWeb.trx.getUnconfirmedBalance().then(balance => {
-      this._update$.next(state => {
-        console.warn(state.balance.toString(), "=>", balance.toString());
-        state.balance = new BigNumber(balance);
-      });
-    });
-  }
-
-  requestTRC20TokenBalance(token: Token) {
-    if (!window.tronWeb)
-      throw new Error("TronWeb not initialized");
-
+  async requestTRC20TokenBalance(token: Token) {
     const contract = window.tronWeb.contract(TRC20ABI, token);
+    const address = window.tronWeb.defaultAddress.base58;
 
-    contract.methods.balanceOf(window.tronWeb.defaultAddress.base58).call().then(result => {
-      const balance = this.convertBadBigNumber(result);
+    try {
+      const balance = this.convertBadBigNumber(await contract.methods.balanceOf(address).call());
 
-      this._update$.next(state => {
-        state.tokens[token].balance = balance;
-      });
-    });
+      this._update$.next(state => state.tokens[token].balance = balance);
+    } catch (e) {
+      this._update$.next(state => state.tokens[token].balance = new BigNumber(0));
+    }
   }
-  requestTRC20TokenAllowance(token: Token) {
-    if (!window.tronWeb)
-      throw new Error("TronWeb not initialized");
-
+  async requestTRC20TokenAllowance(token: Token) {
     const contract = window.tronWeb.contract(TRC20ABI, token);
+    const address = window.tronWeb.defaultAddress.base58;
 
-    contract.methods.allowance(window.tronWeb.defaultAddress.base58, ContractAddress.Swap).call().then(result => {
-      const allowance = this.convertBadBigNumber(result);
+    try {
+      const allowance = this.convertBadBigNumber(await contract.methods.allowance(address, ContractAddress.Swap).call());
 
-      this._update$.next(state => {
-        state.tokens[token].allowance = allowance;
-      });
-    });
+      this._update$.next(state => state.tokens[token].allowance = allowance);
+    } catch (e) {
+      this._update$.next(state => state.tokens[token].allowance = new BigNumber(0));
+    }
   }
   getTRC20TokenBalance$(token: Token) {
     if (!window.tronWeb)
@@ -225,9 +201,8 @@ export class StateService {
 
   getToken$(token: Token): Observable<TokenInfo> {
     return this._state$.pipe(
-      filter(state => !!state.tronWeb),
-      map(state => state.tokens[token])
-    )
+      map(state => state.tokens[token]),
+    );
   }
 
   delay(time: number) {
@@ -323,8 +298,7 @@ export class StateService {
   }
 
   getPositionInfo$(): Observable<PositionInfo | null> {
-    return this.tron$.pipe(
-      filter(state => !!state.tronWeb),
+    return this.state$.pipe(
       map(state => {
         const lpTokenBalance = state.tokens[Token.swUSD].balance;
         if (lpTokenBalance.eq(0))
