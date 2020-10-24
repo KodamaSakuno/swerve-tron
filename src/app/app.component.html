@@ -1,4 +1,10 @@
 <div class="body">
   <app-header></app-header>
-  <router-outlet></router-outlet>
+  <router-outlet *ngIf="isAvailable$ | async; else notAvailable"></router-outlet>
+
+  <ng-template #notAvailable>
+    <div class="not-available">
+      请确保已安装 <a href="https://chrome.google.com/webstore/detail/ibnejdfjmmkpcnlpebklmnkoeoihofec">TronLink（波宝钱包）</a>并解锁钱包
+    </div>
+  </ng-template>
 </div>
