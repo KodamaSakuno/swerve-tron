@@ -12,33 +12,10 @@ import { TokenInfo } from '../../../types/TokenInfo';
 export class SwapContentComponent implements OnInit {
 
   @Input()
-  private _from: TokenInfo | null = null;
-  get from() {
-    return this._from;
-  }
+  from: TokenInfo | null = null;
+
   @Input()
-  set from(value: TokenInfo | null) {
-    this._from = value;
-
-    if (!value)
-      return;
-
-    this.stateService.requestTRC20TokenAllowance(value.address);
-  }
-
-  private _to: TokenInfo | null = null;
-  get to() {
-    return this._to;
-  }
-  @Input()
-  set to(value: TokenInfo | null) {
-    this._to = value;
-
-    if (!value)
-      return;
-
-    this.stateService.requestTRC20TokenBalance(value.address);
-  }
+  to: TokenInfo | null = null;
 
   input = '';
 
