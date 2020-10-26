@@ -7,8 +7,6 @@
   </div>
 
   <ng-template #notAvailable>
-    <div class="not-available">
-      请确保已安装 <a href="https://chrome.google.com/webstore/detail/ibnejdfjmmkpcnlpebklmnkoeoihofec">TronLink（波宝钱包）</a>并解锁钱包
-    </div>
+    <div class="not-available" [innerHTML]="'wallet.notAvailable' | translate"></div>
   </ng-template>
 </div>
