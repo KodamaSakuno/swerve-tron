@@ -1,0 +1,6 @@
+<button (click)="toggle()">
+  <ng-container [ngSwitch]="currentLanguage$ | async">
+    <span *ngSwitchCase="'en'">EN</span>
+    <span *ngSwitchCase="'zhhans'">中</span>
+  </ng-container>
+</button>

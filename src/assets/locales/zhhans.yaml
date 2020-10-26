@@ -1,2 +1,6 @@
 wallet:
   notAvailable: 请确保已安装 <a href="https://chrome.google.com/webstore/detail/ibnejdfjmmkpcnlpebklmnkoeoihofec">TronLink（波宝钱包）</a>并解锁钱包
+
+buttons:
+  addLiquidity: 增加流动性
+  removeLiquidity: 移除流动性

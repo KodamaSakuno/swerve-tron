@@ -1,4 +1,7 @@
 <div class="header-container">
-  <a routerLink="/swap">💖</a>
+  <div class="logo">
+    <a routerLink="/swap">💖</a>
+  </div>
   <app-tron-status [tron]="tron" *ngIf="tron$ | async as tron"></app-tron-status>
+  <app-language-switch></app-language-switch>
 </div>

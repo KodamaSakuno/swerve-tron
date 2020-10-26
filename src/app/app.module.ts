@@ -82,6 +82,7 @@ import { LiquidityInfoComponent } from './shared/liquidity-info/liquidity-info.c
 import { TokenIconComponent } from './shared/token-icon/token-icon.component';
 
 import { YamlTranslateLoader } from './translate.loader';
+import { LanguageSwitchComponent } from './shared/language-switch/language-switch.component';
 
 @NgModule({
   declarations: [
@@ -112,6 +113,7 @@ import { YamlTranslateLoader } from './translate.loader';
     SwapContentComponent,
     LiquidityInfoComponent,
     TokenIconComponent,
+    LanguageSwitchComponent,
   ],
   imports: [
     BrowserModule,
