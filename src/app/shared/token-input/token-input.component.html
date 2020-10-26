@@ -7,7 +7,7 @@
     <div class="input-container">
       <app-amount-input [text]="text" [decimals]="token?.decimals || 0" [maxAmount]="(balance$ | async) || 0" (amountChange)="amountChange.emit($event)" (badInput)="isBadInput = $event" #input></app-amount-input>
     </div>
-    <app-token-icon [token]="token.address"></app-token-icon>
-    <span class="token-name">{{ token.name }}</span>
+    <app-token-icon [token]="token.address" *ngIf="token"></app-token-icon>
+    <span class="token-name">{{ token?.name }}</span>
   </div>
 </div>

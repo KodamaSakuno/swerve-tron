@@ -1,9 +1,8 @@
 import { HttpClient } from '@angular/common/http';
 import { TranslateLoader } from '@ngx-translate/core';
-import { Observable } from 'rxjs';
+import { Observable, of } from 'rxjs';
 import { catchError, map } from 'rxjs/operators';
 import { safeLoad } from 'js-yaml';
-import { of } from 'rxjs/internal/observable/of';
 
 export class YamlTranslateLoader implements TranslateLoader {
 
