@@ -63,7 +63,8 @@
             ],
             "scripts": [],
             "allowedCommonJsDependencies": [
-              "bignumber.js"
+              "bignumber.js",
+              "js-yaml"
             ]
           },
           "configurations": {

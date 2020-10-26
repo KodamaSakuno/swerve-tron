@@ -1,7 +1,9 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { APP_INITIALIZER, NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
+import { HttpClientModule, HttpClient } from '@angular/common/http';
 import { CountUpModule } from 'ngx-countup';
+import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 
 import {A11yModule} from '@angular/cdk/a11y';
 import {ClipboardModule} from '@angular/cdk/clipboard';
@@ -78,6 +80,8 @@ import { DialogOverviewConfirmSupply } from './shared/modal-confirm-supply/modal
 import { SwapContentComponent } from './pages/swap/swap-content/swap-content.component';
 import { LiquidityInfoComponent } from './shared/liquidity-info/liquidity-info.component';
 import { TokenIconComponent } from './shared/token-icon/token-icon.component';
+
+import { YamlTranslateLoader } from './translate.loader';
 
 @NgModule({
   declarations: [
@@ -159,6 +163,14 @@ import { TokenIconComponent } from './shared/token-icon/token-icon.component';
     OverlayModule,
     PortalModule,
     ScrollingModule,
+    HttpClientModule,
+    TranslateModule.forRoot({
+      loader: {
+        provide: TranslateLoader,
+        useFactory: (http: HttpClient) => new YamlTranslateLoader(http),
+        deps: [HttpClient],
+      },
+    }),
   ],
   providers: [
     {
