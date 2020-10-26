@@ -1,6 +1,10 @@
-<app-token-input [token]="usdt" (amountChange)="inputUSDT$.next($event)"></app-token-input>
+<app-token-input [token]="usdt" (amountChange)="inputUSDT$.next($event)">
+  <span name="header">Input</span>
+</app-token-input>
 <div class="arrow">➕</div>
-<app-token-input [token]="usdj" (amountChange)="inputUSDJ$.next($event)"></app-token-input>
+<app-token-input [token]="usdj" (amountChange)="inputUSDJ$.next($event)">
+  <span name="header">Input</span>
+</app-token-input>
 
 <div class="approve-buttons">
   <button class="main-button" [disabled]="isApprovingUSDT" (click)="approveUSDT()" *ngIf="shouldApproveUSDT$ | async">

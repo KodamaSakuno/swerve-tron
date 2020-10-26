@@ -1,9 +1,13 @@
 <div class="border" [class.bad-input]="isBadInput && input.text !== ''">
   <div class="header">
-    <span>{{ token?.name }}</span>
+    <ng-content select="[name=header]"></ng-content>
     <span *ngIf="balance$ | async as balance">Balance: {{ balance | bignumber:(token?.decimals || 0)}}</span>
   </div>
   <div class="amount-input">
-    <app-amount-input [text]="text" [decimals]="token?.decimals || 0" [maxAmount]="(balance$ | async) || 0" (amountChange)="amountChange.emit($event)" (badInput)="isBadInput = $event" #input></app-amount-input>
+    <div class="input-container">
+      <app-amount-input [text]="text" [decimals]="token?.decimals || 0" [maxAmount]="(balance$ | async) || 0" (amountChange)="amountChange.emit($event)" (badInput)="isBadInput = $event" #input></app-amount-input>
+    </div>
+    <app-token-icon [token]="token.address"></app-token-icon>
+    <span class="token-name">{{ token.name }}</span>
   </div>
 </div>

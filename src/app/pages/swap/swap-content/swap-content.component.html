@@ -1,14 +1,18 @@
-<app-token-input [text]="input" [token]="from" (amountChange)="inputChange.emit($event)" *ngIf="from"></app-token-input>
+<app-token-input [text]="input" [token]="from" (amountChange)="inputChange.emit($event)" *ngIf="from">
+  <span name="header">From</span>
+</app-token-input>
 <div class="arrow" (click)="pairSwitch()">
   <mat-icon>arrow_downward</mat-icon>
 </div>
 <div class="border" *ngIf="to">
   <div class="header">
-    <span>{{ to.name }}</span>
+    <span>To</span>
     <span>Balance: {{ to.balance | bignumber:to.decimals}}</span>
   </div>
   <div class="target-amount">
-    <span>{{ targetAmount | bignumber:to.decimals }}</span>
+    <span class="target-amount-number">{{ targetAmount | bignumber:to.decimals }}</span>
+    <app-token-icon [token]="to.address"></app-token-icon>
+    <span>{{ to.name }}</span>
   </div>
 </div>
 <div class="info">
