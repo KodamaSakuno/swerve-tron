@@ -1,6 +1,8 @@
 <div class="header-container">
   <div class="logo">
-    <a routerLink="/swap">💖</a>
+    <a routerLink="/swap">
+      <img style="width: 32px;" src="../../../assets//image//logo-jfii.png" alt="logo">
+    </a>
   </div>
   <app-tron-status [tron]="tron" *ngIf="tron$ | async as tron"></app-tron-status>
   <app-language-switch></app-language-switch>
