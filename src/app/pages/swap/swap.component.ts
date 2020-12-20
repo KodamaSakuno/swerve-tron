@@ -46,7 +46,11 @@ export class SwapComponent implements OnInit {
   constructor(private stateService: StateService) {
     this.pairSwitch$.pipe(
       scan(([a, b]) => [b, a], this.pair$.value),
-      tap(() => this.input = new BigNumber(0)),
+      tap(() => {
+        const oldInput = new BigNumber(this.input)
+        this.input = this.targetAmount$.value
+        this.targetAmount$.next(oldInput)
+      })
     ).subscribe(this.pair$);
 
     this.from$ = this.pair$.pipe(
@@ -61,7 +65,10 @@ export class SwapComponent implements OnInit {
 
     combineLatest([this.from$, this.input$]).pipe(
       filter(([, input]) => !input.isNaN()),
-      mergeMap(([token, input]) => stateService.getTargetAmount$(token.address, input)),
+      mergeMap(([token, input]) => {
+        console.log('获取兑换金额：', token.name, input.toFixed());
+        return stateService.getTargetAmount$(token.address, input)
+      }),
     ).subscribe(this.targetAmount$);
 
     const allowance$ = this.from$.pipe(

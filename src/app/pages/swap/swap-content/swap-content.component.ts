@@ -47,8 +47,13 @@ export class SwapContentComponent implements OnInit {
   }
 
   pairSwitch() {
+    if (this.targetAmount && this.to) {
+      this.input = this.targetAmount.div(new BigNumber(10).pow(this.to.decimals)).toString();
+    }
+    else {
+      this.input = ''
+    }
     this.pairSwitchClicked.emit();
-    this.input = '0';
   }
 
   async approve() {
